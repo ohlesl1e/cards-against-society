@@ -3,7 +3,6 @@
 Team Application URL: "https://github.com/CSC-648-SFSU/csc648-04-fa19-Team203"
 
 Team #: 203
-
 Team Members:
 
 Team Lead: Jose Castanon

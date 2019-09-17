@@ -7,10 +7,9 @@ function App() {
       <header className="App-header">
         
         <p>
-          <div>Software Enginnering Class SFSU</div>
-          <div>Fall 2019</div>
-          <div>Section 4</div>
-          <div>Team 203</div>
+          <div>Cards</div>
+          <div>Against</div>
+          <div>Society</div>
         </p>
         <a
           className="App-link"
@@ -18,45 +17,9 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Jose Castanon
+          GitHub Repository
         </a>
 
-        <a
-          className="App-link"
-          href="https://github.com/CSC-648-SFSU/csc648-04-fa19-Team203"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Leslie Zhou
-        </a>
-
-        <a
-          className="App-link"
-          href="https://github.com/CSC-648-SFSU/csc648-04-fa19-Team203"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Zhola Ebikawa
-        </a>
-
-        <a
-          className="App-link"
-          href="https://github.com/CSC-648-SFSU/csc648-04-fa19-Team203"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Daryl Ortiz
-        </a>
-
-        <a
-          className="App-link"
-          href="https://github.com/CSC-648-SFSU/csc648-04-fa19-Team203"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Brian Li
-
-        </a>
       </header>
     </div>
   );
