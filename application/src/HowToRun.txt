@@ -1,0 +1,5 @@
+CD into the CSC648-04-FA19-TEAM203/application/src and do
+
+1- npm install
+2- npm install react-router-dom 
+3- npm start

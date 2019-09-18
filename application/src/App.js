@@ -1,28 +1,32 @@
-import React from 'react';
-import './App.css';
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        
-        <p>
-          <div>Cards</div>
-          <div>Against</div>
-          <div>Society</div>
-        </p>
-        <a
-          className="App-link"
-          href="https://github.com/CSC-648-SFSU/csc648-04-fa19-Team203"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GitHub Repository
-        </a>
-
-      </header>
-    </div>
-  );
+const backButton = {
+  background: "white",
+  color: "#1b1b1e",
+  border: "none",
+  cursor: "pointer",
+  fontSize: "12px",
+  textDecoration: 'none'
 }
 
-export default App;
+class App extends React.Component {
+  render() {
+    return(
+      <body>
+        <h1>
+          <center>
+            Cards Against Society
+          </center>
+        </h1>
+        <h4>
+          <center>
+          CSC648-04 / Fall 2019 / Team 203
+          </center>
+        </h4>
+        <Link style={backButton} to="About">to About</Link>
+        <p>
+        </p>
+      </body>
+    )}
+} export default App;
