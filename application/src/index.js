@@ -4,7 +4,7 @@ import './index.css';
 
 import * as serviceWorker from './serviceWorker';
 
-//import Root from './App';
+import Root from './App';
 import About from './About';
 import BrianLe from './AboutMembers/BrianLe';
 import JoseCastanon from './AboutMembers/JoseCastanon';
@@ -24,6 +24,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom'
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
+        <Route component={Root} exact path="/"/>
 
         <Route component={About} path="/About"/>
         <Route component={BrianLe} path="/BrianLe"/>
