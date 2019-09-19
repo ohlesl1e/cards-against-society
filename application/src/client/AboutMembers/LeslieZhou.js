@@ -19,6 +19,10 @@ class LeslieZhou extends React.Component {
                 <h1>
                     Leslie Zhou
                 </h1>
+            <p>
+            Leslie is a Computer Science undergraduate student at San Francisco
+            State University.
+          </p>
               </div>
             </body>
         );
