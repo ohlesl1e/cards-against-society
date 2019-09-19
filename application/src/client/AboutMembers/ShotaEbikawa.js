@@ -10,15 +10,40 @@ const backButton = {
     textDecoration: 'none'
 }
 
+const container = {
+    width: '30rem',
+    height:'auto',
+    display: 'inline-flex',
+    marginLeft: '28%',
+    marginTop: '3rem',
+    borderStyle: 'solid',
+    borderWidth: '0.05rem',
+    borderRadius: '0.2rem',
+    borderColor: 'black',
+    padding: '0.1rem 1rem',
+
+}
+
+const headerDiv = {
+    textAlign: 'center'
+}
+const bodyStyle = {
+    
+}
 class ShotaEbikawa extends React.Component {
     render() {
         return ( 
-            <body>
+            <body style={bodyStyle}>
               <Link style={backButton} to="About">to About</Link>
               <div style={{marginLeft: "10vh"}}>
-                <h1>
-                    Shota Ebikawa
-                </h1>
+                <div style={headerDiv}>
+                    <h1>
+                        Shota Ebikawa
+                    </h1>
+                </div>
+                <div style = {container}>
+                    <p>Hi my name is Shota Ebikawa and I am currently a Senior. This will be my final semester, and I am looking forward to work with this team.</p>
+                </div>
               </div>
             </body>
         );

@@ -19,6 +19,9 @@ class DarylOrtiz extends React.Component {
                 <h1>
                     Daryl Ortiz
                 </h1>
+                <p>
+                    I am a Senior graduating this semester. My major is computer science with a focus on web development. I am from San Diego looking for the many opportunities that San Francisco has to offer.
+                </p>
               </div>
             </body>
         );

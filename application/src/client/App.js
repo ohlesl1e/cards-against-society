@@ -1,32 +1,52 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
 
-const backButton = {
-  background: "white",
-  color: "#1b1b1e",
-  border: "none",
-  cursor: "pointer",
-  fontSize: "12px",
-  textDecoration: 'none'
-}
+import { BrowserRouter, Route } from 'react-router-dom';
 
-class App extends React.Component {
+import Home from './Home';
+import About from './About';
+import BrianLe from './AboutMembers/BrianLe';
+import JoseCastanon from './AboutMembers/JoseCastanon';
+import ShotaEbikawa from './AboutMembers/ShotaEbikawa';
+import LeslieZhou from './AboutMembers/LeslieZhou';
+import DarylOrtiz from './AboutMembers/DarylOrtiz';
+
+// For now root path
+// If error for react-router-dom, install "npm install react-router-dom"
+// This allows us to manage switching between pages!
+
+/* Switch root to about later
+    - Do we need router <history>?
+*/
+
+export default class Routing extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      loggedIn: false
+    };
+  }
+
+  setUsername = (username) => {
+    this.setState({ username });
+  };
+
   render() {
-    return(
-      <body>
-        <h1>
-          <center>
-            Cards Against Society
-          </center>
-        </h1>
-        <h4>
-          <center>
-          CSC648-04 / Fall 2019 / Team 203
-          </center>
-        </h4>
-        <Link style={backButton} to="About">to About</Link>
-        <p>
-        </p>
-      </body>
-    )}
-} export default App;
+    return (
+      <BrowserRouter>
+        <Route
+          exact
+          path="/"
+          render={props => <Home {...props} component={Home} />}
+        />
+
+        <Route component={About} path="/About" />
+        <Route component={BrianLe} path="/BrianLe" />
+        <Route component={JoseCastanon} path="/JoseCastanon" />
+        <Route component={ShotaEbikawa} path="/ShotaEbikawa" />
+        <Route component={LeslieZhou} path="/LeslieZhou" />
+        <Route component={DarylOrtiz} path="/DarylOrtiz" />
+      </BrowserRouter>
+    );
+  }
+}
