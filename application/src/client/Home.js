@@ -10,22 +10,21 @@ const backButton = {
   textDecoration: 'none'
 };
 
-class JoseCastanon extends React.Component {
+export default class Home extends Component {
   render() {
     return (
       <body>
+        <h1>
+          <center>Cards Against Society</center>
+        </h1>
+        <h4>
+          <center>CSC648-04 / Fall 2019 / Team 203</center>
+        </h4>
         <Link style={backButton} to="About">
           to About
         </Link>
-        <div style={{ marginLeft: '10vh' }}>
-          <h1>Jose Castanon</h1>
-          <p>
-            Jose is a senior Computer Science undergraduate at San Francisco
-            State University.
-          </p>
-        </div>
+        <p />
       </body>
     );
   }
 }
-export default JoseCastanon;
