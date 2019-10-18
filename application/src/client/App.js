@@ -9,6 +9,7 @@ import JoseCastanon from './AboutMembers/JoseCastanon';
 import ShotaEbikawa from './AboutMembers/ShotaEbikawa';
 import LeslieZhou from './AboutMembers/LeslieZhou';
 import DarylOrtiz from './AboutMembers/DarylOrtiz';
+import Registration from './Registration';
 
 // For now root path
 // If error for react-router-dom, install "npm install react-router-dom"
@@ -46,6 +47,7 @@ export default class Routing extends Component {
         <Route component={ShotaEbikawa} path="/ShotaEbikawa" />
         <Route component={LeslieZhou} path="/LeslieZhou" />
         <Route component={DarylOrtiz} path="/DarylOrtiz" />
+        <Route component = {Registration} path = "/Registration"/>
       </BrowserRouter>
     );
   }

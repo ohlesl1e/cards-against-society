@@ -3,14 +3,21 @@ const os = require('os');
 const path = require('path');
 let sequelize = require('sequelize');
 let indexRouter = require('./routes/index');
-
+var userRouter = require("./routes/users-router");
 const app = express();
 
 app.use(express.static('dist'));
 
-app.listen(8080, () => console.log('Listening on port 4000!'));
+app.set("view engine", "ejs");
+app.listen(4000, () => console.log('Listening on port 4000!'));
 
 app.get('/', indexRouter);
+app.use("/users", userRouter);
+
+
+app.use((req, res, next) => {
+  next(createError(404));
+});
 
 app.use((err, req, res, next) => {
   // set locals, only providing error in development
@@ -22,8 +29,6 @@ app.use((err, req, res, next) => {
   res.render("error");
 });
 
-app.use((req, res, next) => {
-  next(createError(404));
-});
+
 
 module.exports = app;

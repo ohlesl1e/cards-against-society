@@ -9,14 +9,6 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(20),
         primaryKey: true
       },
-      firstname: {
-        type: Sequelize.STRING(20),
-        allowNull: false
-      },
-      lastname: {
-        type: Sequelize.STRING(20),
-        allowNull: false
-      },
       email: {
         type: Sequelize.STRING(45),
         allowNull: false,

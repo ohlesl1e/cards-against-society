@@ -6,10 +6,12 @@ const app = express();
 
 // users registration route -- checks for userID in page
 router.post("/register", (req, res, next) => {
+  console.log("wow");
+
   models.user
     .findOne({
       where: {
-        userid: req.body.userid
+        userid: 'req.body.userid'
       }
     })
     .then(user => {
@@ -19,9 +21,9 @@ router.post("/register", (req, res, next) => {
       }
 
       models.user.create({
-        userid: req.body.userid,
-        email: req.body.email,
-        password: req.body.password,
+        userid: 'req.body.userid',
+        email: 'req.body.email',
+        password: 'req.body.password',
         sessionToken: null
       });
 
