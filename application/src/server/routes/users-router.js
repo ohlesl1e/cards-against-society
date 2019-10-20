@@ -1,33 +1,33 @@
-const express = require("express");
-var bodyParser = require("body-parser");
-const router = express.Router();
-const models = require("../models");
+/* eslint-disable linebreak-style */
+const express = require('express');
+const bodyParser = require('body-parser');
+
 const app = express();
 
-// users registration route -- checks for userID in page
-router.post("/register", (req, res, next) => {
-  console.log("wow");
+const router = express.Router();
+const models = require('../models');
 
+router.post('/register', (req, res, next) => {
   models.user
     .findOne({
       where: {
-        userid: 'req.body.userid'
+        userid: req.body.userid
       }
     })
-    .then(user => {
-      //if userId is already being used
+    .then((user) => {
+      // if userId is already being used
       if (user) {
-        return res.status(400).json({ result: "User id is already used." });
+        return res.status(400).json({ result: 'User id is already used.' });
       }
 
       models.user.create({
-        userid: 'req.body.userid',
-        email: 'req.body.email',
-        password: 'req.body.password',
+        userid: req.body.userid,
+        email: req.body.email,
+        password: req.body.password,
         sessionToken: null
       });
 
-      return res.status(200).json({ result: "user created" });
+      return res.status(200).json({ result: 'user created' });
     });
 });
 
