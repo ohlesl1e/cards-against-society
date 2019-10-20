@@ -1,9 +1,10 @@
-const bcrypt = require("bcrypt");
-("use strict");
+const bcrypt = require('bcrypt');
+
+('use strict');
 
 module.exports = (sequelize, Sequelize) => {
   const user = sequelize.define(
-    "user",
+    'user',
     {
       userid: {
         type: Sequelize.STRING(20),
@@ -24,16 +25,14 @@ module.exports = (sequelize, Sequelize) => {
       updatedAt: false,
 
       hooks: {
-        beforeCreate: (user, options) => {
-          return bcrypt
+        beforeCreate: (user, options) => bcrypt
             .hash(user.password, 10)
             .then(hash => {
               user.password = hash;
             })
             .catch(err => {
               throw new Error();
-            });
-        }
+            })
       }
     }
   );
