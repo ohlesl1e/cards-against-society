@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "csc6481",
+    "password": "csc648database",
     "database": "csc648",
     "host": "127.0.0.1",
     "dialect": "mysql"
