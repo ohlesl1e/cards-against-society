@@ -3,9 +3,40 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 const router = express.Router();
 const models = require('../models');
+
+router.put('/userSearch', async function(req,res){
+  if(req.body.userid !== null){
+    models.user.findAll({
+      raw: true,
+      where:{
+      
+        userid: {
+          [Op.like]: '%' + req.body.userid + '%'
+        }
+      }
+    }).then(users => {
+      console.log(users);
+      res.send(users);
+    }).catch(error =>{
+      res.status(500).send(error);
+    })
+  }
+  else{
+    models.user.findAll({
+      raw: true
+    }).then(users => {
+      console.log(users)
+      res.send(JSON.stringify(users));
+    }).catch(error =>{
+      res.status(500).send(error);   
+    })
+  }
+});
 
 router.post('/register', (req, res, next) => {
   models.user

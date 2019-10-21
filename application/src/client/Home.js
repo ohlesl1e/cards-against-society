@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Registration from './Registration';
+import UserSearch from './Components/UserSearch';
 import { Link } from 'react-router-dom';
 
 const backButton = {
@@ -24,6 +26,8 @@ export default class Home extends Component {
           to About
         </Link>
         <p />
+        <Registration />
+        <UserSearch />
       </body>
     );
   }
