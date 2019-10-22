@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
@@ -110,7 +111,6 @@ export default class Registration extends Component {
     return (
       <div className="wrapper">
         <div className="form-wrapper">
-          <h1 className="light-blue-text">Chess</h1>
           <br />
           <form onSubmit={this.handleSubmit} noValidate>
             <div className="userId">
