@@ -1,5 +1,3 @@
-'use strict';
-
 module.exports = (sequelize, Sequelize) => {
   const gamesession = sequelize.define(
     'gamesessions',
@@ -26,7 +24,7 @@ module.exports = (sequelize, Sequelize) => {
       through: 'hostTable'
     });
 
-    gamesession.belongsTo(models.user, {
+    gamesession.belongsToMany(models.user, {
       as: 'Player',
       through: 'playerTable'
     });

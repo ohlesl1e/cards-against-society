@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
-  const card = sequelize.define(
-    'card',
+  const blackCard = sequelize.define(
+    'blackCard',
     {
       id: {
         type: Sequelize.INTEGER(9),
@@ -27,5 +27,5 @@ module.exports = (sequelize, Sequelize) => {
       updatedAt: false
     }
   );
-  return card;
+  return blackCard;
 };

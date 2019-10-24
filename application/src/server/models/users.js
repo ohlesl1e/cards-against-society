@@ -1,7 +1,5 @@
 const bcrypt = require('bcrypt');
 
-('use strict');
-
 module.exports = (sequelize, Sequelize) => {
   const user = sequelize.define(
     'user',
@@ -27,15 +25,22 @@ module.exports = (sequelize, Sequelize) => {
       hooks: {
         beforeCreate: (user, options) => bcrypt
             .hash(user.password, 10)
-            .then(hash => {
+            .then((hash) => {
               user.password = hash;
             })
-            .catch(err => {
+            .catch((err) => {
               throw new Error();
             })
       }
     }
   );
 
+  user.associate = (models) => {
+    user.belongsToMany(models.gamesessions, {
+      as: 'Games',
+      through: 'playerTable',
+      foreignKey: 'userID'
+    });
+  };
   return user;
 };
