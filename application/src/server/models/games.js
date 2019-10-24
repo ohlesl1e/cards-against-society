@@ -1,14 +1,8 @@
-/*
-*  Author: Jonathan Julian
-*  Author: Inez Wibowo
-*  Purpose: DB model for all game session activity
-*/
-
-"use strict";
+'use strict';
 
 module.exports = (sequelize, Sequelize) => {
   const gamesession = sequelize.define(
-    "gamesessions",
+    'gamesessions',
     {
       gameid: {
         type: Sequelize.INTEGER(11),
@@ -17,25 +11,24 @@ module.exports = (sequelize, Sequelize) => {
       },
 
       gameState: {
-        type: Sequelize.TEXT("long"),
+        type: Sequelize.TEXT('long'),
         allowNull: false
-      },
-      
+      }
     },
     {
       updatedAt: false
     }
   );
 
-  gamesession.associate = models => {
+  gamesession.associate = (models) => {
     gamesession.belongsTo(models.user, {
-      as: "Host",
-      through: "hostTable"
+      as: 'Host',
+      through: 'hostTable'
     });
 
     gamesession.belongsTo(models.user, {
-      as: "Player",
-      through: "playerTable"
+      as: 'Player',
+      through: 'playerTable'
     });
   };
 

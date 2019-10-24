@@ -1,14 +1,6 @@
-/*
-*  Author: Jonathan Julian
-*  Author: Inez Wibowo
-*  Purpose: DB model for all game session activity
-*/
-
-"use strict";
-
 module.exports = (sequelize, Sequelize) => {
   const card = sequelize.define(
-    "card",
+    'card',
     {
       id: {
         type: Sequelize.INTEGER(9),
@@ -17,8 +9,8 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true
       },
       text: {
-        type: Sequelize.TEXT("long"),
-        allowNull: false,
+        type: Sequelize.TEXT('long'),
+        allowNull: false
       },
       draw: {
         type: Sequelize.INTEGER(6),
@@ -28,9 +20,8 @@ module.exports = (sequelize, Sequelize) => {
       pick: {
         type: Sequelize.INTEGER(6),
         allowNull: false,
-        default: 1,
+        default: 1
       }
-      
     },
     {
       updatedAt: false
