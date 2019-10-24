@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
@@ -86,7 +85,7 @@ export default class Registration extends Component {
         .then((res) => {
           if (res.status === 200) {
             // cookie.save(userid);
-            this.handleRouteChange();
+            // this.handleRouteChange();
           } else {
             const error = new Error(res.error);
             throw error;
