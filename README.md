@@ -9,7 +9,7 @@ Team Lead: Jose Castanon
 
 Back-End Lead: Leslie Zhou
 
-Database Master: Zhola Ebikawa
+Database Master: Shota Ebikawa
 
 Git Master: Daryl Ortiz
 
