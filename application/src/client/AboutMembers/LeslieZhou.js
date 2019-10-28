@@ -20,7 +20,7 @@ class LeslieZhou extends React.Component {
                     Leslie Zhou
                 </h1>
             <p>
-            Leslie is a Computer Science undergraduate student at San Francisco
+            My name is Leslie. I am a Computer Science undergraduate student at San Francisco
             State University.
           </p>
               </div>
