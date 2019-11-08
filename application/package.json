@@ -25,7 +25,9 @@
     "react-bootstrap": "^1.0.0-beta.14",
     "react-dom": "^16.5.2",
     "react-router-dom": "^5.0.1",
-    "sequelize": "^5.19.7"
+    "sequelize": "^5.19.7",
+    "socket.io": "^2.3.0",
+    "universal-cookie": "^4.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

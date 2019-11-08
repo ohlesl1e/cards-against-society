@@ -8,6 +8,18 @@ const indexRouter = require('./routes/index');
 const userRouter = require('./routes/users-router');
 
 const app = express();
+
+var io = require("socket.io")();
+io.listen(8080);
+app.set("socketio", io);
+
+io.of("/lobby").on("connection", socket => {
+  socket.on("subscribeToChat", msg => {
+    io.of("/lobby").emit("message", msg);
+  });
+});
+
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());

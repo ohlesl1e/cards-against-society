@@ -38,6 +38,21 @@ router.put('/userSearch', async function(req,res){
   }
 });
 
+router.post("/login", (req, res) => { 
+  models.user.findOne({ 
+    where: {
+      userid: req.body.userid
+    }
+  }).then(async user => {
+    if (!user || !(await user.comparePassword(req.body.password))) {
+      res.status(401).json({ token: null, errorMessage: "failed!" });
+    } else {
+      user['password'] = true;
+      res.send(user.dataValues);
+    }
+  });
+});
+
 router.post('/register', (req, res, next) => {
   models.user
     .findOne({

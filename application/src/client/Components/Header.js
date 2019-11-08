@@ -26,6 +26,9 @@ export default class Header extends Component {
             <Link to="/MyGames">
               <Nav.Item className="navselection">My Games</Nav.Item>
             </Link>
+            <Link to="/Help">
+              <Nav.Item className="navselection">Help</Nav.Item>
+            </Link>
             <Navbar.Collapse className="justify-content-end">
               <NavDropdown id="basic-nav-dropdown">
                 <Link to="/">
