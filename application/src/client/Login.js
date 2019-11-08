@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import "./app.css";
 import { Link } from "react-router-dom";
-import { saveCookie } from "./components/Cookies";
+import { saveCookie } from "./Components/cookies";
 
 export default class Login extends Component {
   constructor(props) {
@@ -91,7 +91,7 @@ export default class Login extends Component {
           >
             Login
           </Button>
-          <Link to="/register">Don't Have an Account?</Link>
+          <Link to="/Registration">Don't Have an Account?</Link>
         </form>
       </div>
       </div>
