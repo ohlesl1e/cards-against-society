@@ -10,6 +10,9 @@ import ShotaEbikawa from './AboutMembers/ShotaEbikawa';
 import LeslieZhou from './AboutMembers/LeslieZhou';
 import DarylOrtiz from './AboutMembers/DarylOrtiz';
 import Registration from './Registration';
+import Game from './Game';
+import Lobby from './Lobby';
+import Login from './Login';
 
 // For now root path
 // If error for react-router-dom, install "npm install react-router-dom"
@@ -38,7 +41,7 @@ export default class Routing extends Component {
         <Route
           exact
           path="/"
-          render={props => <Home {...props} component={Home} />}
+          render={props => <Login {...props} component={Login} />}
         />
 
         <Route component={About} path="/About" />
@@ -48,6 +51,8 @@ export default class Routing extends Component {
         <Route component={LeslieZhou} path="/LeslieZhou" />
         <Route component={DarylOrtiz} path="/DarylOrtiz" />
         <Route component = {Registration} path = "/Registration"/>
+        <Route component={Game} path="/Game" />
+        <Route component={Lobby} path ="/Lobby" />
       </BrowserRouter>
     );
   }
