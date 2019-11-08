@@ -23,6 +23,9 @@ export default class Home extends Component {
         <Link style={backButton} to="About">
           to About
         </Link>
+        <Link style={backButton} to="SignUp">
+          to SignUp
+        </Link>
         <p />
       </body>
     );
