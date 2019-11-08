@@ -18,6 +18,20 @@
   color: #866b6b;
 }
 
+.navselection {
+  color: black;
+  filter: grayscale(100%);
+  transition: all .4s ease;
+}
+.navselection:hover{
+  overflow: hidden;
+  margin: -3px 13px 3px 3px;
+  color: white;
+  -webkit-text-stroke: .5px;
+  -webkit-text-stroke-color: black;
+  filter: grayscale(0%);
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
