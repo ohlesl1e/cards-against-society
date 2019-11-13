@@ -14,6 +14,7 @@ import Game from './Game';
 import Lobby from './Lobby';
 import Login from './Login';
 import MyGames from './MyGames';
+import Custom from './Custom';
 
 // For now root path
 // If error for react-router-dom, install "npm install react-router-dom"
@@ -51,10 +52,11 @@ export default class Routing extends Component {
         <Route component={ShotaEbikawa} path="/ShotaEbikawa" />
         <Route component={LeslieZhou} path="/LeslieZhou" />
         <Route component={DarylOrtiz} path="/DarylOrtiz" />
-        <Route component = {Registration} path = "/Registration"/>
+        <Route component={Registration} path="/Registration" />
         <Route component={Game} path="/Game" />
-        <Route component={Lobby} path ="/Lobby" />
+        <Route component={Lobby} path="/Lobby" />
         <Route component={MyGames} path="/MyGames" />
+        <Route component={Custom} path="/Custom" />
       </BrowserRouter>
     );
   }
