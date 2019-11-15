@@ -7,14 +7,11 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true,
         primaryKey: true
       },
-      gameState: {
-        type: Sequelize.TEXT('long'),
-        allowNull: false
-      },
-      currentBlackCard: {
-        type: Sequelize.INTEGER(11)
+      roomName: {
+        type: Sequelize.STRING(20)
       }
     },
+
     {
       updatedAt: false
     }
@@ -29,6 +26,11 @@ module.exports = (sequelize, Sequelize) => {
     gamesession.belongsToMany(models.user, {
       as: 'Player',
       through: 'playerTable'
+    });
+
+    gamesession.belongsTo(models.blackCard, {
+      as: 'CurrentBlackCard',
+      through: 'cardTable'
     });
   };
 

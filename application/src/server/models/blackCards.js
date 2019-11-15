@@ -30,8 +30,6 @@ module.exports = (sequelize, Sequelize) => {
     }
   );
 
-  console.log(`${__dirname}/..`);
-
   fs.readFile(`${__dirname}/../blackcardsfixed.json`, (err, data) => {
     blackCard.bulkCreate(JSON.parse(data.toString())).then((result) => {
       console.log('black cards added into database');

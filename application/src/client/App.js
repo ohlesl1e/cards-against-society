@@ -54,7 +54,7 @@ export default class Routing extends Component {
         <Route component={LeslieZhou} path="/LeslieZhou" />
         <Route component={DarylOrtiz} path="/DarylOrtiz" />
         <Route component={Registration} path="/Registration" />
-        <Route component={Game} path="/Game" />
+        <Route component={Game} path="/Game/:gameid" />
         <Route component={Profile} path="/Profile" />
         <Route component={Home} path="/Home" />
         <Route component={Lobby} path="/Lobby" />
