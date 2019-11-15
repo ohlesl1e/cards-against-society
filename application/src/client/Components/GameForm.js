@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import '../About.css'
 import { Button, FormGroup, FormControl, FormLabel, FormCheck, Dropdown} from "react-bootstrap";
 
@@ -35,11 +35,21 @@ const GameForm = () => {
         display:'inline-flex'
     }
 
+    const [points, setPoints] = React.useState('');
+    const [size, setSize] = React.useState('');
+    const [card, setCard] = React.useState('');
+    const [roomName, setRoomName] = React.useState('');
+    const [pri, setPrivate] = React.useState('');
+
     return(
         <div style={divStyle}>
             <FormGroup style={formStyle}>
                 Setup Room
-                <FormControl placeholder='Room Name:' style={inputGameStyle}/>
+                <FormControl 
+                    placeholder='Room Name:' 
+                    style={inputGameStyle}
+                    value={points}
+                />
                 <div style={CheckStyle}>
                     <FormLabel>Private</FormLabel> 
                     <FormCheck style={{marginLeft:'1rem'}}/>
