@@ -7,10 +7,12 @@ module.exports = (sequelize, Sequelize) => {
         autoIncrement: true,
         primaryKey: true
       },
-
       gameState: {
         type: Sequelize.TEXT('long'),
         allowNull: false
+      },
+      currentBlackCard: {
+        type: Sequelize.INTEGER(11)
       }
     },
     {
