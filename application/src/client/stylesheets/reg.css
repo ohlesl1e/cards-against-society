@@ -1,0 +1,28 @@
+
+  input {
+    background-color: white;
+    width: 40%;
+    min-width: 20%;
+  }
+  
+  button {
+    background-color: lightblue;
+    width: 40%;
+    min-width: 20%;
+  }
+  
+  .regwrap {
+    margin-top: 5%;
+    text-align: left;
+    padding-bottom: 1%;
+    margin-left: 35%;
+   
+  }
+  
+  .form-control {
+    width: 100% !important;
+  }
+  
+  .center {
+    text-align: center;
+  }
