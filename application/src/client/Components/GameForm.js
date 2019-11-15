@@ -29,7 +29,7 @@ const GameForm = () => {
     }
 
     const divStyle = {
-        width:'25rem', 
+        width:'20rem', 
         marginLeft:'30%',
         marginTop:'10%',
         display:'inline-flex'
@@ -44,7 +44,7 @@ const GameForm = () => {
                     <FormLabel>Private</FormLabel> 
                     <FormCheck style={{marginLeft:'1rem'}}/>
                 </div>
-                <br/><br/>
+                <br/>
                 Game Rules
                 <FormGroup>
                     <FormControl style={inputGameStyle} as="select">

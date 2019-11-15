@@ -20,16 +20,25 @@
 
 .navselection {
   color: black;
+  margin: 0px 13px 3px 3px;
   filter: grayscale(100%);
-  transition: all .4s ease;
+  transition: all 0.4s ease;
 }
-.navselection:hover{
-  overflow: hidden;
-  margin: -3px 13px 3px 3px;
+.navselection:hover {
+  margin: -3px 16px 3px 3px;
   color: white;
-  -webkit-text-stroke: .5px;
+  -webkit-text-stroke: 0.5px;
   -webkit-text-stroke-color: black;
   filter: grayscale(0%);
+}
+.chat-history {
+  width: 320px;
+  height: 400px;
+  overflow: scroll;
+}
+.chat-section {
+  text-align: center;
+  padding: 20px;
 }
 
 @keyframes App-logo-spin {

@@ -1,16 +1,16 @@
 /* eslint-disable no-unused-vars */
-import React, { Component } from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Link } from 'react-router-dom';
 import '../app.css';
-import { deleteCookie } from "./cookies";
+import { deleteCookie } from './cookies';
 
 export default class Header extends Component {
-   logout() {
-     deleteCookie();
-   }
+  logout() {
+    deleteCookie();
+  }
 
   render() {
     return (
