@@ -31,6 +31,15 @@
   -webkit-text-stroke-color: black;
   filter: grayscale(0%);
 }
+.chat-history {
+  width: 320px;
+  height: 400px;
+  overflow: scroll;
+}
+.chat-section {
+  text-align: center;
+  padding: 20px;
+}
 
 @keyframes App-logo-spin {
   from {
