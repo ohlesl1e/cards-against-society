@@ -5,6 +5,7 @@ import {
 import './app.css';
 import { Link } from 'react-router-dom';
 import { saveCookie } from './Components/cookies';
+import Header from './Components/Header';
 
 export default class Login extends Component {
   constructor(props) {
@@ -61,8 +62,9 @@ export default class Login extends Component {
   render() {
     return (
       <div className="wrapper">
+         <> <Header userid={this.state.userid} /></>
         <div className="form-wrapper">
-          <h1 className="light-blue-text">Cards Against Society</h1>
+          <h1 className="centertext">Cards Against Society</h1>
           <br />
           <form onSubmit={this.handleSubmit}>
             <FormGroup classname="userId" controlId="userid" bsSize="large">
