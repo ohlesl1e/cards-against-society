@@ -10,7 +10,6 @@ import ShotaEbikawa from './AboutMembers/ShotaEbikawa';
 import LeslieZhou from './AboutMembers/LeslieZhou';
 import DarylOrtiz from './AboutMembers/DarylOrtiz';
 import Registration from './Registration';
-import GameForm from './Components/GameForm'
 import Profile from './Profile';
 import Game from './Game';
 import Lobby from './Lobby';
@@ -60,7 +59,6 @@ export default class Routing extends Component {
         <Route component={Home} path="/Home" />
         <Route component={Lobby} path="/Lobby" />
         <Route component={MyGames} path="/MyGames" />
-        <Route component={GameForm} path='/GameForm'/>
         <Route component={Custom} path="/Custom" />
       </BrowserRouter>
     );

@@ -2,7 +2,7 @@ import React from 'react'
 import '../About.css'
 import { Button, FormGroup, FormControl, FormLabel, FormCheck, Dropdown} from "react-bootstrap";
 
-const GameForm = () => {
+const GameForm = (state) => {
     const settingButton = {
         width: '100%',
         borderRadius: 0,
@@ -28,36 +28,51 @@ const GameForm = () => {
         justifyContent: 'flex-end',
     }
 
-    const divStyle = {
-        width:'20rem', 
-        marginLeft:'30%',
-        marginTop:'10%',
-        display:'inline-flex'
-    }
 
     const [points, setPoints] = React.useState('');
     const [size, setSize] = React.useState('');
     const [card, setCard] = React.useState('');
     const [roomName, setRoomName] = React.useState('');
-    const [pri, setPrivate] = React.useState('');
+    const [isPrivate, setPrivate] = React.useState(false);
+
+    const submitChange = () => {
+        let stateObj = {
+            room: roomName,
+            private: isPrivate,
+            points: points,
+            size: size,
+            card: card
+        }
+        console.log(stateObj)
+    }
 
     return(
-        <div style={divStyle}>
+        <div >
             <FormGroup style={formStyle}>
                 Setup Room
                 <FormControl 
                     placeholder='Room Name:' 
                     style={inputGameStyle}
-                    value={points}
+                    value={roomName}
+                    onChange={e=>setRoomName(e.target.value)}
                 />
                 <div style={CheckStyle}>
                     <FormLabel>Private</FormLabel> 
-                    <FormCheck style={{marginLeft:'1rem'}}/>
+                    <FormCheck 
+                        style={{marginLeft:'1rem'}}
+                        checked={isPrivate}
+                        onChange={e=>setPrivate(e.target.checked)}
+                    />
                 </div>
                 <br/>
                 Game Rules
                 <FormGroup>
-                    <FormControl style={inputGameStyle} as="select">
+                    <FormControl 
+                        style={inputGameStyle} 
+                        as="select"
+                        value={points}
+                        onChange={e=>setPoints(e.target.value)}
+                    >
                         <option>Points to Win: </option>
                         <option>1</option>
                         <option>2</option>
@@ -65,7 +80,12 @@ const GameForm = () => {
                 </FormGroup>
                 <br/>
                 <FormGroup>
-                    <FormControl style={inputGameStyle} as="select">
+                    <FormControl 
+                        style={inputGameStyle} 
+                        as="select"
+                        value={size}
+                        onChange={e=>setSize(e.target.value)}
+                    >
                         <option>Room Size: </option>
                         <option>1</option>
                         <option>2</option>
@@ -73,14 +93,25 @@ const GameForm = () => {
                 </FormGroup>
                 <br/>
                 <FormGroup>
-                    <FormControl style={inputGameStyle} as="select">
+                    <FormControl 
+                        style={inputGameStyle} 
+                        as="select"
+                        value={card}
+                        onChange={e=>setCard(e.target.value)}
+                        >
                         <option>Custom Card: </option>
-                        <option>1</option>
-                        <option>2</option>
+                        <option>Sample Card I</option>
+                        <option>Sample Card II</option>
                     </FormControl>
                 </FormGroup>
                 <br/>
-                <Button variant='dark' style={settingButton}>Create Room</Button>
+                <Button 
+                    variant='dark' 
+                    style={settingButton}
+                    onClick={submitChange}
+                >
+                    Create Room
+                </Button>
             </FormGroup>
         </div>
     )
