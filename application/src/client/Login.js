@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
- Button, FormGroup, FormControl, FormLabel 
+  Button, FormGroup, FormControl, FormLabel
 } from 'react-bootstrap';
 import './app.css';
 import { Link } from 'react-router-dom';
@@ -15,12 +15,6 @@ export default class Login extends Component {
       password: ''
     };
   }
-
-  handleChange = (event) => {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
-  };
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -65,7 +59,7 @@ export default class Login extends Component {
           <div class= "column">
       <div className="wrapper">
         <div className="form-wrapper">
-          <h1 className="light-blue-text">Cards Against Society</h1>
+          <h1 className="centertext">Cards Against Society</h1>
           <br />
           <form onSubmit={this.handleSubmit}>
             <FormGroup classname="userId" controlId="userid" bsSize="large">

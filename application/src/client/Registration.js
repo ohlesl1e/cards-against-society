@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import "./stylesheets/reg.css";
+
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
@@ -26,13 +28,11 @@ export default class Registration extends Component {
     super(props);
     this.state = {
       email: null,
-      confirmEmail: null,
       password: null,
       confirmPassword: null,
       userid: ' ',
       formErrors: {
         email: '',
-        confirmEmail: '',
         password: '',
         confirmPassword: '',
         userid: ''
@@ -52,11 +52,11 @@ export default class Registration extends Component {
           : 'invalid email address';
         break;
       case 'password':
-        formErrors.password =          value.length < 8 ? 'minimum 8 characaters required' : '';
+        formErrors.password = value.length < 8 ? 'minimum 8 characaters required' : '';
         break;
 
       case 'confirmPassword':
-        formErrors.confirmPassword =          value === this.state.password ? '' : "Password don't match!";
+        formErrors.confirmPassword = value === this.state.password ? '' : "Password don't match!";
         break;
       case 'userid':
         formErrors.userid = value.length < 40 ? '' : 'maximum 40 characaters';
@@ -74,7 +74,7 @@ export default class Registration extends Component {
     e.preventDefault();
     if (formValid(this.state)) {
       // this.handleRouteChange();
-      fetch('http://localhost:4000/users/register', {
+      fetch('/users/register', {
         method: 'POST',
         credentials: 'same-origin',
         body: JSON.stringify(this.state),
@@ -84,8 +84,8 @@ export default class Registration extends Component {
       })
         .then((res) => {
           if (res.status === 200) {
-            alert('Account created successfully.');
-            this.handleRouteChange();
+            // cookie.save(userid);
+            // this.handleRouteChange();
           } else {
             const error = new Error(res.error);
             throw error;
@@ -108,13 +108,20 @@ export default class Registration extends Component {
     const { formErrors } = this.state;
 
     return (
-      <div className="wrapper">
-        <div className="form-wrapper">
-          <br />
+      <div className="wrap1">
+        <h1><b>Create Account</b></h1>
+        <br />
+        <div className="wrap2">
           <form onSubmit={this.handleSubmit} noValidate>
             <div className="userId">
+<<<<<<< HEAD
               <center><label htmlFor="userid">Username</label></center>
+=======
+              <label htmlFor="userid">Username</label>
+              <br />
+>>>>>>> b0a53e41538b8413eb8219f1194c1c3842581661
               <input
+                class="booty"
                 className={formErrors.userid.length > 0 ? 'error' : null}
                 placeholder="User Name"
                 type="text"
@@ -126,11 +133,11 @@ export default class Registration extends Component {
                 <span className="errorMessage">{formErrors.userid}</span>
               )}
             </div>
-            <br />
-
             <div className="email">
               <label htmlFor="email">Email</label>
+              <br />
               <input
+                class="booty"
                 className={formErrors.email.length > 0 ? 'error' : null}
                 placeholder="Email"
                 type="email"
@@ -143,24 +150,11 @@ export default class Registration extends Component {
               )}
             </div>
 
-            <div className="confirmEmail">
-              <label htmlFor="email">Confirm Email</label>
-              <input
-                className={formErrors.confirmEmail.length > 0 ? 'error' : null}
-                placeholder="Confirm Email"
-                type="email"
-                name="confirmEmail"
-                noValidate
-                onChange={this.handleChange}
-              />
-              {formErrors.confirmEmail.length > 0 && (
-                <span className="errorMessage">{formErrors.confirmEmail}</span>
-              )}
-            </div>
-
             <div className="password">
               <label htmlFor="password">Password</label>
+              <br />
               <input
+                class="booty"
                 className={formErrors.password.length > 0 ? 'error' : null}
                 placeholder="Password"
                 type="password"
@@ -175,7 +169,9 @@ export default class Registration extends Component {
 
             <div className="confirmPassword">
               <label htmlFor="password">Confirm Password</label>
+              <br />
               <input
+                class="booty"
                 className={
                   formErrors.confirmPassword.length > 0 ? 'error' : null
                 }
@@ -191,10 +187,14 @@ export default class Registration extends Component {
                 </span>
               )}
             </div>
-
+            <div class="a">
+              By clicking Sign Up, you have read and agreed to our&nbsp;
+                  <a href="https://www.youtube.com/watch?v=5TcT1zqZofA" target="_blank">Terms of Service</a>.
+                </div>
             <div className="createAccount">
-              <button type="submit">Create Account</button>
-              <Link to="/">Already Have an Account?</Link>
+              <button class="account" type="submit">Create Account</button>
+              <br />
+              <Link className="bongola" to="/">Already Have an Account?</Link>
             </div>
           </form>
         </div>
