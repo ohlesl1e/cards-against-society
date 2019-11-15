@@ -1,22 +1,38 @@
-import React, { Component } from 'react';
-import Header from './Components/Header';
-import { retrieveCookie } from "./Components/cookies";
-import { Redirect } from 'react-router-dom';
-import axios from 'axios';
+import React, { Component } from 'react'
+import Header from './Components/Header'
+import { retrieveCookie } from "./Components/cookies"
+import { Redirect } from 'react-router-dom'
+import Axios from 'axios'
 
 export default class Custom extends Component {
     constructor(props) {
-        super(props);
+        super(props)
+
         this.state = {
             userid: retrieveCookie("userid"),
-            customCard: null,
-            whiteCard: false,
+            calledDeck: "",
+            redirectTo: "",
             redirect: false,
-            formErrors: {
-                userid: '',
-                customCard: '',
-                whiteCard: ''
-            }
+            render: false,
+            decklist: [{ name: "Deck1", cards: ["big black cock", "an ar15 assault rifle"] }],
+        }
+        console.log(this.state.decklist);
+
+    }
+
+    setRender = () =>{
+        this.setState({
+            render: true
+        })
+    }
+
+    renderDeck = () => {
+        if (this.state.render) {
+            {this.state.decklist[this.state.calledDeck].cards.map(c => {
+                return (
+                    <div>{c}</div>
+                )
+            })}
         }
     }
 
@@ -25,66 +41,67 @@ export default class Custom extends Component {
             redirect: true
         })
     }
+
     renderRedirect = () => {
         if (this.state.redirect) {
-            return <Redirect to='/Lobby' />
+            return <Redirect to={redirectTo} />
         }
-    }
-
-    handleChange = event => {
-        this.setState({
-            [event.target.id]: event.target.value
-        });
-        console.log(event.target.value)
-    }
-
-    handleSubmit = (e) => {
-        e.preventDefault()
-        fetch({
-            method: "POST",
-            url: "/api/addcustomcard",
-            body: {
-                userid: this.state.userid,
-                customCard: this.state.customCard,
-                whiteCard: this.state.whiteCard,
-            }
-        }).then(res => {
-            console.log(this.state);
-            console.log(res);
-        }).catch((e) => {
-            console.log(e);
-        })
     }
 
     componentDidMount() {
-        if (!retrieveCookie("userid")) {
+        /*if (!retrieveCookie("userid")) {
             alert("please log in!");
         }
+        Axios({
+            method: "POST",
+            url: "/api/getalldecks",
+            data: {
+                userid: this.state.userid
+            }
+        })
+            .then((res) => {
+                console.log(res.data);
+                const decklist = res.data;
+                console.log({ decklist });
+                this.setState({ decklist })
+            }).catch((e) => {
+                console.log(e);
+            })
+            */
+    }
+
+    handleClick = event => {
+        for (let i = 0; i < this.state.decklist.length; i++) {
+            if (this.state.decklist[i].name == event.target.value) {
+                this.setState({ calledDeck : i })
+                break
+            }
+        }
+        this.setRender()
+        console.log(this.state.calledDeck);
     }
 
     render() {
         return (
-            <div className="Custom">
+            <div>
                 {this.renderRedirect()}
                 <Header />
-                <form onSubmit={this.handleSubmit}>
-                    <input type="radio" name="whiteCard" value="true" onInput={this.handleChange} /> White Card<br />
-                    <input type="radio" name="whiteCard" value="false" onInput={this.handleChange} /> Black Card<br />
-                    <div className="">
-                        <label htmlFor="customCard">Card Content: </label><br />
-                        <input
-                            placeholder="Biggest blackest cock"
-                            type="text"
-                            name="customCard"
-                            noValidate
-                            onChange={this.handleChange}
-                        />
-                    </div><br />
-                    <div>
-                        <button onClick={this.handleSubmit}>Submit</button>
-                        <button onClick={this.setRedirect}>Cancel</button>
+                <div className="BodyWrapper">
+                    <div className="DeckList">
+                        {this.state.decklist.map(d => {
+                            return (
+                                <div>
+                                    <button className="Deck" value={d.name} onClick={this.handleClick}>
+                                        {d.name}
+                                    </button>
+                                </div>
+                            )
+                        })}
                     </div>
-                </form>
+                    <div className="ShowDeck">
+                        {this.renderDeck}
+                    </div>
+                </div>
             </div>
         )
     }

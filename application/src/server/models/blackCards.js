@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 module.exports = (sequelize, Sequelize) => {
   const blackCard = sequelize.define(
     'blackCard',
@@ -27,5 +29,12 @@ module.exports = (sequelize, Sequelize) => {
       updatedAt: false
     }
   );
+
+  fs.readFile(`${__dirname}/../blackcardsfixed.json`, (err, data) => {
+    blackCard.bulkCreate(JSON.parse(data.toString())).then((result) => {
+      console.log('black cards added into database');
+    });
+  });
+
   return blackCard;
 };

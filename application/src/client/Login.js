@@ -60,40 +60,44 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <div className="form-wrapper">
-          <h1 className="light-blue-text">Cards Against Society</h1>
-          <br />
-          <form onSubmit={this.handleSubmit}>
-            <FormGroup classname="userId" controlId="userid" bsSize="large">
-              <FormLabel>Username</FormLabel>
-              <FormControl
-                autoFocus
-                type="username"
-                value={this.state.userid}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup controlId="password" bsSize="large">
-              <FormLabel>Password</FormLabel>
-              <FormControl
-                value={this.state.password}
-                onChange={this.handleChange}
-                type="password"
-                data-toggle="password"
-              />
-            </FormGroup>
-            <Button
-              block
-              bsSize="large"
-              disabled={!this.validateForm()}
-              type="submit"
-              onClick={this.onSubmit}
-            >
-              Login
-            </Button>
-            <Link to="/Registration">Don't Have an Account?</Link>
-          </form>
+      <div className="row">
+        <div className="column">
+          <div className="wrapper">
+            <div className="form-wrapper">
+              <h1 className="centertext">Cards Against Society</h1>
+              <br />
+              <form onSubmit={this.handleSubmit}>
+                <FormGroup classname="userId" controlId="userid" bsSize="large">
+                  <FormLabel>Username</FormLabel>
+                  <FormControl
+                    autoFocus
+                    type="username"
+                    value={this.state.userid}
+                    onChange={this.handleChange}
+                  />
+                </FormGroup>
+                <FormGroup controlId="password" bsSize="large">
+                  <FormLabel>Password</FormLabel>
+                  <FormControl
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                    type="password"
+                    data-toggle="password"
+                  />
+                </FormGroup>
+                <Button
+                  block
+                  bsSize="large"
+                  disabled={!this.validateForm()}
+                  type="submit"
+                  onClick={this.onSubmit}
+                >
+                  Login
+                </Button>
+                <Link to="/Registration">Don't Have an Account?</Link>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     );

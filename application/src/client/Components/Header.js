@@ -26,7 +26,7 @@ export default class Header extends Component {
             <Link to="/MyGames">
               <Nav.Item className="navselection">My Games</Nav.Item>
             </Link>
-            <Link to="/Help">
+            <Link to="/FAQ">
               <Nav.Item className="navselection">Help</Nav.Item>
             </Link>
             <Navbar.Collapse className="justify-content-end">
@@ -36,11 +36,7 @@ export default class Header extends Component {
                     Log Out
                   </NavDropdown.Item>
                 </Link>
-                <Link to="/Registration">
-                  <NavDropdown.Item href="#register" onClick={() => this.logout()}>
-                    Register
-                  </NavDropdown.Item>
-                </Link>
+                
               </NavDropdown>
               <Navbar.Text>{this.props.userid}</Navbar.Text>
             </Navbar.Collapse>

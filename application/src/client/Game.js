@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, ButtonGroup, Button } from 'react-bootstrap';
+import {
+ Container, Row, Col, ButtonGroup, Button 
+} from 'react-bootstrap';
 import Header from './Components/Header';
 import { retrieveCookie } from './Components/cookies';
 import Chatbox from './Components/Chatbox';
 import GameContainer from './Components/GameContainer';
 
 export default class Game extends Component {
-  state = {
-    userid: retrieveCookie('userid')
-  };
+  constructor() {
+    super();
+    this.state = {
+      userid: retrieveCookie('userid')
+    };
+  }
+
+  componentDidMount() {}
 
   render() {
     return (
-      <div className = "game-page">
+      <div className="game-page">
         <Header userid={this.state.userid} />
-        <GameContainer></GameContainer>
+        <GameContainer gameid={this.props.match.params.gameid} />
         <Container>
           <br />
-          <Row>
-            
-          </Row>
+          <Row />
           <Row>
             <Col md="9">
               <div className="text-center chatbox">
@@ -35,9 +40,7 @@ export default class Game extends Component {
               </ButtonGroup>
             </Col>
           </Row>
-          
         </Container>
-        
       </div>
     );
   }
