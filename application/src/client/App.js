@@ -10,13 +10,14 @@ import ShotaEbikawa from './AboutMembers/ShotaEbikawa';
 import LeslieZhou from './AboutMembers/LeslieZhou';
 import DarylOrtiz from './AboutMembers/DarylOrtiz';
 import Registration from './Registration';
+import Profile from './Profile';
 import Game from './Game';
 import Lobby from './Lobby';
 import Login from './Login';
 import MyGames from './MyGames';
+import Custom from './Custom';
 import AddCustom from './AddCustom';
-import Custom from './Custom'
-
+import FAQ from './FAQ';
 // For now root path
 // If error for react-router-dom, install "npm install react-router-dom"
 // This allows us to manage switching between pages!
@@ -54,11 +55,14 @@ export default class Routing extends Component {
         <Route component={LeslieZhou} path="/LeslieZhou" />
         <Route component={DarylOrtiz} path="/DarylOrtiz" />
         <Route component={Registration} path="/Registration" />
-        <Route component={Game} path="/Game" />
+        <Route component={Game} path="/Game/:gameid" />
+        <Route component={Profile} path="/Profile" />
+        <Route component={Home} path="/Home" />
         <Route component={Lobby} path="/Lobby" />
         <Route component={MyGames} path="/MyGames" />
         <Route component={AddCustom} path="/AddCustom" />
         <Route component={Custom} path="/Custom" />
+        <Route component={FAQ} path="/FAQ" />
       </BrowserRouter>
     );
   }

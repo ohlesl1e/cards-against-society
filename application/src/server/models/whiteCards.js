@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 module.exports = (sequelize, Sequelize) => {
   const whiteCard = sequelize.define(
     'whiteCard',
@@ -17,5 +19,12 @@ module.exports = (sequelize, Sequelize) => {
       updatedAt: false
     }
   );
+
+  fs.readFile(`${__dirname}/../whitecardsfixed.json`, (err, data) => {
+    whiteCard.bulkCreate(JSON.parse(data.toString())).then((result) => {
+      console.log('white cards added into database');
+    });
+  });
+
   return whiteCard;
 };

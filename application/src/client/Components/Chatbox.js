@@ -1,19 +1,21 @@
-import React, { Component } from "react";
-import Button from 'react-bootstrap';
-import io from "socket.io-client";
-import List from 'react-bootstrap';
+import React, { Component } from 'react';
+import io from 'socket.io-client';
+import {
+ ListGroup, Button, Form, Row, Col 
+} from 'react-bootstrap';
+import '../app.css';
 
-
-export default class Chatbox extends Component {
+export default class ChatBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      password: "",
-      textmsg: "",
-      //userid: this.props.userid,
+      textmsg: '',
+      userid: this.props.userid,
       msgHistory: [],
-      //socket: io.connect("http://localhost:8080/lobby")
+      socket: io.connect(
+        'http://localhost:8080/lobby'
+        // +this.props.url
+      )
     };
     this.handleChange = this.handleChange.bind(this);
     this.receiveMessage = this.receiveMessage.bind(this);
@@ -25,25 +27,23 @@ export default class Chatbox extends Component {
   };
 
   sendMessage(message) {
-    this.state.socket.emit("subscribeToChat", message);
+    this.state.socket.emit('subscribeToChat', message);
   }
 
   getMessage(receieveMessage) {
-    this.state.socket.on("message", receieveMessage);
+    this.state.socket.on('message', receieveMessage);
   }
 
   receiveMessage(data) {
-    this.setState(state => {
+    this.setState((state) => {
       const msgHistory = state.msgHistory.concat({
         title: data.title,
-        avatar:
-          "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
         description: data.msg,
         userid: data.userid
       });
       return {
         msgHistory,
-        textmsg: ""
+        textmsg: ''
       };
     });
   }
@@ -56,48 +56,52 @@ export default class Chatbox extends Component {
     this.setState({ textmsg: event.target.value });
   }
 
-  render = () => {
-    return (
-      <div className="view-box">
-        <div className="chat-history">
-          <List
-            itemLayout="horizontal"
-            dataSource={this.state.msgHistory}
-            renderItem={item => (
-              <List.Item>
-                <List.Item.Meta
-                  avatar={
-                    <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                  }
-                  title={item.title}
-                  description={item.description}
-                />
-              </List.Item>
-            )}
-          />
-        </div>
-        <div className="text-box">
-          <textarea
-            value={this.state.textmsg}
-            onChange={this.handleChange}
-            className="textarea"
-            id="textboxsize"
-            width="2000"
-            rows="2"
-            placeholder="Type your message here..."
-          />
-          <Button
-            rounded
-            size="sm"
-            className="float-right mt-4"
-            onClick={() => {
-              this.handleSubmit();
-            }}
-          >
-            Send
-          </Button>
-        </div>
+  render = () => (
+    <div className="chat-section">
+      <div className="chat-history">
+        <ListGroup
+          itemLayout="horizontal"
+          dataSource={this.state.msgHistory}
+          renderItem={item => (
+            <ListGroup.Item>
+              <ListGroup.Item.Meta
+                title={item.title}
+                description={item.description}
+              />
+            </ListGroup.Item>
+          )}
+        />
       </div>
-    );
-  };
+      <div className="text-box">
+        <Form>
+          <Row className="justify-content-left">
+            <Col md="10">
+              <textarea
+                value={this.state.textmsg}
+                onChange={this.handleChange}
+                className="text-area"
+                id="textboxsize"
+                width="auto"
+                rows="2"
+                placeholder="Type your message here..."
+              />
+            </Col>
+            <Col md="1">
+              <Button
+                rounded
+                variant="dark"
+                size="lg"
+                className="mt-4"
+                onClick={() => {
+                  this.handleSubmit();
+                }}
+              >
+                Send
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      </div>
+    </div>
+  );
 }

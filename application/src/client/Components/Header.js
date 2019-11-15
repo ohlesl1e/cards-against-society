@@ -1,16 +1,16 @@
 /* eslint-disable no-unused-vars */
-import React, { Component } from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import { Link } from 'react-router-dom';
 import '../app.css';
-import { deleteCookie } from "./cookies";
+import { deleteCookie } from './cookies';
 
 export default class Header extends Component {
-   logout() {
-     deleteCookie();
-   }
+  logout() {
+    deleteCookie();
+  }
 
   render() {
     return (
@@ -26,7 +26,7 @@ export default class Header extends Component {
             <Link to="/MyGames">
               <Nav.Item className="navselection">My Games</Nav.Item>
             </Link>
-            <Link to="/Help">
+            <Link to="/FAQ">
               <Nav.Item className="navselection">Help</Nav.Item>
             </Link>
             <Navbar.Collapse className="justify-content-end">
@@ -36,6 +36,7 @@ export default class Header extends Component {
                     Log Out
                   </NavDropdown.Item>
                 </Link>
+                
               </NavDropdown>
               <Navbar.Text>{this.props.userid}</Navbar.Text>
             </Navbar.Collapse>
