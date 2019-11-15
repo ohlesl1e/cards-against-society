@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
-import { ListGroup, Button, Form } from 'react-bootstrap';
+import { ListGroup, Button, Form,Row,Col } from 'react-bootstrap';
 import '../app.css';
 
 export default class ChatBox extends Component {
@@ -72,26 +72,36 @@ export default class ChatBox extends Component {
       </div>
       <div className="text-box">
         <Form>
-          <textarea
-            value={this.state.textmsg}
-            onChange={this.handleChange}
-            className="textarea"
-            id="textboxsize"
-            width="4000"
-            rows="2"
-            placeholder="Type your message here..."
-          />
-          <Button
-            rounded
-            size="sm"
-            className="float-right mt-4"
-            onClick={() => {
-              this.handleSubmit();
-            }}
-          >
-            Send
-          </Button>
+          <Row className="justify-content-left">
+          <Col md="10">
+            <textarea
+              value={this.state.textmsg}
+              onChange={this.handleChange}
+              className="text-area"
+              id="textboxsize"
+              width="auto"
+              rows="2"
+              placeholder="Type your message here..."
+            />
+           
+           
+          </Col>
+          <Col md = "1" >
+            <Button
+                rounded
+                variant="dark"
+                size="lg"
+                className="mt-4"
+                onClick={() => {
+                  this.handleSubmit();
+                }}
+              >
+                Send
+              </Button>
+            </Col>
+          </Row>
         </Form>
+          
       </div>
     </div>
   );

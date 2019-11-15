@@ -40,10 +40,10 @@ export default class Custom extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        axios({
+        fetch({
             method: "POST",
             url: "/api/addcustomcard",
-            data: {
+            body: {
                 userid: this.state.userid,
                 customCard: this.state.customCard,
                 whiteCard: this.state.whiteCard,
