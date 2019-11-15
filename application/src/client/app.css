@@ -28,8 +28,18 @@
   float: left;
   width: 50%;
   padding-top: 100px;
-  padding-right: 150px;
-  padding-left: 150px;
+  padding-right: 200px;
+  padding-left: 50px;
+  height: 300px;
+}
+
+.column2 {
+  margin: auto;
+  float: left;
+  width: 50%;
+  padding-top: 50px;
+  padding-right: 200px;
+  padding-left: 200px;
   height: 300px;
 }
 

@@ -60,6 +60,9 @@ export default class Login extends Component {
 
   render() {
     return (
+
+      <div class="row">
+          <div class= "column">
       <div className="wrapper">
         <div className="form-wrapper">
           <h1 className="light-blue-text">Cards Against Society</h1>
@@ -95,6 +98,8 @@ export default class Login extends Component {
             <Link to="/Registration">Don't Have an Account?</Link>
           </form>
         </div>
+      </div>
+      </div>
       </div>
     );
   }

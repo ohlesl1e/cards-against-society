@@ -113,7 +113,7 @@ export default class Registration extends Component {
           <br />
           <form onSubmit={this.handleSubmit} noValidate>
             <div className="userId">
-              <label htmlFor="userid">Username</label>
+              <center><label htmlFor="userid">Username</label></center>
               <input
                 className={formErrors.userid.length > 0 ? 'error' : null}
                 placeholder="User Name"
