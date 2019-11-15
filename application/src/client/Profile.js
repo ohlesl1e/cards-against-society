@@ -3,7 +3,6 @@ import Header from './Components/Header';
 import {
     Button, Form, FormGroup, FormControl, FormLabel 
    } from 'react-bootstrap';
-import { Link } from "react-router-dom";
 import { retrieveCookie } from "./Components/cookies";
 
 
