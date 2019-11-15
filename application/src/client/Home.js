@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react';
 import Header from './Components/Header';
-import { Link } from "react-router-dom";
 import "./app.css";
 
 export default class Home extends Component {
