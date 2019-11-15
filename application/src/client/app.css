@@ -18,18 +18,49 @@
   color: #866b6b;
 }
 
+.Profile-header{
+  padding: 120px;
+  height: 300px;
+}
+
+.column {
+  margin: auto;
+  float: left;
+  width: 50%;
+  padding-top: 100px;
+  padding-right: 150px;
+  padding-left: 150px;
+  height: 300px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 .navselection {
   color: black;
   margin: 0px 13px 3px 3px;
   filter: grayscale(100%);
   transition: all 0.4s ease;
 }
+
 .navselection:hover {
   margin: -3px 16px 3px 3px;
   color: white;
   -webkit-text-stroke: 0.5px;
   -webkit-text-stroke-color: black;
   filter: grayscale(0%);
+}
+.chat-history {
+  width: 320px;
+  height: 400px;
+  overflow: scroll;
+}
+.chat-section {
+  text-align: center;
+  padding: 20px;
 }
 
 @keyframes App-logo-spin {

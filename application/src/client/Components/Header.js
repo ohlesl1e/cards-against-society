@@ -36,6 +36,11 @@ export default class Header extends Component {
                     Log Out
                   </NavDropdown.Item>
                 </Link>
+                <Link to="/Registration">
+                  <NavDropdown.Item href="#register" onClick={() => this.logout()}>
+                    Register
+                  </NavDropdown.Item>
+                </Link>
               </NavDropdown>
               <Navbar.Text>{this.props.userid}</Navbar.Text>
             </Navbar.Collapse>
