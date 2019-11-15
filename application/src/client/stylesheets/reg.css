@@ -1,28 +1,41 @@
 
-  input {
+  input.booty {
     background-color: white;
-    width: 40%;
-    min-width: 20%;
+    width: auto;
+    min-width: 100%;
   }
   
-  button {
+  button.account {
     background-color: lightblue;
-    width: 40%;
-    min-width: 20%;
+    width: auto;
+    min-width: 100%;
   }
   
-  .regwrap {
+  .wrap1 {
     margin-top: 5%;
+    text-align: center;
+}
+
+.wrap2 {
     text-align: left;
-    padding-bottom: 1%;
-    margin-left: 35%;
-   
-  }
-  
+    display: inline-block;
+}
+
   .form-control {
     width: 100% !important;
   }
   
-  .center {
-    text-align: center;
+  .sheckle {
+      text-align: left;
+      width: 20%;
+      margin-left: 0%;
+  }
+  
+  div.a {
+      margin-top: 1%;
+      margin-bottom: 1%;
+      font-size: 12px;
+  }
+  .bongola {
+      font-size: 12px;
   }

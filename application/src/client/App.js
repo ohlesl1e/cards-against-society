@@ -16,8 +16,8 @@ import Lobby from './Lobby';
 import Login from './Login';
 import MyGames from './MyGames';
 import Custom from './Custom';
+import AddCustom from './AddCustom';
 import FAQ from './FAQ';
-
 // For now root path
 // If error for react-router-dom, install "npm install react-router-dom"
 // This allows us to manage switching between pages!
@@ -60,8 +60,9 @@ export default class Routing extends Component {
         <Route component={Home} path="/Home" />
         <Route component={Lobby} path="/Lobby" />
         <Route component={MyGames} path="/MyGames" />
+        <Route component={AddCustom} path="/AddCustom" />
         <Route component={Custom} path="/Custom" />
-        <Route component={FAQ} path="/FAQ"/>
+        <Route component={FAQ} path="/FAQ" />
       </BrowserRouter>
     );
   }

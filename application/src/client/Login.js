@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import {
- Button, FormGroup, FormControl, FormLabel 
+  Button, FormGroup, FormControl, FormLabel
 } from 'react-bootstrap';
 import './app.css';
 import { Link } from 'react-router-dom';
 import { saveCookie } from './Components/cookies';
-import Header from './Components/Header';
 
 export default class Login extends Component {
   constructor(props) {
@@ -16,12 +15,6 @@ export default class Login extends Component {
       password: ''
     };
   }
-
-  handleChange = (event) => {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
-  };
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -61,8 +54,10 @@ export default class Login extends Component {
 
   render() {
     return (
+
+      <div class="row">
+          <div class= "column">
       <div className="wrapper">
-         <> <Header userid={this.state.userid} /></>
         <div className="form-wrapper">
           <h1 className="centertext">Cards Against Society</h1>
           <br />
@@ -97,6 +92,8 @@ export default class Login extends Component {
             <Link to="/Registration">Don't Have an Account?</Link>
           </form>
         </div>
+      </div>
+      </div>
       </div>
     );
   }

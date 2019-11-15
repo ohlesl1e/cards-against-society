@@ -3,7 +3,6 @@ import Header from './Components/Header';
 import { retrieveCookie } from './Components/cookies';
 import "./app.css";
 import Chatbox from './Components/Chatbox';
-import GameContainer from './Components/GameContainer';
 
 export default class Lobby extends Component {
   state = {
@@ -50,5 +49,4 @@ export default class Lobby extends Component {
       </div>
     );
   }
-
 }

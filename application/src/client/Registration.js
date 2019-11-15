@@ -28,13 +28,11 @@ export default class Registration extends Component {
     super(props);
     this.state = {
       email: null,
-      confirmEmail: null,
       password: null,
       confirmPassword: null,
       userid: ' ',
       formErrors: {
         email: '',
-        confirmEmail: '',
         password: '',
         confirmPassword: '',
         userid: ''
@@ -110,15 +108,20 @@ export default class Registration extends Component {
     const { formErrors } = this.state;
 
     return (
-      <div className="regwrap">
-        <div className="form-wrapper">
-          <h1><b>Create Account</b></h1>
-          <br />
+      <div className="wrap1">
+        <h1><b>Create Account</b></h1>
+        <br />
+        <div className="wrap2">
           <form onSubmit={this.handleSubmit} noValidate>
             <div className="userId">
+<<<<<<< HEAD
+              <center><label htmlFor="userid">Username</label></center>
+=======
               <label htmlFor="userid">Username</label>
-              <br/>
+              <br />
+>>>>>>> b0a53e41538b8413eb8219f1194c1c3842581661
               <input
+                class="booty"
                 className={formErrors.userid.length > 0 ? 'error' : null}
                 placeholder="User Name"
                 type="text"
@@ -132,8 +135,9 @@ export default class Registration extends Component {
             </div>
             <div className="email">
               <label htmlFor="email">Email</label>
-              <br/>
+              <br />
               <input
+                class="booty"
                 className={formErrors.email.length > 0 ? 'error' : null}
                 placeholder="Email"
                 type="email"
@@ -148,8 +152,9 @@ export default class Registration extends Component {
 
             <div className="password">
               <label htmlFor="password">Password</label>
-              <br/>
+              <br />
               <input
+                class="booty"
                 className={formErrors.password.length > 0 ? 'error' : null}
                 placeholder="Password"
                 type="password"
@@ -164,8 +169,9 @@ export default class Registration extends Component {
 
             <div className="confirmPassword">
               <label htmlFor="password">Confirm Password</label>
-              <br/>
+              <br />
               <input
+                class="booty"
                 className={
                   formErrors.confirmPassword.length > 0 ? 'error' : null
                 }
@@ -181,11 +187,14 @@ export default class Registration extends Component {
                 </span>
               )}
             </div>
-                <br/>
+            <div class="a">
+              By clicking Sign Up, you have read and agreed to our&nbsp;
+                  <a href="https://www.youtube.com/watch?v=5TcT1zqZofA" target="_blank">Terms of Service</a>.
+                </div>
             <div className="createAccount">
-              <button type="submit">Create Account</button>
-              <br/>
-              <Link to="/">Already Have an Account?</Link>
+              <button class="account" type="submit">Create Account</button>
+              <br />
+              <Link className="bongola" to="/">Already Have an Account?</Link>
             </div>
           </form>
         </div>

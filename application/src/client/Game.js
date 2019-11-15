@@ -11,27 +11,17 @@ export default class Game extends Component {
   constructor() {
     super();
     this.state = {
-      data: null,
       userid: retrieveCookie('userid')
     };
-    this.getInfo = this.getInfo.bind(this);
   }
 
-  componentDidMount() {
-    this.getInfo();
-  }
-
-  getInfo() {
-    fetch('/game/' + this.props.gamesessionid)
-      .then(response => response.json())
-      .then((res) => {});
-  }
+  componentDidMount() {}
 
   render() {
     return (
       <div className="game-page">
         <Header userid={this.state.userid} />
-        <GameContainer />
+        <GameContainer gameid={this.props.match.params.gameid} />
         <Container>
           <br />
           <Row />
