@@ -3,22 +3,22 @@ const os = require('os');
 const path = require('path');
 const sequelize = require('sequelize');
 const cors = require('cors');
+const io = require('socket.io')();
 const bodyParser = require('body-parser');
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/users-router');
 
 const app = express();
 
-var io = require("socket.io")();
 io.listen(8080);
-app.set("socketio", io);
+app.set('socketio', io);
 
-io.of("/lobby").on("connection", socket => {
-  socket.on("subscribeToChat", msg => {
-    io.of("/lobby").emit("message", msg);
+io.of('/lobby').on('connection', (socket) => {
+  socket.on('subscribeToChat', (msg) => {
+    console.log(msg);
+    io.of('/lobby').emit('message', msg);
   });
 });
-
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
