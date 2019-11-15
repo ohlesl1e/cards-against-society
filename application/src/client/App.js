@@ -10,7 +10,11 @@ import ShotaEbikawa from './AboutMembers/ShotaEbikawa';
 import LeslieZhou from './AboutMembers/LeslieZhou';
 import DarylOrtiz from './AboutMembers/DarylOrtiz';
 import Registration from './Registration';
+<<<<<<< HEAD
 import GameForm from './Components/GameForm'
+=======
+import Profile from './Profile';
+>>>>>>> d14a35f39dce7f6724aebadfc04e5df86a96f53d
 import Game from './Game';
 import Lobby from './Lobby';
 import Login from './Login';
@@ -55,6 +59,8 @@ export default class Routing extends Component {
         <Route component={DarylOrtiz} path="/DarylOrtiz" />
         <Route component={Registration} path="/Registration" />
         <Route component={Game} path="/Game" />
+        <Route component={Profile} path="/Profile" />
+        <Route component={Home} path="/Home" />
         <Route component={Lobby} path="/Lobby" />
         <Route component={MyGames} path="/MyGames" />
         <Route component={GameForm} path='/GameForm'/>
