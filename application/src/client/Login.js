@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Button, FormGroup, FormControl, FormLabel
+ Button, FormGroup, FormControl, FormLabel 
 } from 'react-bootstrap';
 import './app.css';
 import { Link } from 'react-router-dom';
@@ -15,6 +15,12 @@ export default class Login extends Component {
       password: ''
     };
   }
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.id]: event.target.value
+    });
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -54,46 +60,45 @@ export default class Login extends Component {
 
   render() {
     return (
-
-      <div class="row">
-          <div class= "column">
-      <div className="wrapper">
-        <div className="form-wrapper">
-          <h1 className="centertext">Cards Against Society</h1>
-          <br />
-          <form onSubmit={this.handleSubmit}>
-            <FormGroup classname="userId" controlId="userid" bsSize="large">
-              <FormLabel>Username</FormLabel>
-              <FormControl
-                autoFocus
-                type="username"
-                value={this.state.userid}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup controlId="password" bsSize="large">
-              <FormLabel>Password</FormLabel>
-              <FormControl
-                value={this.state.password}
-                onChange={this.handleChange}
-                type="password"
-                data-toggle="password"
-              />
-            </FormGroup>
-            <Button
-              block
-              bsSize="large"
-              disabled={!this.validateForm()}
-              type="submit"
-              onClick={this.onSubmit}
-            >
-              Login
-            </Button>
-            <Link to="/Registration">Don't Have an Account?</Link>
-          </form>
+      <div className="row">
+        <div className="column">
+          <div className="wrapper">
+            <div className="form-wrapper">
+              <h1 className="centertext">Cards Against Society</h1>
+              <br />
+              <form onSubmit={this.handleSubmit}>
+                <FormGroup classname="userId" controlId="userid" bsSize="large">
+                  <FormLabel>Username</FormLabel>
+                  <FormControl
+                    autoFocus
+                    type="username"
+                    value={this.state.userid}
+                    onChange={this.handleChange}
+                  />
+                </FormGroup>
+                <FormGroup controlId="password" bsSize="large">
+                  <FormLabel>Password</FormLabel>
+                  <FormControl
+                    value={this.state.password}
+                    onChange={this.handleChange}
+                    type="password"
+                    data-toggle="password"
+                  />
+                </FormGroup>
+                <Button
+                  block
+                  bsSize="large"
+                  disabled={!this.validateForm()}
+                  type="submit"
+                  onClick={this.onSubmit}
+                >
+                  Login
+                </Button>
+                <Link to="/Registration">Don't Have an Account?</Link>
+              </form>
+            </div>
+          </div>
         </div>
-      </div>
-      </div>
       </div>
     );
   }
