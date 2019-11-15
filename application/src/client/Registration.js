@@ -74,7 +74,7 @@ export default class Registration extends Component {
     e.preventDefault();
     if (formValid(this.state)) {
       // this.handleRouteChange();
-      fetch('/users/register', {
+      fetch('http://localhost:4000/users/register', {
         method: 'POST',
         credentials: 'same-origin',
         body: JSON.stringify(this.state),
@@ -84,8 +84,8 @@ export default class Registration extends Component {
       })
         .then((res) => {
           if (res.status === 200) {
-            // cookie.save(userid);
-            // this.handleRouteChange();
+            alert('Account created successfully.');
+            this.handleRouteChange();
           } else {
             const error = new Error(res.error);
             throw error;
