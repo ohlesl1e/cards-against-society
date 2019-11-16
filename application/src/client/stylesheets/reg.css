@@ -2,9 +2,12 @@
   input.booty {
     background-color: white;
     width: auto;
-    min-width: 100%;
+    min-width: 30%;
   }
   
+  button,input {
+    width: 100%;
+  }
   button.account {
     background-color: lightblue;
     width: auto;

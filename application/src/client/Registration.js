@@ -115,9 +115,8 @@ export default class Registration extends Component {
         <div className="wrap2">
           <form onSubmit={this.handleSubmit} noValidate>
             <div className="userId">
-              <center>
                 <label htmlFor="userid">Username</label>
-              </center>
+                <br/>
               <input
                 className="booty"
                 className={formErrors.userid.length > 0 ? 'error' : null}
