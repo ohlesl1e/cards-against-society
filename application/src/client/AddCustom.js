@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Header from './Components/Header';
 import { retrieveCookie } from "./Components/cookies";
 import { Redirect } from 'react-router-dom';
-import axios from 'axios';
 
 export default class AddCustom extends Component {
     constructor(props) {

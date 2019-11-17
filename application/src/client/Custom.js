@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import Header from './Components/Header'
 import { retrieveCookie } from "./Components/cookies"
 import { Redirect } from 'react-router-dom'
-import Axios from 'axios'
+import {Button} from 'react-bootstrap'
+import ShowDeck from './ShowDeck'
 
 export default class Custom extends Component {
     constructor(props) {
@@ -10,17 +11,17 @@ export default class Custom extends Component {
 
         this.state = {
             userid: retrieveCookie("userid"),
+            deckShow: false,
             calledDeck: "",
             redirectTo: "",
             redirect: false,
-            render: false,
             decklist: [{ name: "Deck1", cards: ["big black cock", "an ar15 assault rifle"] }],
         }
         console.log(this.state.decklist);
 
     }
 
-    setRender = () =>{
+    setRender = () => {
         this.setState({
             render: true
         })
@@ -28,11 +29,13 @@ export default class Custom extends Component {
 
     renderDeck = () => {
         if (this.state.render) {
-            {this.state.decklist[this.state.calledDeck].cards.map(c => {
-                return (
-                    <div>{c}</div>
-                )
-            })}
+            {
+                this.state.decklist[this.state.calledDeck].cards.map(c => {
+                    return (
+                        <div>{c}</div>
+                    )
+                })
+            }
         }
     }
 
@@ -73,15 +76,16 @@ export default class Custom extends Component {
     handleClick = event => {
         for (let i = 0; i < this.state.decklist.length; i++) {
             if (this.state.decklist[i].name == event.target.value) {
-                this.setState({ calledDeck : i })
+                this.setState({ calledDeck: i })
                 break
             }
         }
-        this.setRender()
+        this.setState({ deckShow: true })
         console.log(this.state.calledDeck);
     }
 
     render() {
+        let closeShowedDeck = () => this.setState({ deckShow: false })
         return (
             <div>
                 {this.renderRedirect()}
@@ -91,15 +95,16 @@ export default class Custom extends Component {
                         {this.state.decklist.map(d => {
                             return (
                                 <div>
-                                    <button className="Deck" value={d.name} onClick={this.handleClick}>
+                                    <Button varian='primary' value={d.name} onClick={this.handleClick}>
                                         {d.name}
-                                    </button>
+                                        <ShowDeck
+                                            show={this.state.deckShow}
+                                            onHide={closeShowedDeck}
+                                        />
+                                    </Button>
                                 </div>
                             )
                         })}
-                    </div>
-                    <div className="ShowDeck">
-                        {this.renderDeck}
                     </div>
                 </div>
             </div>
