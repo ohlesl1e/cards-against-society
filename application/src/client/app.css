@@ -23,24 +23,36 @@
   height: 300px;
 }
 
+.chatbox {
+  margin: auto;
+  float: left;
+  padding: 100px;
+  height: 300px;
+}
+
 .column {
   margin: auto;
   float: left;
-  width: 50%;
-  padding-top: 100px;
-  padding-right: 200px;
+  padding-top: 0px;
+  padding-right: 50px;
   padding-left: 50px;
-  height: 300px;
+  height: 0px;
 }
 
 .column2 {
   margin: auto;
   float: left;
-  width: 50%;
+  width: 80;
   padding-top: 50px;
   padding-right: 200px;
   padding-left: 200px;
   height: 300px;
+}
+
+.lobby {
+  margin: 0;
+  padding-left: 300px;
+  padding-right: 300px;
 }
 
 .row:after {
@@ -50,7 +62,7 @@
 }
 
 .navselection {
-  color: black;
+  color: rgb(192, 192, 192);
   margin: 0px 13px 3px 3px;
   filter: grayscale(100%);
   transition: all 0.4s ease;

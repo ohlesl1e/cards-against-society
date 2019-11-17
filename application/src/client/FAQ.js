@@ -18,7 +18,7 @@ export default class FAQ extends Component {
   render() {
     return (
       <React.Fragment>
-        <Link to="/">Back to Login</Link>
+        <Link to="/Lobby">Back to Lobby</Link>
         <React.Fragment>
           <h2 align="center">Help</h2>
         </React.Fragment>

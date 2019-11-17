@@ -15,7 +15,7 @@ export default class Header extends Component {
   render() {
     return (
       <header>
-        <Navbar className="navbar" expand="lg">
+        <Navbar className="navbar" expand="lg" bg="dark" variant="dark">
           <Link to="/Lobby">
             <Navbar.Brand href="#home" className="navselection">
               Cards Against Society
