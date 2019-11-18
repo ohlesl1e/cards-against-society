@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Header from './Components/Header'
 import { retrieveCookie } from "./Components/cookies"
 import { Redirect } from 'react-router-dom'
-import { Button, ButtonToolbar } from 'react-bootstrap'
+import { Button, ButtonToolbar, Col, Row } from 'react-bootstrap'
 import ShowDeck from './ShowDeck'
 
 export default class Custom extends Component {
@@ -15,7 +15,10 @@ export default class Custom extends Component {
             calledDeck: 0,
             redirectTo: "",
             redirect: false,
-            decklist: [{ name: "Deck1", cards: ["big black cock", "an ar15 assault rifle"] }],
+            decklist: [
+                { name: "Deck1", cards: ["big black cock", "an ar15 assault rifle"] },
+                { name: "Deck2", cards: ["jews"] }
+            ],
         }
         console.log(this.state.decklist);
 
@@ -56,13 +59,12 @@ export default class Custom extends Component {
     }
 
     handleClick = event => {
-        /*for (let i = 0; i < this.state.decklist.length; i++) {
+        for (let i = 0; i < this.state.decklist.length; i++) {
             if (this.state.decklist[i].name == event.target.value) {
                 this.setState({ calledDeck: i })
                 break
             }
         }
-        */
         this.setState({ deckShow: true })
         console.log(this.state.calledDeck);
     }
@@ -75,21 +77,24 @@ export default class Custom extends Component {
                 <Header />
                 <div className="BodyWrapper">
                     <div className="DeckList">
-                        {this.state.decklist.map(d => {
-                            return (
-                                <div>
-                                    <ButtonToolbar>
-                                        <Button varian='primary' value={d.name} onClick={this.handleClick}>
-                                            {d.name}
-                                        </Button>
-                                        <ShowDeck
+                        <Row>
+                            {this.state.decklist.map(d => {
+                                return (
+                                    <Col>
+                                        <ButtonToolbar>
+                                            <Button varian='primary' value={d.name} onClick={this.handleClick}>
+                                                {d.name}
+                                            </Button>
+                                            <ShowDeck
                                                 show={this.state.deckShow}
                                                 onHide={deckClose}
-                                        />
-                                    </ButtonToolbar>
-                                </div>
-                            )
-                        })}
+                                                deck={this.state.decklist[this.state.calledDeck]}
+                                            />
+                                        </ButtonToolbar>
+                                    </Col>
+                                )
+                            })}
+                        </Row>
                     </div>
                 </div>
             </div>
