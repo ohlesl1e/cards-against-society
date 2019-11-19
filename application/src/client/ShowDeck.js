@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Modal, Button, Row, Col, Container, ButtonToolbar } from 'react-bootstrap'
 import { Redirect } from 'react-router-dom';
+import Add from './Add'
 
 export class ShowDeck extends Component {
     constructor(props) {
@@ -8,6 +9,7 @@ export class ShowDeck extends Component {
 
         this.state = {
             redirect: false,
+            formShow: false,
         }
     }
 
@@ -22,7 +24,12 @@ export class ShowDeck extends Component {
         }
     }
 
+    handleClick = () => {
+        this.setState({ formShow: true })
+    }
+
     render() {
+        let formClose = () => this.setState({ formShow: false })
         return (
             <div>
                 {this.renderRedirect()}
@@ -36,12 +43,17 @@ export class ShowDeck extends Component {
                     <Modal.Header>
                         <Modal.Title id="contained-modal-title-vcenter">
                             <Row>
-                                <Col>Deck1</Col>
+                                <Col>{this.props.deck.name}</Col>
                                 <Col>
                                     <ButtonToolbar>
-                                        <Button onClick={this.setRedirect}>
+                                        <Button onClick={this.handleClick}>
                                             Add
                                         </Button>
+                                        <Add
+                                            show={this.state.formShow}
+                                            onHide={formClose}
+                                            deck={this.props.deck}
+                                        />
                                     </ButtonToolbar>
                                 </Col>
                             </Row>
@@ -53,7 +65,7 @@ export class ShowDeck extends Component {
                                 {this.props.deck.cards.map(c => {
                                     return (
                                         <Col>
-                                            {c}
+                                            {c.content}
                                         </Col>
                                     )
                                 })}

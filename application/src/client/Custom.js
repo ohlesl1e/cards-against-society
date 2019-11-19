@@ -16,8 +16,8 @@ export default class Custom extends Component {
             redirectTo: "",
             redirect: false,
             decklist: [
-                { name: "Deck1", cards: ["big black cock", "an ar15 assault rifle"] },
-                { name: "Deck2", cards: ["jews"] }
+                { name: "Deck1", cards: [{ whiteCard: true, content: "big black cock" }, { whiteCard: true, content: "an ar15 assault rifle" }] },
+                { name: "Deck2", cards: [{ whiteCard: false, content: "jews" }] }
             ],
         }
         console.log(this.state.decklist);
