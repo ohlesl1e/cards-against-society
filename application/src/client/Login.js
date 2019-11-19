@@ -64,7 +64,7 @@ export default class Login extends Component {
         <div className="column">
           <div className="wrapper">
             <div className="form-wrapper">
-              <h1 className="centertext">Cards Against Society</h1>
+              <h1 className="cah-login">Cards Against Society</h1>
               <br />
               <form onSubmit={this.handleSubmit}>
                 <FormGroup classname="userId" controlId="userid" bsSize="large">
