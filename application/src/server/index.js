@@ -16,7 +16,6 @@ app.set('socketio', io);
 
 io.of('/lobby').on('connection', (socket) => {
   socket.on('subscribeToChat', (msg) => {
-    console.log(msg);
     io.of('/lobby').emit('message', msg);
   });
 });

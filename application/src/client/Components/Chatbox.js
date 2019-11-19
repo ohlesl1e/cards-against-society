@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
 import {
- ListGroup, Button, Form, Row, Col 
+ ListGroup, Button, Form, Row, Col, Card 
 } from 'react-bootstrap';
 import '../app.css';
 
@@ -12,10 +12,7 @@ export default class ChatBox extends Component {
       textmsg: '',
       userid: this.props.userid,
       msgHistory: [],
-      socket: io.connect(
-        'http://localhost:8080/lobby'
-        // +this.props.url
-      )
+      socket: io.connect(`http://localhost:8080/${this.props.url}`)
     };
     this.handleChange = this.handleChange.bind(this);
     this.receiveMessage = this.receiveMessage.bind(this);
@@ -26,13 +23,18 @@ export default class ChatBox extends Component {
     this.getMessage(this.receiveMessage);
   };
 
-  sendMessage(message) {
-    this.state.socket.emit('subscribeToChat', message);
+  componentDidUpdate() {
+    const { chat } = this.refs;
+    chat.scrollTop = chat.scrollHeight;
   }
 
   getMessage(receieveMessage) {
     this.state.socket.on('message', receieveMessage);
   }
+
+  handleSubmit = () => {
+    this.sendMessage({ msg: this.state.textmsg, title: this.state.userid });
+  };
 
   receiveMessage(data) {
     this.setState((state) => {
@@ -48,29 +50,32 @@ export default class ChatBox extends Component {
     });
   }
 
-  handleSubmit = () => {
-    this.sendMessage({ msg: this.state.textmsg, title: this.state.userid });
-  };
+  sendMessage(message) {
+    this.state.socket.emit('subscribeToChat', message);
+  }
 
   handleChange(event) {
     this.setState({ textmsg: event.target.value });
   }
 
+  createHistory() {
+    const messages = [];
+
+    for (let i = 0; i < this.state.msgHistory.length; i++) {
+      messages.push(
+        <ListGroup.Item>
+          <h5>{this.state.msgHistory[i].title}</h5>
+          <p>{this.state.msgHistory[i].description}</p>
+        </ListGroup.Item>
+      );
+    }
+    return messages;
+  }
+
   render = () => (
     <div className="chat-section">
-      <div className="chat-history">
-        <ListGroup
-          itemLayout="horizontal"
-          dataSource={this.state.msgHistory}
-          renderItem={item => (
-            <ListGroup.Item>
-              <ListGroup.Item.Meta
-                title={item.title}
-                description={item.description}
-              />
-            </ListGroup.Item>
-          )}
-        />
+      <div className="chat-history" ref="chat">
+        <ListGroup itemLayout="horizontal">{this.createHistory()}</ListGroup>
       </div>
       <div className="text-box">
         <Form>
@@ -88,7 +93,7 @@ export default class ChatBox extends Component {
             </Col>
             <Col md="1">
               <Button
-                rounded
+                rounded="true"
                 variant="dark"
                 size="lg"
                 className="mt-4"
