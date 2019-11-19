@@ -28,7 +28,7 @@ export default class Profile extends Component {
           <div class= "column2">
         <Form>
          <Form.Group controlId="formGroupEmail">
-         <center><Form.Label>Profile</Form.Label></center>
+         <center><h5><Form.Label>Profile</Form.Label></h5></center>
           <Form.Label>Username</Form.Label>
           <Form.Control type="username" value="Username" class="field left" readonly/>
         </Form.Group>

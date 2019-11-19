@@ -1,6 +1,26 @@
+.title {
+    margin: 0;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background-color:  #ffffff;
+}
+
 body {
     margin: 0;
-    padding: 0;
     background-color:  #909090;
+}
+
+.aboutBody {
+    margin: 0;
+    padding-left: 300px;
+    padding-right: 300px;
+}
+
+.aboutTeam {
+    margin: auto;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
+    padding: 30px;
 }
 

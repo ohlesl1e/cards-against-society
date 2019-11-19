@@ -5,17 +5,36 @@ import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 import '../app.css';
-import { deleteCookie } from './cookies';
+import { retrieveCookie, deleteCookie } from './cookies';
 
 export default class Header extends Component {
+  constructor(props) {
+    super();
+    this.isAdmin = this.isAdmin.bind(this);
+  }
+
+
   logout() {
     deleteCookie();
+  }
+
+  isAdmin(){
+    if(retrieveCookie() === 'admin'){
+      return (
+        <Link to="/Admin">
+          <Nav.Item className="navselection">Admin</Nav.Item>
+        </Link>
+      )
+    }
+    else {
+      return(<div></div>)
+    }
   }
 
   render() {
     return (
       <header>
-        <Navbar className="navbar" expand="lg">
+        <Navbar className="navbar" expand="lg" bg="dark" variant="dark">
           <Link to="/Lobby">
             <Navbar.Brand href="#home" className="navselection">
               Cards Against Society
@@ -29,6 +48,7 @@ export default class Header extends Component {
             <Link to="/FAQ">
               <Nav.Item className="navselection">Help</Nav.Item>
             </Link>
+            {this.isAdmin()}
             <Navbar.Collapse className="justify-content-end">
               <NavDropdown id="basic-nav-dropdown">
                 <Link to="/">

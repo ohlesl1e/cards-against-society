@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import Header from './Components/Header'
 import { retrieveCookie } from "./Components/cookies"
 import { Redirect } from 'react-router-dom'
-import Axios from 'axios'
+import { Button, ButtonToolbar, Col, Row } from 'react-bootstrap'
+import ShowDeck from './ShowDeck'
 
 export default class Custom extends Component {
     constructor(props) {
@@ -10,30 +11,17 @@ export default class Custom extends Component {
 
         this.state = {
             userid: retrieveCookie("userid"),
-            calledDeck: "",
+            deckShow: false,
+            calledDeck: 0,
             redirectTo: "",
             redirect: false,
-            render: false,
-            decklist: [{ name: "Deck1", cards: ["big black cock", "an ar15 assault rifle"] }],
+            decklist: [
+                { name: "Deck1", cards: [{ whiteCard: true, content: "big black cock" }, { whiteCard: true, content: "an ar15 assault rifle" }] },
+                { name: "Deck2", cards: [{ whiteCard: false, content: "jews" }] }
+            ],
         }
         console.log(this.state.decklist);
 
-    }
-
-    setRender = () =>{
-        this.setState({
-            render: true
-        })
-    }
-
-    renderDeck = () => {
-        if (this.state.render) {
-            {this.state.decklist[this.state.calledDeck].cards.map(c => {
-                return (
-                    <div>{c}</div>
-                )
-            })}
-        }
     }
 
     setRedirect = () => {
@@ -73,33 +61,40 @@ export default class Custom extends Component {
     handleClick = event => {
         for (let i = 0; i < this.state.decklist.length; i++) {
             if (this.state.decklist[i].name == event.target.value) {
-                this.setState({ calledDeck : i })
+                this.setState({ calledDeck: i })
                 break
             }
         }
-        this.setRender()
+        this.setState({ deckShow: true })
         console.log(this.state.calledDeck);
     }
 
     render() {
+        let deckClose = () => this.setState({ deckShow: false })
         return (
             <div>
                 {this.renderRedirect()}
                 <Header />
                 <div className="BodyWrapper">
                     <div className="DeckList">
-                        {this.state.decklist.map(d => {
-                            return (
-                                <div>
-                                    <button className="Deck" value={d.name} onClick={this.handleClick}>
-                                        {d.name}
-                                    </button>
-                                </div>
-                            )
-                        })}
-                    </div>
-                    <div className="ShowDeck">
-                        {this.renderDeck}
+                        <Row>
+                            {this.state.decklist.map(d => {
+                                return (
+                                    <Col>
+                                        <ButtonToolbar>
+                                            <Button varian='primary' value={d.name} onClick={this.handleClick}>
+                                                {d.name}
+                                            </Button>
+                                            <ShowDeck
+                                                show={this.state.deckShow}
+                                                onHide={deckClose}
+                                                deck={this.state.decklist[this.state.calledDeck]}
+                                            />
+                                        </ButtonToolbar>
+                                    </Col>
+                                )
+                            })}
+                        </Row>
                     </div>
                 </div>
             </div>
