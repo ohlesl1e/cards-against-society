@@ -3,7 +3,6 @@ import Header from './Components/Header';
 import { retrieveCookie } from './Components/cookies'
 import './app.css';
 import ListRooms from './Components/ListRooms';
-import {Table} from 'react-bootstrap';
 import UserSearch from './Components/UserSearch';
 
 export default class Admin extends Component{
@@ -18,9 +17,47 @@ export default class Admin extends Component{
                 <div className="homePage">
                     <Header userid={this.state.userid} />
                 </div>
+            
+                <div class="sidebarContainer">
+                    <div class="sidebarAdmin">
+                    Admin Control
+                    </div>
 
-                <div className="admin-title">
-                    <h2>Admin</h2>
+                <div className="sidebarNav">
+                    <li><a href='/Lobby'>
+                        Lobby
+                    </a></li>
+                </div>
+
+                <div className="sidebarNav">
+                    <li><a href='/About'>
+                        About
+                    </a></li>
+                </div>
+
+                <div className="sidebarNav">
+                    <li><a href='/Profile'>
+                        Profile
+                    </a></li>
+                </div>
+
+                <div className="sidebarNav">
+                    <li><a href='/Custom'>
+                        Custom Cards
+                    </a></li>
+                </div>
+
+                <div className="sidebarNav">
+                    <li><a href='/Registration'>
+                        Registration
+                    </a></li>
+                </div>
+
+                <div className="sidebarNav">
+                    <li><a href='/FAQ'>
+                        FAQ
+                    </a></li>
+                </div>
                 </div>
 
                 <div className="column2">
@@ -35,8 +72,6 @@ export default class Admin extends Component{
                     <h5># of Users:</h5>
                 </div>
             </body>
-
-
         );
     }
 }
