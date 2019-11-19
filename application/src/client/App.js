@@ -63,7 +63,11 @@ export default class Routing extends Component {
         <Route component={MyGames} path="/MyGames" />
         <Route component={Custom} path="/Custom" />
         <Route component={FAQ} path="/FAQ" />
+<<<<<<< HEAD
         <Route component={Admin} path="/Admin" />
+=======
+      
+>>>>>>> 9c8287d41f5f37b918041ab38b8203cc13b411ac
       </BrowserRouter>
     );
   }
