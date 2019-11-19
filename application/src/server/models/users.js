@@ -43,10 +43,28 @@ module.exports = (sequelize, Sequelize) => {
     });
   };
 
+
+  bcrypt.hash('admin123', 10).then((hash) => {
+    let admins = [
+      {
+        'userid':'admin',
+        'email':'admin@administrator.com',
+        'password': hash
+      }
+    ]
+  
+    user.bulkCreate(admins);
+  });
+
+  
+
   (user.prototype.comparePassword = async function(password) {
     return await bcrypt.compare(password, this.password);
   });
   
+
+  
+
   return user;
 
 

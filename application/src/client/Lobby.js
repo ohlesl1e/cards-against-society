@@ -28,7 +28,7 @@ export default class Lobby extends Component {
             <br/>
               <p>Active Game Rooms:</p>
                <ListRooms url="http://localhost:4000/game/allgames" />
-              <Chatbox userid={this.state.userid} />
+              <Chatbox userid={this.state.userid} url = "lobby" />
           </div>
       </body>
     );
