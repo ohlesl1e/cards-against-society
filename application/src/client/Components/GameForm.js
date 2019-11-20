@@ -6,7 +6,8 @@ import {
   FormControl,
   FormLabel,
   FormCheck,
-  Dropdown
+  Dropdown,
+  Modal
 } from 'react-bootstrap';
 
 const GameForm = (state) => {
@@ -17,11 +18,15 @@ const GameForm = (state) => {
     color: 'white'
   };
 
+  const marginStyle = {
+  }
+
   const formStyle = {
     width: '100%',
     display: 'inline-flex',
     flexDirection: 'column',
-    textAlign: 'center'
+    textAlign: 'center',
+    padding: '1.5rem'
   };
 
   const inputGameStyle = {
@@ -34,7 +39,9 @@ const GameForm = (state) => {
     display: 'inline-flex',
     justifyContent: 'flex-end'
   };
-
+  const [show, setShow] = React.useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const [points, setPoints] = React.useState('');
   const [size, setSize] = React.useState('');
   const [card, setCard] = React.useState('');
@@ -53,6 +60,11 @@ const GameForm = (state) => {
   };
 
   return (
+  <>
+    <Button variant='dark' onClick={handleShow}>
+      Create Room
+    </Button>
+    <Modal style ={marginStyle} show={show} onHide={handleClose}>
     <div>
       <FormGroup style={formStyle}>
         Setup Room
@@ -116,6 +128,8 @@ const GameForm = (state) => {
         </Button>
       </FormGroup>
     </div>
+    </Modal>
+  </>
   );
 };
 
