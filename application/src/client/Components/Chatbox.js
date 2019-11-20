@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
-import io from 'socket.io-client';
-import {
- ListGroup, Button, Form, Row, Col, Card 
-} from 'react-bootstrap';
-import '../app.css';
+import React, { Component } from "react";
+import io from "socket.io-client";
+import { ListGroup, Button, Form, Row, Col, Card } from "react-bootstrap";
+import "../app.css";
 
 export default class ChatBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      textmsg: '',
+      textmsg: "",
       userid: this.props.userid,
       msgHistory: [],
       socket: io.connect(`http://localhost:8080/${this.props.url}`)
@@ -29,7 +27,7 @@ export default class ChatBox extends Component {
   }
 
   getMessage(receieveMessage) {
-    this.state.socket.on('message', receieveMessage);
+    this.state.socket.on("message", receieveMessage);
   }
 
   handleSubmit = () => {
@@ -37,7 +35,7 @@ export default class ChatBox extends Component {
   };
 
   receiveMessage(data) {
-    this.setState((state) => {
+    this.setState(state => {
       const msgHistory = state.msgHistory.concat({
         title: data.title,
         description: data.msg,
@@ -45,13 +43,13 @@ export default class ChatBox extends Component {
       });
       return {
         msgHistory,
-        textmsg: ''
+        textmsg: ""
       };
     });
   }
 
   sendMessage(message) {
-    this.state.socket.emit('subscribeToChat', message);
+    this.state.socket.emit("subscribeToChat", message);
   }
 
   handleChange(event) {
@@ -64,7 +62,7 @@ export default class ChatBox extends Component {
     for (let i = 0; i < this.state.msgHistory.length; i++) {
       messages.push(
         <ListGroup.Item>
-          <h5>{this.state.msgHistory[i].title}</h5>
+          <h6>{this.state.msgHistory[i].title}</h6>
           <p>{this.state.msgHistory[i].description}</p>
         </ListGroup.Item>
       );
@@ -80,18 +78,17 @@ export default class ChatBox extends Component {
       <div className="text-box">
         <Form>
           <Row className="justify-content-left">
-            <Col md="10">
+            <Col md="8">
               <textarea
                 value={this.state.textmsg}
                 onChange={this.handleChange}
                 className="text-area"
                 id="textboxsize"
-                width="auto"
                 rows="2"
                 placeholder="Type your message here..."
               />
             </Col>
-            <Col md="1">
+            <Col md="3">
               <Button
                 rounded="true"
                 variant="dark"
