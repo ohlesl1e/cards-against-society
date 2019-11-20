@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import {
+ Button, FormGroup, FormControl, FormLabel 
+} from 'react-bootstrap';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import Home from './Home';
@@ -15,9 +17,11 @@ import Game from './Game';
 import Lobby from './Lobby';
 import Login from './Login';
 import MyGames from './MyGames';
+import GameForm from './Components/GameForm';
 import Custom from './Custom';
-import AddCustom from './AddCustom';
 import FAQ from './FAQ';
+import Admin from './Admin';
+
 // For now root path
 // If error for react-router-dom, install "npm install react-router-dom"
 // This allows us to manage switching between pages!
@@ -60,9 +64,10 @@ export default class Routing extends Component {
         <Route component={Home} path="/Home" />
         <Route component={Lobby} path="/Lobby" />
         <Route component={MyGames} path="/MyGames" />
-        <Route component={AddCustom} path="/AddCustom" />
         <Route component={Custom} path="/Custom" />
         <Route component={FAQ} path="/FAQ" />
+        <Route component={GameForm} path="/FormGame" />
+        <Route component={Admin} path="/Admin" />
       </BrowserRouter>
     );
   }

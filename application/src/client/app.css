@@ -40,12 +40,12 @@
 }
 
 .column2 {
-  margin: auto;
+  margin: 0px 10px;
   float: left;
   width: 80;
-  padding-top: 50px;
+  padding-top: 20px;
   padding-right: 200px;
-  padding-left: 200px;
+  padding-left: 220px;
   height: 300px;
 }
 
@@ -146,4 +146,37 @@
 
 .centertext {
   text-align: center;
+}
+
+.cah-login{
+  text-align: center;
+  padding-top: 200px;
+}
+
+.sidebarContainer {
+  position: fixed;
+  width: 280;
+  height: 100%;
+  left: 0;
+  overflow: auto;
+  background: #2c2c31;
+  color: rgb(212, 212, 212);
+}
+
+.sidebarAdmin{
+  padding: 10px 15px 10px 30px;
+  font-size:20px;
+  background-color: rgb(39, 39, 39);
+}
+
+.sidebarNav li{
+  background-color: transparent;
+  position: relative;
+  display: inline-block;
+}
+
+.sidebarNav li a{
+  padding:10px 15px 10px 30px;
+  display: block;
+  color: rgb(197, 197, 197);
 }

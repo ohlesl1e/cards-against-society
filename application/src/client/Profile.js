@@ -25,7 +25,7 @@ export default class Profile extends Component {
         <div className="homePage">
         <Header userid={this.state.userid} />
         <div class="row">
-          <div class= "column2">
+          <div class= "column">
         <Form>
          <Form.Group controlId="formGroupEmail">
          <center><h5><Form.Label>Profile</Form.Label></h5></center>

@@ -5,11 +5,28 @@ import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 import '../app.css';
-import { deleteCookie } from './cookies';
+import { retrieveCookie, deleteCookie } from './cookies';
 
 export default class Header extends Component {
+  constructor(props) {
+    super();
+    this.isAdmin = this.isAdmin.bind(this);
+  }
+
   logout() {
     deleteCookie();
+  }
+
+  isAdmin() {
+    if (retrieveCookie() === "admin") {
+      return (
+        <Link to="/Admin">
+          <Nav.Item className="navselection">Admin</Nav.Item>
+        </Link>
+      );
+    } 
+      return <div></div>;
+    
   }
 
   render() {
@@ -29,6 +46,7 @@ export default class Header extends Component {
             <Link to="/FAQ">
               <Nav.Item className="navselection">Help</Nav.Item>
             </Link>
+            {this.isAdmin()}
             <Navbar.Collapse className="justify-content-end">
               <NavDropdown id="basic-nav-dropdown">
                 <Link to="/">
@@ -36,7 +54,6 @@ export default class Header extends Component {
                     Log Out
                   </NavDropdown.Item>
                 </Link>
-                
               </NavDropdown>
               <Navbar.Text>{this.props.userid}</Navbar.Text>
             </Navbar.Collapse>

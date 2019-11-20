@@ -19,28 +19,28 @@ export default class Game extends Component {
 
   render() {
     return (
-      <div className="game-page">
+      <div>
         <Header userid={this.state.userid} />
-        <GameContainer gameid={this.props.match.params.gameid} />
-        <Container>
-          <br />
-          <Row />
-          <Row>
-            <Col md="9">
-              <div className="text-center chatbox">
-                <Chatbox userid={this.state.userid} />
-              </div>
-            </Col>
-            <Col md="3">
-              <ButtonGroup vertical size="lg">
-                <Button variant="outline-dark">Edit Game Rules</Button>
-                <Button variant="outline-dark">Invite Friends</Button>
-                <Button variant="outline-dark">Kick Player</Button>
-                <Button variant="outline-dark">Leave Room</Button>
-              </ButtonGroup>
-            </Col>
-          </Row>
-        </Container>
+        <div className="game-page">
+          <GameContainer gameid={this.props.match.params.gameid} />
+          <Container>
+            <br />
+            <Row />
+            <Row>
+              <Col md="9">
+                <Chatbox userid={this.state.userid} url="lobby" />
+              </Col>
+              <Col md="3">
+                <ButtonGroup vertical size="lg">
+                  <Button variant="outline-dark">Edit Game Rules</Button>
+                  <Button variant="outline-dark">Invite Friends</Button>
+                  <Button variant="outline-dark">Kick Player</Button>
+                  <Button variant="outline-dark">Leave Room</Button>
+                </ButtonGroup>
+              </Col>
+            </Row>
+          </Container>
+        </div>
       </div>
     );
   }
