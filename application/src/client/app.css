@@ -26,8 +26,6 @@
 .chatbox {
   margin: auto;
   float: left;
-  padding: 100px;
-  height: 300px;
 }
 
 .column {
@@ -82,6 +80,7 @@
 }
 .chat-section {
   text-align: left;
+  box-shadow: 1px 1px 5px 1px #888888;
 }
 .text-area {
   width: 100%;
