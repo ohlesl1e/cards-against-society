@@ -185,15 +185,6 @@
   color: rgb(197, 197, 197);
 }
 
-.wrap1 {
-  margin-top: 5%;
-  text-align: center;
-}
-
-.wrap2 {
-  text-align: left;
-  display: inline-block;
-  width: auto;
-  border: 1px solid gray;
-  padding: 50px;
+link.small {
+  text:10px;
 }
