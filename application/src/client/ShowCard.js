@@ -54,7 +54,7 @@ export class ShowCard extends Component {
                     <Modal.Header>
                         <Modal.Title id="contained-modal-title-vcenter">
                                 <Row>
-                                    <Col sm={10}>{this.props.card}</Col>
+                                    <Col sm={10}>{this.props.deck.cards[this.props.card].content}</Col>
                                     <Col>
                                         <ButtonToolbar>
                                             <Button onClick={this.handleDelete}>
@@ -69,7 +69,7 @@ export class ShowCard extends Component {
                         <Form>
                             <Form.Group controlId="cardContent" onInput={this.handleChange}>
                                 <Form.Label>Card Content</Form.Label>
-                                <Form.Control type="text" placeholder={this.props.card} />
+                                <Form.Control type="text" placeholder={this.props.deck.cards[this.props.card].content} />
                             </Form.Group>
                             <Form.Group as={Row} onInput={this.handleChange}>
                                 <Form.Label as="legend" column sm={2}>

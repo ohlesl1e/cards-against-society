@@ -12,6 +12,7 @@ export class ShowDeck extends Component {
             redirect: false,
             formShow: false,
             cardShow: false,
+            calledCard: 0
         }
     }
 
@@ -31,6 +32,12 @@ export class ShowDeck extends Component {
     }
 
     getCard = () => {
+        for (let index = 0; index < this.props.deck.cards.length; index++) {
+            if (this.props.deck.cards[index].content == event.target.value) {
+                this.setState({calledCard : index})
+                break
+            }
+        }
         this.setState({ cardShow: true })
     }
 
@@ -74,14 +81,14 @@ export class ShowDeck extends Component {
                                         return (
                                             <Col>
                                                 <ButtonToolbar>
-                                                    <Button variant="outline-dark" onClick={this.getCard}>
+                                                    <Button variant="outline-dark" value={c.content} onClick={this.getCard}>
                                                         {c.content}
                                                     </Button>
                                                     <ShowCard
                                                         show={this.state.cardShow}
                                                         onHide={cardClose}
                                                         deck={this.props.deck}
-                                                        card={c.content}
+                                                        card={this.state.calledCard}
                                                     />
                                                 </ButtonToolbar>
                                             </Col>
@@ -90,14 +97,14 @@ export class ShowDeck extends Component {
                                         return (
                                             <Col>
                                                 <ButtonToolbar>
-                                                    <Button variant="dark" onClick={this.getCard}>
+                                                    <Button variant="dark" value={c.content} onClick={this.getCard}>
                                                         {c.content}
                                                     </Button>
                                                     <ShowCard
                                                         show={this.state.cardShow}
                                                         onHide={cardClose}
                                                         deck={this.props.deck}
-                                                        card={c.content}
+                                                        card={this.state.calledCard}
                                                     />
                                                 </ButtonToolbar>
                                             </Col>

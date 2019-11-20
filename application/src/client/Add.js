@@ -16,13 +16,14 @@ export class Add extends Component {
             [event.target.id]: event.target.value
         });
         console.log(event.target.id)
-        console.log(event.target.value);
-        console.log(this.state.cardContent)
+        console.log(event.target.value)
+        console.log(this.state.whitecard)
         console.log(this.state.whitecard)
     }
 
     handleSubmit = () => {
-        let newcard = { whitecard: this.state.whitecard, content: this.state.cardContent }
+        console.log(this.state.whitecard)
+        let newcard = { whitecard: (/true/i).test(this.state.whitecard), content: this.state.cardContent }
         this.props.deck.cards.push(newcard)
         console.log(this.props.deck);
         this.props.onHide()
