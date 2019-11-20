@@ -34,16 +34,35 @@ router.get('/:gamesessionid', async (req, res) => {
     });
 });
 
+router.post('/join/:gamesessionid', async (req, res) => {
+  models.gamesessions
+    .findOne({ where: { gameid: req.params.gamesessionid } })
+    .then(async (game) => {
+      game.addPlayer(req.body.userid);
+      game.gameState.Players.push(req.body.userid);
+      game.save().then(() => {
+        res.send(game);
+      });
+    })
+    .catch((error) => {
+      res.status(400).send(error);
+    });
+});
+
 router.post('/newgame', (req, res) => {
-  console.log(req.body.userid);
   models.blackCard
     .findOne({ order: Sequelize.literal('rand()') })
     .then(async (blackCard) => {
+      const host = req.body.userid;
       const game = await models.gamesessions.create({
-        roomName: req.body.roomName
+        roomName: req.body.roomName,
+        gameState: {
+          Host: host
+        }
       });
       await game.setCurrentBlackCard(blackCard);
-      await game.setHost(req.body.userid);
+      await game.setHost(host);
+
       res.send(game);
     });
 });

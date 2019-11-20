@@ -1,3 +1,5 @@
+JsonField = require('sequelize-json');
+
 module.exports = (sequelize, Sequelize) => {
   const gamesession = sequelize.define(
     'gamesessions',
@@ -9,7 +11,8 @@ module.exports = (sequelize, Sequelize) => {
       },
       roomName: {
         type: Sequelize.STRING(20)
-      }
+      },
+      gameState: JsonField(Sequelize, 'gamesession', 'gameState')
     },
 
     {

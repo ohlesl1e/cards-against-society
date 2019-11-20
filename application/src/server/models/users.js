@@ -53,7 +53,7 @@ module.exports = (sequelize, Sequelize) => {
       }
     ];
 
-    user.bulkCreate(admins);
+    user.bulkCreate(admins).catch();
   });
 
   user.prototype.comparePassword = async function (password) {
