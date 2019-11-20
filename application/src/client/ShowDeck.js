@@ -36,7 +36,7 @@ export class ShowDeck extends Component {
                     <Modal.Header>
                         <Modal.Title id="contained-modal-title-vcenter">
                             <Row>
-                                <Col>Deck1</Col>
+                                <Col>{this.props.deck.name}</Col>
                                 <Col>
                                     <ButtonToolbar>
                                         <Button onClick={this.setRedirect}>
