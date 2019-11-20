@@ -28,9 +28,7 @@ export default class Game extends Component {
             <Row />
             <Row>
               <Col md="9">
-                <div className="text-center chatbox">
-                  <Chatbox userid={this.state.userid} url="lobby" />
-                </div>
+                <Chatbox userid={this.state.userid} url="lobby" />
               </Col>
               <Col md="3">
                 <ButtonGroup vertical size="lg">
