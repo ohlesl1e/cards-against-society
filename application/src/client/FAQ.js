@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import './stylesheets/faq.css';
 import { Link } from "react-router-dom";
+import Header from './Components/Header';
 
 import {
   Accordion,
@@ -18,9 +19,11 @@ export default class FAQ extends Component {
   render() {
     return (
       <React.Fragment>
-        <Link to="/Lobby">Back to Lobby</Link>
+        <div className="homePage">
+        <Header/>
+        </div>
         <React.Fragment>
-          <h2 align="center">Help</h2>
+          <h2 align="center">Help Against Society</h2>
         </React.Fragment>
         <Accordion allowMultipleExpanded='true' allowZeroExpanded='true'>
           <AccordionItem>
