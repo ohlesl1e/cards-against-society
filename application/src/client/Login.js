@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
- Button, FormGroup, FormControl, FormLabel 
+  Button, FormGroup, FormControl, FormLabel
 } from 'react-bootstrap';
 import './app.css';
 import { Link } from 'react-router-dom';
@@ -60,44 +60,42 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="column">
-          <div className="wrapper">
-            <div className="form-wrapper">
-              <h1 className="cah-login">Cards Against Society</h1>
-              <br />
-              <form onSubmit={this.handleSubmit}>
-                <FormGroup classname="userId" controlId="userid" bsSize="large">
-                  <FormLabel>Username</FormLabel>
-                  <FormControl
-                    autoFocus
-                    type="username"
-                    value={this.state.userid}
-                    onChange={this.handleChange}
-                  />
-                </FormGroup>
-                <FormGroup controlId="password" bsSize="large">
-                  <FormLabel>Password</FormLabel>
-                  <FormControl
-                    value={this.state.password}
-                    onChange={this.handleChange}
-                    type="password"
-                    data-toggle="password"
-                  />
-                </FormGroup>
-                <Button
-                  block
-                  bsSize="large"
-                  disabled={!this.validateForm()}
-                  type="submit"
-                  onClick={this.onSubmit}
-                >
-                  Login
+      <div className="wrap1">
+        <div className="wrap2">
+          <h2 className="centertext">
+            <b>Cards Against Society</b>
+          </h2>
+          <br />
+          <form onSubmit={this.handleSubmit}>
+            <FormGroup classname="userId" controlId="userid" bsSize="large">
+              <FormLabel>Username</FormLabel>
+              <FormControl
+                autoFocus
+                type="username"
+                value={this.state.userid}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+            <FormGroup controlId="password" bsSize="large">
+              <FormLabel>Password</FormLabel>
+              <FormControl
+                value={this.state.password}
+                onChange={this.handleChange}
+                type="password"
+                data-toggle="password"
+              />
+            </FormGroup>
+            <Button
+              block
+              bsSize="large"
+              disabled={!this.validateForm()}
+              type="submit"
+              onClick={this.onSubmit}
+            >
+              Login
                 </Button>
-                <Link to="/Registration">Don't Have an Account?</Link>
-              </form>
-            </div>
-          </div>
+            <Link to="/Registration" style="text: 10px">Don't Have an Account?</Link>
+          </form>
         </div>
       </div>
     );

@@ -17,12 +17,15 @@
   .wrap1 {
     margin-top: 5%;
     text-align: center;
-}
-
-.wrap2 {
+  }
+  
+  .wrap2 {
     text-align: left;
     display: inline-block;
-}
+    width: 30%;
+    border: 1px solid gray;
+    padding: 50px;
+  }
 
   .form-control {
     width: 100% !important;
@@ -34,10 +37,14 @@
       margin-left: 0%;
   }
   
+  h2.center {
+    text-align:center;
+  }
+
   div.a {
       margin-top: 1%;
       margin-bottom: 1%;
-      font-size: 12px;
+      font-size: 11px;
   }
   .bongola {
       font-size: 12px;

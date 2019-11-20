@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import {
+  Button, FormGroup, FormControl, FormLabel
+} from 'react-bootstrap';
 
 import './stylesheets/reg.css';
 
@@ -30,7 +33,7 @@ export default class Registration extends Component {
       email: null,
       password: null,
       confirmPassword: null,
-      userid: ' ',
+      userid: '',
       formErrors: {
         email: '',
         password: '',
@@ -49,17 +52,17 @@ export default class Registration extends Component {
       case 'email':
         formErrors.email = emailRegex.test(value)
           ? ''
-          : 'invalid email address';
+          : 'Invalid email address';
         break;
       case 'password':
-        formErrors.password =          value.length < 8 ? 'minimum 8 characaters required' : '';
+        formErrors.password = value.length < 8 ? 'Minimum of 8 characaters required' : '';
         break;
 
       case 'confirmPassword':
-        formErrors.confirmPassword =          value === this.state.password ? '' : "Password don't match!";
+        formErrors.confirmPassword = value === this.state.password ? '' : "Password don't match!";
         break;
       case 'userid':
-        formErrors.userid = value.length < 40 ? '' : 'maximum 40 characaters';
+        formErrors.userid = value.length < 40 ? '' : 'Maximum of 40 characaters';
         break;
 
       default:
@@ -108,19 +111,17 @@ export default class Registration extends Component {
 
     return (
       <div className="wrap1">
-        <h1>
-          <b>Create Account</b>
-        </h1>
-        <br />
         <div className="wrap2">
-          <form onSubmit={this.handleSubmit} noValidate>
-            <div className="userId">
-                <label htmlFor="userid">Username</label>
-                <br/>
-              <input
-                className="booty"
+          <h2 className="center">
+            <b>Create Account</b>
+          </h2>
+          <br />
+          <form onSubmit={this.handleSubmit}>
+            <FormGroup className="userId" controlId="userid" bsSize="large">
+              <FormLabel htmlFor="userid">Username</FormLabel>
+              <FormControl
+                type="userid"
                 className={formErrors.userid.length > 0 ? 'error' : null}
-                placeholder="User Name"
                 type="text"
                 name="userid"
                 noValidate
@@ -129,14 +130,12 @@ export default class Registration extends Component {
               {formErrors.userid.length > 0 && (
                 <span className="errorMessage">{formErrors.userid}</span>
               )}
-            </div>
-            <div className="email">
-              <label htmlFor="email">Email</label>
-              <br />
-              <input
-                className="booty"
+            </FormGroup>
+
+            <FormGroup controlId="" className="email">
+              <FormLabel htmlFor="email">Email</FormLabel>
+              <FormControl
                 className={formErrors.email.length > 0 ? 'error' : null}
-                placeholder="Email"
                 type="email"
                 name="email"
                 noValidate
@@ -145,15 +144,12 @@ export default class Registration extends Component {
               {formErrors.email.length > 0 && (
                 <span className="errorMessage">{formErrors.email}</span>
               )}
-            </div>
+            </FormGroup>
 
-            <div className="password">
-              <label htmlFor="password">Password</label>
-              <br />
-              <input
-                className="booty"
+            <FormGroup controlId="password" className="password">
+              <FormLabel htmlFor="password">Password</FormLabel>
+              <FormControl
                 className={formErrors.password.length > 0 ? 'error' : null}
-                placeholder="Password"
                 type="password"
                 name="password"
                 noValidate
@@ -162,17 +158,16 @@ export default class Registration extends Component {
               {formErrors.password.length > 0 && (
                 <span className="errorMessage">{formErrors.password}</span>
               )}
-            </div>
+            </FormGroup>
 
-            <div className="confirmPassword">
-              <label htmlFor="password">Confirm Password</label>
+            <FormGroup className="confirmPassword">
+              <FormLabel htmlFor="password">Confirm Password</FormLabel>
               <br />
-              <input
+              <FormControl
                 className="booty"
                 className={
                   formErrors.confirmPassword.length > 0 ? 'error' : null
                 }
-                placeholder="Confirm Password"
                 type="password"
                 name="confirmPassword"
                 noValidate
@@ -183,26 +178,21 @@ export default class Registration extends Component {
                   {formErrors.confirmPassword}
                 </span>
               )}
-            </div>
+            </FormGroup>
             <div className="a">
               By clicking Sign Up, you have read and agreed to our&nbsp;
               <a
                 href="https://www.youtube.com/watch?v=5TcT1zqZofA"
-                target="_blank"
-              >
+                target="_blank">
                 Terms of Service
               </a>
-              .
             </div>
-            <div className="createAccount">
-              <button className="account" type="submit">
-                Create Account
-              </button>
-              <br />
-              <Link className="bongola" to="/">
-                Already Have an Account?
+            <Button block bsSize="large" type="submit" onClick={this.onSubmit}>
+              Create Account
+              </Button>
+            <Link className="bongola" to="/">
+              Already Have an Account?
               </Link>
-            </div>
           </form>
         </div>
       </div>
