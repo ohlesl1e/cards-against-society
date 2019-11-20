@@ -18,8 +18,8 @@ export default class Custom extends Component {
             redirectTo: "",
             redirect: false,
             decklist: [
-                { name: "Deck1", cards: [{ whiteCard: true, content: "big black cock" }, { whiteCard: false, content: "an ar15 assault rifle" }] },
-                { name: "Deck2", cards: [{ whiteCard: false, content: "jews" }] }
+                { name: "Deck1", cards: [{ type: "white", content: "big black cock" }, { type: "black", content: "an ar15 assault rifle" }] },
+                { name: "Deck2", cards: [{ type: "black", content: "jews" }] }
             ],
         }
         console.log(this.state.decklist);
@@ -116,6 +116,7 @@ export default class Custom extends Component {
                                                 <ShowDeck
                                                     show={this.state.deckShow}
                                                     onHide={deckClose}
+                                                    decklist={this.state.decklist}
                                                     deck={this.state.decklist[this.state.calledDeck]}
                                                 />
                                             </ButtonToolbar>

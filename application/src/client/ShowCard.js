@@ -7,7 +7,7 @@ export class ShowCard extends Component {
 
         this.state = {
             cardContent: this.props.card,
-            whitecard: false
+            type: this.props.card.type
         }
     }
 
@@ -18,12 +18,12 @@ export class ShowCard extends Component {
         console.log(event.target.id)
         console.log(event.target.value);
         console.log(this.state.cardContent)
-        console.log(this.state.whitecard)
+        console.log(this.state.type)
     }
 
     handleDelete = () => {
         for (let index = 0; index < this.props.deck.cards.length; index++) {
-            if (this.props.card == this.props.deck.cards[index].content) {
+            if (this.props.deck.cards[this.props.card] == this.props.deck.cards[index]) {
                 this.props.deck.cards.splice(index, 1)
             }
         }
@@ -32,9 +32,11 @@ export class ShowCard extends Component {
     }
 
     handleSubmit = () => {
-        let newcard = { whitecard: this.state.whitecard, content: this.state.cardContent }
+        let newcard = { type: this.state.type, content: this.state.cardContent }
+        console.log(newcard);
         for (let index = 0; index < this.props.deck.cards.length; index++) {
-            if (this.props.card == this.props.deck.cards[index]) {
+            console.log(index);
+            if (this.props.deck.cards[this.props.card].content == this.props.deck.cards[index].content) {
                 this.props.deck.cards[index] = newcard
             }
         }
@@ -43,16 +45,17 @@ export class ShowCard extends Component {
     }
 
     render() {
-        return (
-            <div>
-                <Modal
-                    {...this.props}
-                    size="lg"
-                    aria-labelledby="contained-modal-title-vcenter"
-                    centered
-                >
-                    <Modal.Header>
-                        <Modal.Title id="contained-modal-title-vcenter">
+        if (this.props.deck.cards[this.props.card] != null) {
+            return (
+                <div>
+                    <Modal
+                        {...this.props}
+                        size="lg"
+                        aria-labelledby="contained-modal-title-vcenter"
+                        centered
+                    >
+                        <Modal.Header>
+                            <Modal.Title id="contained-modal-title-vcenter">
                                 <Row>
                                     <Col sm={10}>{this.props.deck.cards[this.props.card].content}</Col>
                                     <Col>
@@ -63,45 +66,47 @@ export class ShowCard extends Component {
                                         </ButtonToolbar>
                                     </Col>
                                 </Row>
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Form>
-                            <Form.Group controlId="cardContent" onInput={this.handleChange}>
-                                <Form.Label>Card Content</Form.Label>
-                                <Form.Control type="text" placeholder={this.props.deck.cards[this.props.card].content} />
-                            </Form.Group>
-                            <Form.Group as={Row} onInput={this.handleChange}>
-                                <Form.Label as="legend" column sm={2}>
-                                    Card Type
+                            </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Form>
+                                <Form.Group controlId="cardContent" onInput={this.handleChange}>
+                                    <Form.Label>Card Content</Form.Label>
+                                    <Form.Control type="text" placeholder={this.props.deck.cards[this.props.card].content} />
+                                </Form.Group>
+                                <Form.Group as={Row} onInput={this.handleChange}>
+                                    <Form.Label as="legend" column sm={2}>
+                                        Card Type
                                 </Form.Label>
-                                <Col sm={10}>
-                                    <Form.Check
-                                        name="whitecard"
-                                        type="radio"
-                                        id="whitecard"
-                                        label="white card"
-                                        value={true}
-                                    />
+                                    <Col sm={10}>
+                                        <Form.Check
+                                            name="type"
+                                            type="radio"
+                                            id="type"
+                                            label="white card"
+                                            value="white"
+                                        />
 
-                                    <Form.Check
-                                        name="whitecard"
-                                        type="radio"
-                                        id="whitecard"
-                                        label="black card"
-                                        value={false}
-                                    />
-                                </Col>
-                            </Form.Group>
-                        </Form>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={this.handleDubmit}>Submit</Button>
-                        <Button onClick={this.props.onHide}>Close</Button>
-                    </Modal.Footer>
-                </Modal>
-            </div>
-        )
+                                        <Form.Check
+                                            name="type"
+                                            type="radio"
+                                            id="type"
+                                            label="black card"
+                                            value="black"
+                                        />
+                                    </Col>
+                                </Form.Group>
+                            </Form>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button onClick={this.handleSubmit}>Submit</Button>
+                            <Button onClick={this.props.onHide}>Close</Button>
+                        </Modal.Footer>
+                    </Modal>
+                </div>
+            )
+        }
+        return null
     }
 }
 
