@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Modal, Button, Row, Col, Container, ButtonToolbar } from 'react-bootstrap'
 import { Redirect } from 'react-router-dom';
 import Add from './Add'
+import ShowCard from './ShowCard';
 
 export class ShowDeck extends Component {
     constructor(props) {
@@ -10,6 +11,7 @@ export class ShowDeck extends Component {
         this.state = {
             redirect: false,
             formShow: false,
+            cardShow: false,
         }
     }
 
@@ -24,12 +26,17 @@ export class ShowDeck extends Component {
         }
     }
 
-    handleClick = () => {
+    getForm = () => {
         this.setState({ formShow: true })
+    }
+
+    getCard = () => {
+        this.setState({ cardShow: true })
     }
 
     render() {
         let formClose = () => this.setState({ formShow: false })
+        let cardClose = () => this.setState({ cardShow: false })
         return (
             <div>
                 {this.renderRedirect()}
@@ -46,7 +53,7 @@ export class ShowDeck extends Component {
                                 <Col>{this.props.deck.name}</Col>
                                 <Col>
                                     <ButtonToolbar>
-                                        <Button onClick={this.handleClick}>
+                                        <Button onClick={this.getForm}>
                                             Add
                                         </Button>
                                         <Add
@@ -63,11 +70,39 @@ export class ShowDeck extends Component {
                         <Container>
                             <Row>
                                 {this.props.deck.cards.map(c => {
-                                    return (
-                                        <Col>
-                                            {c.content}
-                                        </Col>
-                                    )
+                                    if (c.whiteCard) {
+                                        return (
+                                            <Col>
+                                                <ButtonToolbar>
+                                                    <Button variant="outline-dark" onClick={this.getCard}>
+                                                        {c.content}
+                                                    </Button>
+                                                    <ShowCard
+                                                        show={this.state.cardShow}
+                                                        onHide={cardClose}
+                                                        deck={this.props.deck}
+                                                        card={c.content}
+                                                    />
+                                                </ButtonToolbar>
+                                            </Col>
+                                        )
+                                    }else{
+                                        return (
+                                            <Col>
+                                                <ButtonToolbar>
+                                                    <Button variant="dark" onClick={this.getCard}>
+                                                        {c.content}
+                                                    </Button>
+                                                    <ShowCard
+                                                        show={this.state.cardShow}
+                                                        onHide={cardClose}
+                                                        deck={this.props.deck}
+                                                        card={c.content}
+                                                    />
+                                                </ButtonToolbar>
+                                            </Col>
+                                        )
+                                    }
                                 })}
                             </Row>
                         </Container>

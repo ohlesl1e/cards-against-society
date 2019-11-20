@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import Header from './Components/Header'
 import { retrieveCookie } from "./Components/cookies"
 import { Redirect } from 'react-router-dom'
-import { Button, ButtonToolbar, Col, Row } from 'react-bootstrap'
+import { Button, ButtonToolbar, Col, Row, Container } from 'react-bootstrap'
 import ShowDeck from './ShowDeck'
+import AddDeck from './AddDeck'
 
 export default class Custom extends Component {
     constructor(props) {
@@ -12,11 +13,12 @@ export default class Custom extends Component {
         this.state = {
             userid: retrieveCookie("userid"),
             deckShow: false,
+            newFormShow: false,
             calledDeck: 0,
             redirectTo: "",
             redirect: false,
             decklist: [
-                { name: "Deck1", cards: [{ whiteCard: true, content: "big black cock" }, { whiteCard: true, content: "an ar15 assault rifle" }] },
+                { name: "Deck1", cards: [{ whiteCard: true, content: "big black cock" }, { whiteCard: false, content: "an ar15 assault rifle" }] },
                 { name: "Deck2", cards: [{ whiteCard: false, content: "jews" }] }
             ],
         }
@@ -69,32 +71,59 @@ export default class Custom extends Component {
         console.log(this.state.calledDeck);
     }
 
+    newDeckForm = () => {
+        this.setState({ newFormShow: true })
+    }
+
     render() {
         let deckClose = () => this.setState({ deckShow: false })
+        let newFormClose = () => this.setState({ newFormShow: false })
+        var border = {
+            border: 'solid 1px black',
+            borderRadius: '5px',
+            padding: '10px'
+        }
         return (
             <div>
                 {this.renderRedirect()}
                 <Header />
                 <div className="BodyWrapper">
                     <div className="DeckList">
-                        <Row>
-                            {this.state.decklist.map(d => {
-                                return (
-                                    <Col>
-                                        <ButtonToolbar>
-                                            <Button varian='primary' value={d.name} onClick={this.handleClick}>
-                                                {d.name}
-                                            </Button>
-                                            <ShowDeck
-                                                show={this.state.deckShow}
-                                                onHide={deckClose}
-                                                deck={this.state.decklist[this.state.calledDeck]}
-                                            />
-                                        </ButtonToolbar>
-                                    </Col>
-                                )
-                            })}
-                        </Row>
+                        <Container>
+                            <Row>
+                                <Col><h2>Custom Decks</h2></Col>
+                                <Col sm="2">
+                                    <ButtonToolbar>
+                                        <Button onClick={this.newDeckForm}>
+                                            Add Deck
+                                        </Button>
+                                        <AddDeck
+                                            show={this.state.newFormShow}
+                                            onHide={newFormClose}
+                                            decklist={this.state.decklist}
+                                        />
+                                    </ButtonToolbar>
+                                </Col>
+                            </Row>
+                            <Row style={border}>
+                                {this.state.decklist.map(d => {
+                                    return (
+                                        <Col>
+                                            <ButtonToolbar>
+                                                <Button varian='primary' value={d.name} onClick={this.handleClick}>
+                                                    {d.name}
+                                                </Button>
+                                                <ShowDeck
+                                                    show={this.state.deckShow}
+                                                    onHide={deckClose}
+                                                    deck={this.state.decklist[this.state.calledDeck]}
+                                                />
+                                            </ButtonToolbar>
+                                        </Col>
+                                    )
+                                })}
+                            </Row>
+                        </Container>
                     </div>
                 </div>
             </div>

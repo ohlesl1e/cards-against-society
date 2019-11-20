@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { Modal, Row, Col, Form, Button, ButtonToolbar } from 'react-bootstrap'
+import { Modal, Button, Row, Col, Form, Container, ButtonToolbar } from 'react-bootstrap'
 
-export class Add extends Component {
+export class ShowCard extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            cardContent: "",
+            cardContent: this.props.card,
             whitecard: false
         }
     }
@@ -21,9 +21,23 @@ export class Add extends Component {
         console.log(this.state.whitecard)
     }
 
+    handleDelete = () => {
+        for (let index = 0; index < this.props.deck.cards.length; index++) {
+            if (this.props.card == this.props.deck.cards[index].content) {
+                this.props.deck.cards.splice(index, 1)
+            }
+        }
+        console.log(this.props.deck);
+        this.props.onHide()
+    }
+
     handleSubmit = () => {
         let newcard = { whitecard: this.state.whitecard, content: this.state.cardContent }
-        this.props.deck.cards.push(newcard)
+        for (let index = 0; index < this.props.deck.cards.length; index++) {
+            if (this.props.card == this.props.deck.cards[index]) {
+                this.props.deck.cards[index] = newcard
+            }
+        }
         console.log(this.props.deck);
         this.props.onHide()
     }
@@ -39,16 +53,23 @@ export class Add extends Component {
                 >
                     <Modal.Header>
                         <Modal.Title id="contained-modal-title-vcenter">
-                            <Row>
-                                <Col>New Card</Col>
-                            </Row>
+                                <Row>
+                                    <Col sm={10}>{this.props.card}</Col>
+                                    <Col>
+                                        <ButtonToolbar>
+                                            <Button onClick={this.handleDelete}>
+                                                Delete
+                                            </Button>
+                                        </ButtonToolbar>
+                                    </Col>
+                                </Row>
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
                             <Form.Group controlId="cardContent" onInput={this.handleChange}>
                                 <Form.Label>Card Content</Form.Label>
-                                <Form.Control type="text" placeholder="Biggest blackest cock" />
+                                <Form.Control type="text" placeholder={this.props.card} />
                             </Form.Group>
                             <Form.Group as={Row} onInput={this.handleChange}>
                                 <Form.Label as="legend" column sm={2}>
@@ -75,7 +96,7 @@ export class Add extends Component {
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={this.handleSubmit}>Submit</Button>
+                        <Button onClick={this.handleDubmit}>Submit</Button>
                         <Button onClick={this.props.onHide}>Close</Button>
                     </Modal.Footer>
                 </Modal>
@@ -84,4 +105,4 @@ export class Add extends Component {
     }
 }
 
-export default Add
+export default ShowCard
