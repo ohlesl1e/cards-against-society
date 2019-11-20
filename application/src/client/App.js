@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import {
+ Button, FormGroup, FormControl, FormLabel 
+} from 'react-bootstrap';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import Home from './Home';
@@ -15,7 +17,7 @@ import Game from './Game';
 import Lobby from './Lobby';
 import Login from './Login';
 import MyGames from './MyGames';
-import GameForm from './Components/GameForm'
+import GameForm from './Components/GameForm';
 import Custom from './Custom';
 import FAQ from './FAQ';
 import Admin from './Admin';
@@ -66,7 +68,6 @@ export default class Routing extends Component {
         <Route component={FAQ} path="/FAQ" />
         <Route component={GameForm} path="/FormGame" />
         <Route component={Admin} path="/Admin" />
-      
       </BrowserRouter>
     );
   }

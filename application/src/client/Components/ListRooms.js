@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import "../app.css";
-import { Table, Button } from "react-bootstrap";
+import React, { Component } from 'react';
+import '../app.css';
+import { Table, Button } from 'react-bootstrap';
 
 export default class ListRooms extends Component {
   constructor() {
@@ -18,7 +18,7 @@ export default class ListRooms extends Component {
   getLobbies() {
     fetch(this.props.url)
       .then(response => response.json())
-      .then(res => {
+      .then((res) => {
         this.setState(
           {
             data: res
@@ -47,8 +47,6 @@ export default class ListRooms extends Component {
         );
 
         for (let i = 0; i < this.state.data.length; i++) {
-          // Inner loop to create children
-
           children.push(
             <Table>
               <tr>
@@ -75,7 +73,7 @@ export default class ListRooms extends Component {
   };
 
   handleRouteChange(link) {
-    window.open("Game/" + link.gameid);
+    window.open('Game/' + link.gameid);
   }
 
   render() {

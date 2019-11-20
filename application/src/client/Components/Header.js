@@ -13,22 +13,20 @@ export default class Header extends Component {
     this.isAdmin = this.isAdmin.bind(this);
   }
 
-
   logout() {
     deleteCookie();
   }
 
-  isAdmin(){
-    if(retrieveCookie() === 'admin'){
+  isAdmin() {
+    if (retrieveCookie() === "admin") {
       return (
         <Link to="/Admin">
           <Nav.Item className="navselection">Admin</Nav.Item>
         </Link>
-      )
-    }
-    else {
-      return(<div></div>)
-    }
+      );
+    } 
+      return <div></div>;
+    
   }
 
   render() {
@@ -56,7 +54,6 @@ export default class Header extends Component {
                     Log Out
                   </NavDropdown.Item>
                 </Link>
-                
               </NavDropdown>
               <Navbar.Text>{this.props.userid}</Navbar.Text>
             </Navbar.Collapse>
