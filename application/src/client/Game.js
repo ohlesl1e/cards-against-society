@@ -25,8 +25,7 @@ export default class Game extends Component {
           <GameContainer gameid={this.props.match.params.gameid} />
           <Container>
             <br />
-            <Row />
-            <Row>
+            <Row className="justify-content-center">
               <Col md="9">
                 <Chatbox userid={this.state.userid} url="lobby" />
               </Col>

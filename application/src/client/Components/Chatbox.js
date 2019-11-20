@@ -64,7 +64,7 @@ export default class ChatBox extends Component {
     for (let i = 0; i < this.state.msgHistory.length; i++) {
       messages.push(
         <ListGroup.Item>
-          <h5>{this.state.msgHistory[i].title}</h5>
+          <h6>{this.state.msgHistory[i].title}</h6>
           <p>{this.state.msgHistory[i].description}</p>
         </ListGroup.Item>
       );
@@ -91,7 +91,7 @@ export default class ChatBox extends Component {
                 placeholder="Type your message here..."
               />
             </Col>
-            <Col md="1">
+            <Col md="2">
               <Button
                 rounded="true"
                 variant="dark"

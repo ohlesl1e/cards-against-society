@@ -4,6 +4,7 @@ import {
   ListGroup,
   Button,
   Form,
+  ButtonGroup,
   Row,
   Col,
   Container,
@@ -16,6 +17,14 @@ export default class ChatBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      cardsSelected: [
+        [0, false],
+        [1, false],
+        [2, false],
+        [3, false],
+        [4, false]
+      ],
+      cardlist: [],
       socket: io.connect(
         'http://localhost:8080/lobby'
         // +this.props.url
@@ -25,6 +34,8 @@ export default class ChatBox extends Component {
       HostUserid: ''
     };
     this.getInfo = this.getInfo.bind(this);
+    this.handBuilder = this.handBuilder.bind(this);
+    this.resetCards = this.resetCards.bind(this);
   }
 
   componentDidMount() {
@@ -32,7 +43,7 @@ export default class ChatBox extends Component {
   }
 
   getInfo() {
-    fetch('http://localhost:4000/game/' + this.props.gameid)
+    fetch(`http://localhost:4000/game/${this.props.gameid}`)
       .then(response => response.json())
       .then((res) => {
         this.setState(
@@ -43,6 +54,55 @@ export default class ChatBox extends Component {
           () => console.log()
         );
       });
+  }
+
+  handBuilder() {
+    const children = [];
+    for (let i = 0; i < 5; i++) {
+      children.push(
+        <Card
+          onClick={() => {
+            const cards = this.state.cardsSelected;
+            cards[i][1] = !cards[i][1];
+            this.setState({
+              cardsSelected: cards
+            });
+            console.log(this.state);
+            if (!this.state.cardlist.includes(i)) {
+              this.state.cardlist.push(i);
+            } else {
+              const cardls = this.state.cardlist;
+              const index = cardls.indexOf(i);
+              if (index !== -1) {
+                cardls.splice(index, 1);
+                this.setState({ cardlist: cardls });
+              }
+            }
+          }}
+          className={
+            this.state.cardsSelected[i][1]
+              ? 'white-card-selected white-card'
+              : 'white-card'
+          }
+        >
+          white card
+        </Card>
+      );
+    }
+    return <Row className="justify-content-center">{children}</Row>;
+  }
+
+  resetCards() {
+    this.setState({
+      cardsSelected: [
+        [0, false],
+        [1, false],
+        [2, false],
+        [3, false],
+        [4, false]
+      ],
+      cardlist: []
+    });
   }
 
   render() {
@@ -62,12 +122,21 @@ export default class ChatBox extends Component {
             </div>
           </Col>
           <Col md="9" className="game-container">
-            <Row>
-              <Card className="white-card">white card</Card>
-              <Card className="white-card">white card</Card>
-              <Card className="white-card">white card</Card>
-              <Card className="white-card">white card</Card>
+            <div className="game-display">
+              <Row>
+                ass
+                <Card className="white-card">testing</Card>
+              </Row>
+            </div>
+            <Row className="justify-content-end">
+              <ButtonGroup vertical size="lg">
+                <Button variant="dark">Submit</Button>
+                <Button onClick={this.resetCards} variant="dark">
+                  Reset Selection
+                </Button>
+              </ButtonGroup>
             </Row>
+            {this.handBuilder()}
           </Col>
         </Row>
       </Container>
