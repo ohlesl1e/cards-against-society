@@ -15,6 +15,7 @@ import Game from './Game';
 import Lobby from './Lobby';
 import Login from './Login';
 import MyGames from './MyGames';
+import GameForm from './Components/GameForm'
 import Custom from './Custom';
 import FAQ from './FAQ';
 import Admin from './Admin';
@@ -63,6 +64,7 @@ export default class Routing extends Component {
         <Route component={MyGames} path="/MyGames" />
         <Route component={Custom} path="/Custom" />
         <Route component={FAQ} path="/FAQ" />
+        <Route component={GameForm} path="/FormGame" />
         <Route component={Admin} path="/Admin" />
       
       </BrowserRouter>

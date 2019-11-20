@@ -3,6 +3,7 @@ import Header from './Components/Header';
 import { retrieveCookie } from './Components/cookies';
 import './app.css';
 import Chatbox from './Components/Chatbox';
+import GameForm from './Components/GameForm'
 import ListRooms from './Components/ListRooms';
 
 export default class Lobby extends Component {
@@ -24,7 +25,7 @@ export default class Lobby extends Component {
         </div>
           <div className="lobby">
            <center><h3>Game Rooms Active</h3></center>
-           
+           <div><GameForm/></div>
             <br/>
               <p>Active Game Rooms:</p>
                <ListRooms url="http://localhost:4000/game/allgames" />
