@@ -40,8 +40,11 @@ router.post('/join/:gamesessionid', async (req, res) => {
     .then(async (game) => {
       game.addPlayer(req.body.userid);
       game.gameState.Players.push(req.body.userid);
-      game.save().then(() => {
-        res.send(game);
+      console.log(game.gameState.Players[1]);
+      //game.gameState.Players.push(req.body.userid);
+      //game.update({Players:});
+      game.save().then(function() {
+          res.send(game);
       });
     })
     .catch((error) => {
@@ -57,7 +60,8 @@ router.post('/newgame', (req, res) => {
       const game = await models.gamesessions.create({
         roomName: req.body.roomName,
         gameState: {
-          Host: host
+          Host: host,
+          Players:[]
         }
       });
       await game.setCurrentBlackCard(blackCard);
