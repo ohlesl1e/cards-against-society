@@ -67,7 +67,7 @@
 }
 
 .navselection:hover {
-  margin: -3px 16px 3px 3px;
+  margin: 0 20px 3px 3px;
   color: white;
   -webkit-text-stroke: 0.5px;
   -webkit-text-stroke-color: black;
@@ -136,7 +136,7 @@
 }
 
 .game-display {
-  margin: 100px;
+  margin: 55px;
 }
 
 @keyframes App-logo-spin {
@@ -186,5 +186,5 @@
 }
 
 link.small {
-  text:10px;
+  text: 10px;
 }

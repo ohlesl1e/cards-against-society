@@ -18,15 +18,14 @@ export default class Header extends Component {
   }
 
   isAdmin() {
-    if (retrieveCookie() === "admin") {
+    if (retrieveCookie() === 'admin') {
       return (
         <Link to="/Admin">
           <Nav.Item className="navselection">Admin</Nav.Item>
         </Link>
       );
-    } 
-      return <div></div>;
-    
+    }
+    return <div />;
   }
 
   render() {
