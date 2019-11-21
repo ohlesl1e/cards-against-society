@@ -28,6 +28,17 @@ export default class Header extends Component {
     return <div />;
   }
 
+  isLoggedIn(){
+    if (retrieveCookie()) {
+      return (
+        'Log Out'
+      );
+    }
+    else{
+      return('Log In');
+    }
+  }
+
   render() {
     return (
       <header>
@@ -38,7 +49,7 @@ export default class Header extends Component {
             </Navbar.Brand>
           </Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Collapse id="basic-navbar-nav" className='dropdown'>
             <Link to="/MyGames">
               <Nav.Item className="navselection">My Games</Nav.Item>
             </Link>
@@ -60,11 +71,11 @@ export default class Header extends Component {
                 </Link>
                 <Link to="/">
                   <NavDropdown.Item href="#login" onClick={() => this.logout()}>
-                    Log Out
+                    {this.isLoggedIn()}
                   </NavDropdown.Item>
                 </Link>
               </NavDropdown>
-              <Navbar.Text>{this.props.userid}</Navbar.Text>
+              <Navbar.Text>{retrieveCookie()}</Navbar.Text>
             </Navbar.Collapse>
           </Navbar.Collapse>
         </Navbar>

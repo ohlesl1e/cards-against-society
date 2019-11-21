@@ -28,6 +28,7 @@
   float: left;
 }
 
+
 .column {
   margin: auto;
   float: left;
@@ -45,6 +46,10 @@
   padding-right: 200px;
   padding-left: 220px;
   height: 300px;
+}
+
+.dropdown {
+  margin-right: 50px;
 }
 
 .lobby {
@@ -185,6 +190,7 @@
   color: rgb(197, 197, 197);
 }
 
-link.small {
-  text: 10px;
+.profile-page{
+  padding-left: 500px;
+  padding-right: 500px;
 }
