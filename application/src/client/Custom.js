@@ -1,31 +1,31 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import Header from "./Components/Header";
-import { retrieveCookie } from "./Components/cookies";
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import { Button, ButtonToolbar, Col, Row, Container } from "react-bootstrap";
-import ShowDeck from "./ShowDeck";
-import AddDeck from "./AddDeck";
+import Header from "./Components/Header";
+import { retrieveCookie } from "./Components/Cookies";
+import ShowDeck from './ShowDeck';
+import AddDeck from './AddDeck';
 
 export default class Custom extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      userid: retrieveCookie("userid"),
+      userid: retrieveCookie('userid'),
       deckShow: false,
       newFormShow: false,
       calledDeck: 0,
-      redirectTo: "",
+      redirectTo: '',
       redirect: false,
       decklist: [
         {
-          name: "Deck1",
+          name: 'Deck1',
           cards: [
-            { type: "white", content: "a big black duck" },
-            { type: "black", content: "an ar15 assault rifle" }
+            { type: 'white', content: 'a big black duck' },
+            { type: 'black', content: 'an ar15 assault rifle' }
           ]
         },
-        { name: "Deck2", cards: [{ type: "black", content: "jews" }] }
+        { name: 'Deck2', cards: [{ type: 'black', content: 'jews' }] }
       ]
     };
     console.log(this.state.decklist);
@@ -65,7 +65,7 @@ export default class Custom extends Component {
             */
   }
 
-  handleClick = event => {
+  handleClick = (event) => {
     for (let i = 0; i < this.state.decklist.length; i++) {
       if (this.state.decklist[i].name == event.target.value) {
         this.setState({ calledDeck: i });
@@ -83,10 +83,10 @@ export default class Custom extends Component {
   render() {
     const deckClose = () => this.setState({ deckShow: false });
     const newFormClose = () => this.setState({ newFormShow: false });
-    let border = {
-      border: "solid 1px black",
-      borderRadius: "5px",
-      padding: "10px"
+    const border = {
+      border: 'solid 1px black',
+      borderRadius: '5px',
+      padding: '10px'
     };
     return (
       <div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Components/Header';
-import { retrieveCookie } from './Components/cookies';
+import { retrieveCookie } from './Components/Cookies';
 import './app.css';
 import Chatbox from './Components/Chatbox';
 import GameForm from './Components/GameForm';

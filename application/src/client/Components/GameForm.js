@@ -9,7 +9,7 @@ import {
   Dropdown,
   Modal
 } from 'react-bootstrap';
-import { retrieveCookie } from './cookies';
+import { retrieveCookie } from './Cookies';
 
 const GameForm = (state) => {
   const settingButton = {

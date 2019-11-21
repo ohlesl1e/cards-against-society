@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Components/Header';
 import ListRooms from './Components/ListRooms';
-import { retrieveCookie } from './Components/cookies';
+import { retrieveCookie } from './Components/Cookies';
 
 export default class MyGames extends Component {
   state = {

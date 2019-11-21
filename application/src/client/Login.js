@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {
-  Button, FormGroup, FormControl, FormLabel
+ Button, FormGroup, FormControl, FormLabel 
 } from 'react-bootstrap';
 import './app.css';
 import { Link } from 'react-router-dom';
-import { saveCookie } from './Components/cookies';
+import { saveCookie } from './Components/Cookies';
 
 export default class Login extends Component {
   constructor(props) {
@@ -93,8 +93,10 @@ export default class Login extends Component {
               onClick={this.onSubmit}
             >
               Login
-                </Button>
-            <Link to="/Registration" className="small">Don't Have an Account?</Link>
+            </Button>
+            <Link to="/Registration" className="small">
+              Don't Have an Account?
+            </Link>
           </form>
         </div>
       </div>

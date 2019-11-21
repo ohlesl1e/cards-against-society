@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 import '../app.css';
-import { retrieveCookie, deleteCookie } from './cookies';
+import { retrieveCookie, deleteCookie } from './Cookies';
 
 export default class Header extends Component {
   constructor(props) {

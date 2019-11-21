@@ -3,7 +3,7 @@ import {
  Container, Row, Col, ButtonGroup, Button 
 } from 'react-bootstrap';
 import Header from './Components/Header';
-import { retrieveCookie } from './Components/cookies';
+import { retrieveCookie } from './Components/Cookies';
 import Chatbox from './Components/Chatbox';
 import GameContainer from './Components/GameContainer';
 
