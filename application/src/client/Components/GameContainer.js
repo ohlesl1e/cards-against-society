@@ -44,7 +44,7 @@ export default class ChatBox extends Component {
   }
 
   getInfo() {
-    fetch(`/game/${this.props.gameid}`)
+    fetch(`/games/${this.props.gameid}`)
       .then(response => response.json())
       .then((res) => {
         this.setState(

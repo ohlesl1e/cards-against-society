@@ -30,7 +30,7 @@ app.listen(4000, () => console.log('Listening on port 4000!'));
 
 app.get('/', indexRouter);
 app.use('/users', userRouter);
-app.use('/game', gameRouter);
+app.use('/games', gameRouter);
 
 app.use((err, req, res, next) => {
   // set locals, only providing error in development
