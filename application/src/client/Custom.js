@@ -25,7 +25,27 @@ export default class Custom extends Component {
             { type: 'black', content: 'an ar15 assault rifle' }
           ]
         },
-        { name: 'Deck2', cards: [{ type: 'black', content: 'jews' }] }
+        { name: 'Deck2', cards: [{ type: 'black', content: 'jews' }] },
+        {
+          name: 'Jozo\'s Reader',
+          cards: [
+            { type: 'white', content: 'prolog' },
+            { type: 'white', content: 'c++ has bad taste' },
+            { type: 'black', content: 'ruby is better because_________' }
+          ]
+        },
+        {
+          name: 'I\'m gay',
+          cards: [
+            { type: 'white', content: 'gay thoughts' },
+            { type: 'white', content: 'all my dead sisters' },
+            { type: 'black', content: 'america is hungry. america wants________' },
+            { type: 'white', content: 'a lifetime of sadness' },
+            { type: 'white', content: 'the female orgasm' },
+            { type: 'white', content: 'trump\'s hair' },
+            { type: 'black', content: 'say it loud! I\'m__________ and I\'m proud!' }
+          ]
+        }
       ]
     };
     console.log(this.state.decklist);
@@ -112,10 +132,10 @@ export default class Custom extends Component {
               </Row>
               <Row style={border}>
                 {this.state.decklist.map(d => (
-                  <Col>
+                  <Col >
                     <ButtonToolbar>
                       <Button
-                        variant="primary"
+                        variant="dark"
                         value={d.name}
                         onClick={this.handleClick}
                       >
