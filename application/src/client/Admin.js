@@ -59,7 +59,7 @@ export default class Admin extends Component {
 
         <div className="column2">
           <h2>Active Game Rooms</h2>
-          <ListRooms url="/game/allgames" />
+          <ListRooms url="games/allgames" />
           <h5># of Active Game Rooms:</h5>
         </div>
 

@@ -9,10 +9,11 @@ module.exports = {
   output: {
     path: path.join(__dirname, outputDirectory),
     filename: 'bundle.js',
-	publicPath: '/'
+    publicPath: '/'
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
@@ -38,7 +39,8 @@ module.exports = {
     proxy: {
       '/api': 'http://localhost:4000'
     },
-	historyApiFallback: true,
+    historyApiFallback: { disableDotRule: true },
+    contentBase: 'public'
   },
   plugins: [
     new CleanWebpackPlugin([outputDirectory]),
