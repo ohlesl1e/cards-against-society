@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
- Button, FormGroup, FormControl, FormLabel 
+  Button, FormGroup, FormControl, FormLabel
 } from 'react-bootstrap';
 import './app.css';
 import { Link } from 'react-router-dom';
@@ -67,7 +67,7 @@ export default class Login extends Component {
           </h2>
           <br />
           <form onSubmit={this.handleSubmit}>
-            <FormGroup classname="userId" controlId="userid" bsSize="large">
+            <FormGroup className="userId" controlId="userid" >
               <FormLabel>Username</FormLabel>
               <FormControl
                 autoFocus
@@ -76,7 +76,7 @@ export default class Login extends Component {
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <FormGroup controlId="password" bsSize="large">
+            <FormGroup controlId="password" >
               <FormLabel>Password</FormLabel>
               <FormControl
                 value={this.state.password}
@@ -87,16 +87,12 @@ export default class Login extends Component {
             </FormGroup>
             <Button
               block
-              bsSize="large"
               disabled={!this.validateForm()}
               type="submit"
-              onClick={this.onSubmit}
-            >
+              onClick={this.onSubmit}>
               Login
-            </Button>
-            <Link to="/Registration" className="small">
-              Don't Have an Account?
-            </Link>
+                </Button>
+            <Link to="/Registration" className="small">Don't Have an Account?</Link>
           </form>
         </div>
       </div>

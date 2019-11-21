@@ -27,6 +27,15 @@
     padding: 50px;
   }
 
+  .wrap3 {
+    text-align: justify;
+    display: inline-block;
+    width: 100%;
+    border: 1px solid gray;
+    padding: 30px;
+    font-size: 12px;
+  }
+
   .form-control {
     width: 100% !important;
   }
@@ -44,8 +53,17 @@
   div.a {
       margin-top: 1%;
       margin-bottom: 1%;
-      font-size: 11px;
+      font-size: 10px;
   }
   .bongola {
       font-size: 12px;
+  }
+
+  button.modalbutton {
+    border: none;
+    padding: 0;
+    background: none;
+    width: auto;
+    font-size: 11px;
+    color:#007bff;;
   }

@@ -48,6 +48,16 @@ export default class Header extends Component {
             {this.isAdmin()}
             <Navbar.Collapse className="justify-content-end">
               <NavDropdown id="basic-nav-dropdown">
+                <Link to="/Profile">
+                  <NavDropdown.Item href="#profile">
+                    Profile
+                  </NavDropdown.Item>
+                </Link>
+                <Link to="/Custom">
+                  <NavDropdown.Item href="#custom">
+                    Custom Cards
+                  </NavDropdown.Item>
+                </Link>
                 <Link to="/">
                   <NavDropdown.Item href="#login" onClick={() => this.logout()}>
                     Log Out
