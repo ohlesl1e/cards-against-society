@@ -28,6 +28,7 @@
   float: left;
 }
 
+
 .column {
   margin: auto;
   float: left;
@@ -45,6 +46,10 @@
   padding-right: 200px;
   padding-left: 220px;
   height: 300px;
+}
+
+.dropdown {
+  margin-right: 50px;
 }
 
 .lobby {
