@@ -5,6 +5,7 @@ import Header from "./Components/Header";
 import { retrieveCookie } from "./Components/Cookies";
 import ShowDeck from './ShowDeck';
 import AddDeck from './AddDeck';
+import './CustomCard.css';
 
 export default class Custom extends Component {
   constructor(props) {
@@ -106,7 +107,8 @@ export default class Custom extends Component {
     const border = {
       border: 'solid 1px black',
       borderRadius: '5px',
-      padding: '10px'
+      padding: '10px',
+      alignSelf: 'auto'
     };
     return (
       <div>
@@ -132,14 +134,15 @@ export default class Custom extends Component {
               </Row>
               <Row style={border}>
                 {this.state.decklist.map(d => (
-                  <Col >
+                  <Col xs="6" md="4">
                     <ButtonToolbar>
                       <Button
+                        className="CustomDeck"
                         variant="dark"
                         value={d.name}
                         onClick={this.handleClick}
                       >
-                        {d.name}
+                        <h3>{d.name}</h3>
                       </Button>
                       <ShowDeck
                         show={this.state.deckShow}

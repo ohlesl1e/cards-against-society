@@ -1,0 +1,15 @@
+.CustomCard{
+    margin: 10px;
+    height: 300px;
+    width: 200px;
+}
+
+.CustomDeck{
+    margin: 10px;
+    height: 350px;
+    width: 250px;
+}
+
+.content{
+    text-align: left;
+}

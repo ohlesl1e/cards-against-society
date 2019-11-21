@@ -3,6 +3,7 @@ import { Modal, Button, Row, Col, Container, ButtonToolbar } from 'react-bootstr
 import { Redirect } from 'react-router-dom';
 import Add from './Add'
 import ShowCard from './ShowCard';
+import './CustomCard.css';
 
 export class ShowDeck extends Component {
     constructor(props) {
@@ -99,8 +100,8 @@ export class ShowDeck extends Component {
                                             return (
                                                 <Col xs="6" md="4">
                                                     <ButtonToolbar>
-                                                        <Button variant="outline-dark" value={c.content} onClick={this.getCard}>
-                                                            {c.content}
+                                                        <Button className="CustomCard" variant="outline-dark" value={c.content} onClick={this.getCard}>
+                                                            <h4 className="content">{c.content}</h4>
                                                         </Button>
                                                         <ShowCard
                                                             show={this.state.cardShow}
@@ -113,10 +114,10 @@ export class ShowDeck extends Component {
                                             )
                                         } else {
                                             return (
-                                                <Col>
+                                                <Col xs="6" md="4">
                                                     <ButtonToolbar>
-                                                        <Button variant="dark" value={c.content} onClick={this.getCard}>
-                                                            {c.content}
+                                                        <Button className="CustomCard" variant="dark" value={c.content} onClick={this.getCard}>
+                                                            <h4 className="content">{c.content}</h4>
                                                         </Button>
                                                         <ShowCard
                                                             show={this.state.cardShow}
