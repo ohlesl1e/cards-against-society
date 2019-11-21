@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-  Button,
   Form,
   FormGroup,
   FormControl,
@@ -8,6 +7,7 @@ import {
 } from "react-bootstrap";
 import Header from "./Components/Header";
 import { retrieveCookie } from './Components/Cookies';
+import './app.css';
 
 export default class Profile extends Component {
   state = {
@@ -23,47 +23,69 @@ export default class Profile extends Component {
   render() {
     return (
       <body>
-        <div className="homePage">
           <Header userid={this.state.userid} />
-          <div className="row">
-            <div className="column">
+          <div className="profile-page">
               <Form>
-                <Form.Group controlId="formGroupEmail">
                   <center>
                     <h5>
-                      <Form.Label>Profile</Form.Label>
+                      <FormLabel>Profile</FormLabel>
                     </h5>
                   </center>
-                  <Form.Label>Username</Form.Label>
-                  <Form.Control
+
+              
+                  <FormGroup controlId="formGroupEmail">
+                  <FormLabel>First Name</FormLabel>
+                  <FormControl
+                    type="firstname"
+                    value="User's first name"
+                    class="field left"
+                    readonly
+                  />
+                </FormGroup>
+
+                <FormGroup controlId="formGroupEmail">
+                  <FormLabel>Last Name</FormLabel>
+                  <FormControl
+                    type="lastname"
+                    value="User's last name"
+                    class="field left"
+                    readonly
+                  />
+                </FormGroup>
+
+              <FormGroup controlId="formGroupEmail">
+                  <FormLabel>Username</FormLabel>
+                  <FormControl
                     type="username"
                     value="Username"
                     class="field left"
                     readonly
                   />
-                </Form.Group>
-                <Form.Group controlId="formGroupEmail">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    value="Password"
-                    class="field left"
-                    readonly
-                  />
-                </Form.Group>
-                <Form.Group controlId="formGroupPassword">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
+                </FormGroup>
+  
+                <FormGroup controlId="formGroupPassword">
+                  <FormLabel>Email</FormLabel>
+                  <FormControl
                     type="email"
                     value="Email"
                     class="field left"
                     readonly
                   />
-                </Form.Group>
+                </FormGroup>
+
+                <FormGroup controlId="exampleForm.ControlInput">
+                  <FormLabel>Bio</FormLabel>
+                  <FormControl as="textarea" rows="10"
+                    value="Enter personal message"
+                    class="field left"
+                    readonly
+                  />
+                </FormGroup>
+
               </Form>
+              
             </div>
-          </div>
-        </div>
+        
       </body>
     );
   }

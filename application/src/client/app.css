@@ -185,6 +185,7 @@
   color: rgb(197, 197, 197);
 }
 
-link.small {
-  text: 10px;
+.profile-page{
+  padding-left: 500px;
+  padding-right: 500px;
 }
