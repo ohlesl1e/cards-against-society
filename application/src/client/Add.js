@@ -7,7 +7,7 @@ export class Add extends Component {
 
         this.state = {
             cardContent: "",
-            whitecard: false
+            type: ""
         }
     }
 
@@ -16,13 +16,13 @@ export class Add extends Component {
             [event.target.id]: event.target.value
         });
         console.log(event.target.id)
-        console.log(event.target.value);
-        console.log(this.state.cardContent)
-        console.log(this.state.whitecard)
+        console.log(event.target.value)
+        console.log(this.state.type)
     }
 
     handleSubmit = () => {
-        let newcard = { whitecard: this.state.whitecard, content: this.state.cardContent }
+        console.log(this.state.type)
+        let newcard = { type: this.state.type, content: this.state.cardContent }
         this.props.deck.cards.push(newcard)
         console.log(this.props.deck);
         this.props.onHide()
@@ -56,19 +56,19 @@ export class Add extends Component {
                                 </Form.Label>
                                 <Col sm={10}>
                                     <Form.Check
-                                        name="whitecard"
+                                        name="type"
                                         type="radio"
-                                        id="whitecard"
+                                        id="type"
                                         label="white card"
-                                        value={true}
+                                        value="white"
                                     />
 
                                     <Form.Check
-                                        name="whitecard"
+                                        name="type"
                                         type="radio"
-                                        id="whitecard"
+                                        id="type"
                                         label="black card"
-                                        value={false}
+                                        value="black"
                                     />
                                 </Col>
                             </Form.Group>

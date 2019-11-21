@@ -12,6 +12,7 @@ export class ShowDeck extends Component {
             redirect: false,
             formShow: false,
             cardShow: false,
+            calledCard: 0
         }
     }
 
@@ -31,88 +32,114 @@ export class ShowDeck extends Component {
     }
 
     getCard = () => {
+        for (let index = 0; index < this.props.deck.cards.length; index++) {
+            if (this.props.deck.cards[index].content == event.target.value) {
+                this.setState({ calledCard: index })
+                break
+            }
+        }
         this.setState({ cardShow: true })
+    }
+
+    handleDelete = () => {
+        for (let index = 0; index < this.props.decklist.length; index++) {
+            if (this.props.deck.name == this.props.decklist[index].name) {
+                this.props.decklist.splice(index, 1)
+            }
+        }
+        console.log(this.props.decklist);
+        this.props.onHide()
     }
 
     render() {
         let formClose = () => this.setState({ formShow: false })
         let cardClose = () => this.setState({ cardShow: false })
-        return (
-            <div>
-                {this.renderRedirect()}
+        if (this.props.deck != null) {
+            return (
+                <div>
+                    {this.renderRedirect()}
 
-                <Modal
-                    {...this.props}
-                    size="lg"
-                    aria-labelledby="contained-modal-title-vcenter"
-                    centered
-                >
-                    <Modal.Header>
-                        <Modal.Title id="contained-modal-title-vcenter">
-                            <Row>
-                                <Col>{this.props.deck.name}</Col>
-                                <Col>
-                                    <ButtonToolbar>
-                                        <Button onClick={this.getForm}>
-                                            Add
+                    <Modal
+                        {...this.props}
+                        size="lg"
+                        aria-labelledby="contained-modal-title-vcenter"
+                        centered
+                    >
+                        <Modal.Header>
+                            <Modal.Title id="contained-modal-title-vcenter">
+                                <Row>
+                                    <Col>{this.props.deck.name}</Col>
+                                    <Col>
+                                        <ButtonToolbar>
+                                            <Button onClick={this.getForm}>
+                                                Add
                                         </Button>
-                                        <Add
-                                            show={this.state.formShow}
-                                            onHide={formClose}
-                                            deck={this.props.deck}
-                                        />
-                                    </ButtonToolbar>
-                                </Col>
-                            </Row>
-                        </Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Container>
-                            <Row>
-                                {this.props.deck.cards.map(c => {
-                                    if (c.whiteCard) {
-                                        return (
-                                            <Col>
-                                                <ButtonToolbar>
-                                                    <Button variant="outline-dark" onClick={this.getCard}>
-                                                        {c.content}
-                                                    </Button>
-                                                    <ShowCard
-                                                        show={this.state.cardShow}
-                                                        onHide={cardClose}
-                                                        deck={this.props.deck}
-                                                        card={c.content}
-                                                    />
-                                                </ButtonToolbar>
-                                            </Col>
-                                        )
-                                    }else{
-                                        return (
-                                            <Col>
-                                                <ButtonToolbar>
-                                                    <Button variant="dark" onClick={this.getCard}>
-                                                        {c.content}
-                                                    </Button>
-                                                    <ShowCard
-                                                        show={this.state.cardShow}
-                                                        onHide={cardClose}
-                                                        deck={this.props.deck}
-                                                        card={c.content}
-                                                    />
-                                                </ButtonToolbar>
-                                            </Col>
-                                        )
-                                    }
-                                })}
-                            </Row>
-                        </Container>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={this.props.onHide}>Close</Button>
-                    </Modal.Footer>
-                </Modal>
-            </div>
-        )
+                                            <Add
+                                                show={this.state.formShow}
+                                                onHide={formClose}
+                                                deck={this.props.deck}
+                                            />
+                                        </ButtonToolbar>
+                                    </Col>
+                                    <Col>
+                                        <ButtonToolbar>
+                                            <Button onClick={this.handleDelete}>
+                                                Delete
+                                        </Button>
+                                        </ButtonToolbar>
+                                    </Col>
+                                </Row>
+                            </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <Container>
+                                <Row>
+                                    {this.props.deck.cards.map(c => {
+                                        if (c.type == "white") {
+                                            return (
+                                                <Col>
+                                                    <ButtonToolbar>
+                                                        <Button variant="outline-dark" value={c.content} onClick={this.getCard}>
+                                                            {c.content}
+                                                        </Button>
+                                                        <ShowCard
+                                                            show={this.state.cardShow}
+                                                            onHide={cardClose}
+                                                            deck={this.props.deck}
+                                                            card={this.state.calledCard}
+                                                        />
+                                                    </ButtonToolbar>
+                                                </Col>
+                                            )
+                                        } else {
+                                            return (
+                                                <Col>
+                                                    <ButtonToolbar>
+                                                        <Button variant="dark" value={c.content} onClick={this.getCard}>
+                                                            {c.content}
+                                                        </Button>
+                                                        <ShowCard
+                                                            show={this.state.cardShow}
+                                                            onHide={cardClose}
+                                                            deck={this.props.deck}
+                                                            card={this.state.calledCard}
+                                                        />
+                                                    </ButtonToolbar>
+                                                </Col>
+                                            )
+                                        }
+                                    })}
+                                </Row>
+                            </Container>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button onClick={this.props.onHide}>Close</Button>
+                        </Modal.Footer>
+                    </Modal>
+                </div>
+            )
+        }
+        return null
     }
 }
 
