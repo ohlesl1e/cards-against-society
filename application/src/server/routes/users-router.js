@@ -11,7 +11,7 @@ const router = express.Router();
 const models = require('../models');
 
 router.put('/userSearch', async (req, res) => {
-  if (req.body.userid !== null) {
+  if (req.body.userid !== null || req.body.userid !== '') {
     models.user
       .findAll({
         raw: true,

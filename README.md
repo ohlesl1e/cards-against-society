@@ -1,4 +1,4 @@
-# csc648 Repository
+# Cards Against Society
 
 Team Application URL: http://52.53.156.79:4000/
 

@@ -97,7 +97,7 @@ export class ShowDeck extends Component {
                                     {this.props.deck.cards.map(c => {
                                         if (c.type == "white") {
                                             return (
-                                                <Col>
+                                                <Col xs="6" md="4">
                                                     <ButtonToolbar>
                                                         <Button variant="outline-dark" value={c.content} onClick={this.getCard}>
                                                             {c.content}
