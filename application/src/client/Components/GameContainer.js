@@ -27,7 +27,7 @@ export default class ChatBox extends Component {
       ],
       cardlist: [],
       socket: io.connect(
-        'http://localhost:8080/lobby'
+        'http://52.53.156.79:8080/lobby'
         // +this.props.url
       ),
       data: '',
@@ -44,7 +44,7 @@ export default class ChatBox extends Component {
   }
 
   getInfo() {
-    fetch(`http://localhost:4000/game/${this.props.gameid}`)
+    fetch(`/game/${this.props.gameid}`)
       .then(response => response.json())
       .then((res) => {
         this.setState(
