@@ -30,7 +30,7 @@ app.listen(4000, () => console.log('Listening on port 4000!'));
 
 app.get('/', indexRouter);
 app.use('/users', userRouter);
-app.use('/game', gameRouter);
+app.use('/games', gameRouter);
 
 app.use((err, req, res, next) => {
   // set locals, only providing error in development
@@ -40,6 +40,14 @@ app.use((err, req, res, next) => {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../../dist/index.html'), (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
 });
 
 module.exports = app;

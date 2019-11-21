@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import io from "socket.io-client";
+import React, { Component } from 'react';
+import io from 'socket.io-client';
 import {
   ListGroup,
   Button,
@@ -10,9 +10,9 @@ import {
   Container,
   Card,
   Spinner
-} from "react-bootstrap";
-import PlayerList from "./PlayerList";
-import "../app.css";
+} from 'react-bootstrap';
+import PlayerList from './PlayerList';
+import '../app.css';
 
 export default class ChatBox extends Component {
   constructor(props) {
@@ -27,12 +27,12 @@ export default class ChatBox extends Component {
       ],
       cardlist: [],
       socket: io.connect(
-        "http://localhost:8080/lobby"
+        'http://52.53.156.79:8080/lobby'
         // +this.props.url
       ),
-      data: "",
-      blackCard: "",
-      HostUserid: ""
+      data: '',
+      blackCard: '',
+      HostUserid: ''
     };
     this.getInfo = this.getInfo.bind(this);
     this.handBuilder = this.handBuilder.bind(this);
@@ -44,9 +44,9 @@ export default class ChatBox extends Component {
   }
 
   getInfo() {
-    fetch(`http://localhost:4000/game/${this.props.gameid}`)
+    fetch(`/games/${this.props.gameid}`)
       .then(response => response.json())
-      .then(res => {
+      .then((res) => {
         this.setState(
           {
             data: res,
@@ -82,8 +82,8 @@ export default class ChatBox extends Component {
           }}
           className={
             this.state.cardsSelected[i][1]
-              ? "white-card-selected white-card"
-              : "white-card"
+              ? 'white-card-selected white-card'
+              : 'white-card'
           }
         >
           white card

@@ -18,7 +18,7 @@ export default class MyGames extends Component {
     return (
       <div>
         <Header userid={this.state.userid} />
-        <ListRooms url="http://localhost:4000/game/allgames" />
+        <ListRooms url="/games/allgames" />
       </div>
     );
   }

@@ -24,7 +24,7 @@ export default class Login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    fetch('http://localhost:4000/users/login', {
+    fetch('/users/login', {
       method: 'POST',
       credentials: 'same-origin',
       body: JSON.stringify(this.state),
