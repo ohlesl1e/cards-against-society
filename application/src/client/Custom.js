@@ -38,7 +38,7 @@ export default class Custom extends Component {
           ]
         },
         {
-          name: 'My Favorite Cards,
+          name: 'My Favorite Cards',
           cards: [
             { type: 'white', content: 'gay thoughts' },
             { type: 'white', content: 'all my dead sisters' },
