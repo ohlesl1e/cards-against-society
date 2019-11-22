@@ -1,4 +1,4 @@
-# csc648 Repository
+# Cards Against Society
 
 Team Application URL: http://52.53.156.79:4000/
 
@@ -9,7 +9,7 @@ Team Lead: Jose Castanon
 
 Back-End Lead: Leslie Zhou
 
-Database Master: Zhola Ebikawa
+Database Master: Shota Ebikawa
 
 Git Master: Daryl Ortiz
 

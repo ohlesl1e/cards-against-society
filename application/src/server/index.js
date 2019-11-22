@@ -3,11 +3,23 @@ const os = require('os');
 const path = require('path');
 const sequelize = require('sequelize');
 const cors = require('cors');
+const io = require('socket.io')();
 const bodyParser = require('body-parser');
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/users-router');
+const gameRouter = require('./routes/game-router');
 
 const app = express();
+
+io.listen(8080);
+app.set('socketio', io);
+
+io.of('/lobby').on('connection', (socket) => {
+  socket.on('subscribeToChat', (msg) => {
+    io.of('/lobby').emit('message', msg);
+  });
+});
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
@@ -18,10 +30,7 @@ app.listen(4000, () => console.log('Listening on port 4000!'));
 
 app.get('/', indexRouter);
 app.use('/users', userRouter);
-
-app.use((req, res, next) => {
-  next(createError(404));
-});
+app.use('/games', gameRouter);
 
 app.use((err, req, res, next) => {
   // set locals, only providing error in development
@@ -31,6 +40,14 @@ app.use((err, req, res, next) => {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../../dist/index.html'), (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
 });
 
 module.exports = app;

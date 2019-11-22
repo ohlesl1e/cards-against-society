@@ -18,6 +18,137 @@
   color: #866b6b;
 }
 
+.Profile-header {
+  padding: 120px;
+  height: 300px;
+}
+
+.chatbox {
+  margin: auto;
+  float: left;
+}
+
+
+.column {
+  margin: auto;
+  float: left;
+  padding-top: 0px;
+  padding-right: 50px;
+  padding-left: 50px;
+  height: 0px;
+}
+
+.column2 {
+  margin: 0px 10px;
+  float: left;
+  width: 80;
+  padding-top: 20px;
+  padding-right: 200px;
+  padding-left: 220px;
+  height: 300px;
+}
+
+.dropdown {
+  margin-right: 50px;
+}
+
+.lobby {
+  margin: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.my-games{
+  margin-left: 400px;
+  margin-right: 400px;
+}
+
+.navselection {
+  color: rgb(192, 192, 192);
+  margin: 0px 13px 3px 3px;
+  filter: grayscale(100%);
+  transition: all 0.4s ease;
+}
+
+.navselection:hover {
+  margin: 0 20px 3px 3px;
+  color: white;
+  -webkit-text-stroke: 0.5px;
+  -webkit-text-stroke-color: black;
+  filter: grayscale(0%);
+}
+.chat-history {
+  width: 100%;
+  height: 250px;
+  overflow: scroll;
+}
+.chat-section {
+  text-align: left;
+  box-shadow: 1px 1px 5px 1px #888888;
+}
+.text-area {
+  width: 100%;
+  margin: 22px;
+}
+
+.black-card {
+  text-align: center;
+  background-color: black !important;
+  color: black !important;
+  width: 100%;
+  padding: 40px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
+
+.game-page {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.white-card {
+  transition: all 0.4s ease;
+  width: auto;
+  margin: 5px;
+  padding: 40px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  padding-top: 70px;
+  padding-bottom: 70px;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.white-card-selected {
+  filter: grayscale(100%);
+  transition: all 0.4s ease;
+  box-shadow: -5px 10px #888888;
+  border-radius: 5px;
+}
+
+.player-list {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.game-display {
+  margin: 55px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -25,4 +156,46 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.centertext {
+  text-align: center;
+}
+
+.cah-login {
+  text-align: center;
+  padding-top: 200px;
+}
+
+.sidebarContainer {
+  position: fixed;
+  width: 280;
+  height: 100%;
+  left: 0;
+  overflow: auto;
+  background: #2c2c31;
+  color: rgb(212, 212, 212);
+}
+
+.sidebarAdmin {
+  padding: 10px 15px 10px 30px;
+  font-size: 20px;
+  background-color: rgb(39, 39, 39);
+}
+
+.sidebarNav li {
+  background-color: transparent;
+  position: relative;
+  display: inline-block;
+}
+
+.sidebarNav li a {
+  padding: 10px 15px 10px 30px;
+  display: block;
+  color: rgb(197, 197, 197);
+}
+
+.profile-page{
+  padding-left: 500px;
+  padding-right: 500px;
 }

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-
+import {
+ Button, FormGroup, FormControl, FormLabel 
+} from 'react-bootstrap';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import Home from './Home';
@@ -10,6 +12,15 @@ import ShotaEbikawa from './AboutMembers/ShotaEbikawa';
 import LeslieZhou from './AboutMembers/LeslieZhou';
 import DarylOrtiz from './AboutMembers/DarylOrtiz';
 import Registration from './Registration';
+import Profile from './Profile';
+import Game from './Game';
+import Lobby from './Lobby';
+import Login from './Login';
+import MyGames from './MyGames';
+import GameForm from './Components/GameForm';
+import Custom from './Custom';
+import FAQ from './FAQ';
+import Admin from './Admin';
 
 // For now root path
 // If error for react-router-dom, install "npm install react-router-dom"
@@ -38,7 +49,7 @@ export default class Routing extends Component {
         <Route
           exact
           path="/"
-          render={props => <Home {...props} component={Home} />}
+          render={props => <Login {...props} component={Login} />}
         />
 
         <Route component={About} path="/About" />
@@ -47,7 +58,16 @@ export default class Routing extends Component {
         <Route component={ShotaEbikawa} path="/ShotaEbikawa" />
         <Route component={LeslieZhou} path="/LeslieZhou" />
         <Route component={DarylOrtiz} path="/DarylOrtiz" />
-        <Route component = {Registration} path = "/Registration"/>
+        <Route component={Registration} path="/Registration" />
+        <Route component={Game} path="/Game/:gameid" />
+        <Route component={Profile} path="/Profile" />
+        <Route component={Home} path="/Home" />
+        <Route component={Lobby} path="/Lobby" />
+        <Route component={MyGames} path="/MyGames" />
+        <Route component={Custom} path="/Custom" />
+        <Route component={FAQ} path="/FAQ" />
+        <Route component={GameForm} path="/FormGame" />
+        <Route component={Admin} path="/Admin" />
       </BrowserRouter>
     );
   }
