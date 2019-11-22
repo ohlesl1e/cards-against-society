@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Button, ButtonToolbar, Col, Row, Container } from "react-bootstrap";
-import Header from "./Components/Header";
-import { retrieveCookie } from "./Components/Cookies";
+import {
+ Button, ButtonToolbar, Col, Row, Container
+} from 'react-bootstrap';
+import Header from './Components/Header';
+import { retrieveCookie } from './Components/Cookies';
 import ShowDeck from './ShowDeck';
 import AddDeck from './AddDeck';
 import './CustomCard.css';
@@ -43,7 +45,7 @@ export default class Custom extends Component {
           ]
         },
         {
-          name: 'Jozo\'s Reader',
+          name: "Jozo's Reader",
           cards: [
             { type: 'white', content: 'prolog' },
             { type: 'white', content: 'c++ has bad taste' },
@@ -59,11 +61,17 @@ export default class Custom extends Component {
           cards: [
             { type: 'white', content: 'gay thoughts' },
             { type: 'white', content: 'all my dead sisters' },
-            { type: 'black', content: 'america is hungry. america wants________' },
+            {
+              type: 'black',
+              content: 'america is hungry. america wants________'
+            },
             { type: 'white', content: 'a lifetime of sadness' },
             { type: 'white', content: 'the female orgasm' },
-            { type: 'white', content: 'trump\'s hair' },
-            { type: 'black', content: 'say it loud! I\'m__________ and I\'m proud!' }
+            { type: 'white', content: "trump's hair" },
+            {
+              type: 'black',
+              content: "say it loud! I'm__________ and I'm proud!"
+            }
           ]
         },
         {
