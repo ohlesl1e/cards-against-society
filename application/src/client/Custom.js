@@ -23,20 +23,39 @@ export default class Custom extends Component {
           name: 'Deck1',
           cards: [
             { type: 'white', content: 'a big black duck' },
-            { type: 'black', content: 'an ar15 assault rifle' }
+            { type: 'white', content: 'an ar15 assault rifle' },
+            { type: 'black', content: 'the class trip was ruined by________' }
           ]
         },
-        { name: 'Deck2', cards: [{ type: 'black', content: 'jews' }] },
+        {
+          name: 'Deck2', cards: [
+            { type: 'black', content: 'what\'s wrong with the jews?' },
+            { type: 'white', content: 'hitler\'s mustache' },
+            { type: 'white', content: 'drinking alone' },
+            { type: 'white', content: 'the entire internet' },
+            { type: 'black', content: 'I drink to forget________' },
+            { type: 'black', content: 'daddy, why is mommy crying?' },
+            { type: 'white', content: 'the glass ceiling' },
+            { type: 'black', content: 'hey baby, come back to my place and I\'ll show you' },
+            { type: 'white', content: 'pulling out' },
+            { type: 'white', content: 'men' },
+            { type: 'black', content: 'lifetime presents________, the story of________' },
+          ]
+        },
         {
           name: 'Jozo\'s Reader',
           cards: [
             { type: 'white', content: 'prolog' },
             { type: 'white', content: 'c++ has bad taste' },
-            { type: 'black', content: 'ruby is better because_________' }
+            { type: 'black', content: 'ruby is better because_________' },
+            { type: 'white', content: 'Cyber boolean' },
+            { type: 'white', content: 'not enough cache' },
+            { type: 'black', content: 'why didn\'t the client tip the server?' },
+            { type: 'white', content: 'insert jozo lecture.mp4' },
           ]
         },
         {
-          name: 'I\'m gay',
+          name: 'Harry Potter Erotica',
           cards: [
             { type: 'white', content: 'gay thoughts' },
             { type: 'white', content: 'all my dead sisters' },
@@ -45,6 +64,16 @@ export default class Custom extends Component {
             { type: 'white', content: 'the female orgasm' },
             { type: 'white', content: 'trump\'s hair' },
             { type: 'black', content: 'say it loud! I\'m__________ and I\'m proud!' }
+          ]
+        },
+        {
+          name: 'Religions',
+          cards: [
+            { type: 'black', content: 'the academy award goes to________' },
+            { type: 'white', content: 'asian jesus' },
+            { type: 'black', content: 'Iraq' },
+            { type: 'white', content: 'cheat on your husband then start a religion to cover it up' },
+            { type: 'white', content: 'grandma' },
           ]
         }
       ]
