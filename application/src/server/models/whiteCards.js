@@ -19,6 +19,12 @@ module.exports = (sequelize, Sequelize) => {
       updatedAt: false
     }
   );
+  whiteCard.associate = (models) => {
+    whiteCard.belongsToMany(models.hands, {
+      as: 'Hand',
+      through: 'handTable'
+    });
+  };
 
   fs.readFile(`${__dirname}/../whitecardsfixed.json`, (err, data) => {
     whiteCard.bulkCreate(JSON.parse(data.toString())).then((result) => {

@@ -38,8 +38,13 @@ module.exports = (sequelize, Sequelize) => {
 
   user.associate = (models) => {
     user.belongsToMany(models.gamesessions, {
-      as: 'Games',
+      as: 'Game',
       through: 'playerTable',
+      foreignKey: 'userID'
+    });
+    user.belongsToMany(models.hands, {
+      as: 'Hand',
+      through: 'playerHands',
       foreignKey: 'userID'
     });
   };

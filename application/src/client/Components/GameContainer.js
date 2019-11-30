@@ -13,6 +13,7 @@ import {
 } from 'react-bootstrap';
 import PlayerList from './PlayerList';
 import '../app.css';
+import { retrieveCookie } from './Cookies';
 
 export default class ChatBox extends Component {
   constructor(props) {
@@ -31,6 +32,7 @@ export default class ChatBox extends Component {
         // +this.props.url
       ),
       data: '',
+      hand: [],
       blackCard: '',
       HostUserid: ''
     };
@@ -44,12 +46,20 @@ export default class ChatBox extends Component {
   }
 
   getInfo() {
-    fetch(`/games/${this.props.gameid}`)
+    fetch(`/games/${this.props.gameid}`, {
+      method: 'POST',
+      credentials: 'same-origin',
+      body: JSON.stringify({ userid: retrieveCookie() }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
       .then(response => response.json())
       .then((res) => {
         this.setState(
           {
             data: res,
+            hand: res[0],
             blackCard: res[1]
           },
           () => console.log()
@@ -68,7 +78,7 @@ export default class ChatBox extends Component {
             this.setState({
               cardsSelected: cards
             });
-            console.log(this.state);
+
             if (!this.state.cardlist.includes(i)) {
               this.state.cardlist.push(i);
             } else {
@@ -86,7 +96,7 @@ export default class ChatBox extends Component {
               : 'white-card'
           }
         >
-          white card
+          {this.state.hand[i]}
         </Card>
       );
     }

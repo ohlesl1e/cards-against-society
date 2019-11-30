@@ -11,8 +11,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       roomName: {
         type: Sequelize.STRING(20)
-      },
-      gameState: JsonField(Sequelize, 'gamesession', 'gameState')
+      }
     },
 
     {
@@ -34,6 +33,11 @@ module.exports = (sequelize, Sequelize) => {
     gamesession.belongsTo(models.blackCard, {
       as: 'CurrentBlackCard',
       through: 'cardTable'
+    });
+
+    gamesession.belongsToMany(models.hands, {
+      as: 'Hand',
+      through: 'gameHands'
     });
   };
 
