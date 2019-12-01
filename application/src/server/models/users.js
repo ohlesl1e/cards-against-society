@@ -23,8 +23,7 @@ module.exports = (sequelize, Sequelize) => {
       updatedAt: false,
 
       hooks: {
-        beforeCreate: (user, options) =>
-          bcrypt
+        beforeCreate: (user, options) => bcrypt
             .hash(user.password, 10)
             .then((hash) => {
               user.password = hash;

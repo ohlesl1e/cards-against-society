@@ -19,6 +19,7 @@ export default class PlayerList extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.receiveMessage = this.receiveMessage.bind(this);
     this.getMessage = this.getMessage.bind(this);
+    this.loadPlayers = this.loadPlayers.bind(this);
   }
 
   componentDidMount = () => {};
@@ -33,6 +34,22 @@ export default class PlayerList extends Component {
 
   handleChange(event) {}
 
+  loadPlayers() {
+    const children = [];
+    if (this.props.players !== null) {
+      for (let i = 0; i < this.props.players.length; i++) {
+        children.push(
+          <tr>
+            <td>{this.props.players[i]}</td>
+            <td>0</td>
+          </tr>
+        );
+      }
+    }
+
+    return <tbody>{children}</tbody>;
+  }
+
   render = () => (
     <Table
       striped
@@ -46,20 +63,7 @@ export default class PlayerList extends Component {
         <th>Players</th>
         <th>Score</th>
       </thead>
-      <tbody>
-        <tr>
-          <td>Player1</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <td>Player2</td>
-          <td>0</td>
-        </tr>
-        <tr>
-          <td>Player3</td>
-          <td>0</td>
-        </tr>
-      </tbody>
+      {this.loadPlayers()}
     </Table>
   );
 }

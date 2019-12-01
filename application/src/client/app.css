@@ -28,7 +28,6 @@
   float: left;
 }
 
-
 .column {
   margin: auto;
   float: left;
@@ -64,7 +63,7 @@
   clear: both;
 }
 
-.my-games{
+.my-games {
   margin-left: 400px;
   margin-right: 400px;
 }
@@ -117,7 +116,7 @@
 
 .white-card {
   transition: all 0.4s ease;
-  width: auto;
+  width: 160px;
   margin: 5px;
   padding: 40px;
   margin-top: 12px;
@@ -195,7 +194,7 @@
   color: rgb(197, 197, 197);
 }
 
-.profile-page{
+.profile-page {
   padding-left: 500px;
   padding-right: 500px;
 }

@@ -13,7 +13,6 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING(20)
       }
     },
-
     {
       updatedAt: false
     }
@@ -23,6 +22,10 @@ module.exports = (sequelize, Sequelize) => {
     gamesession.belongsTo(models.user, {
       as: 'Host',
       through: 'hostTable'
+    });
+
+    gamesession.belongsTo(models.user, {
+      as: 'BCH'
     });
 
     gamesession.belongsToMany(models.user, {

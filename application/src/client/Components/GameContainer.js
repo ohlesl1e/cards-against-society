@@ -27,18 +27,19 @@ export default class ChatBox extends Component {
         [4, false]
       ],
       cardlist: [],
-      socket: io.connect(
-        'http://52.53.156.79:8080/lobby'
-        // +this.props.url
-      ),
+      socket: io.connect('http://localhost:8080/lobby'),
       data: '',
-      hand: [],
+      hand: null,
       blackCard: '',
+      BCH: null,
+      players: null,
       HostUserid: ''
     };
     this.getInfo = this.getInfo.bind(this);
     this.handBuilder = this.handBuilder.bind(this);
     this.resetCards = this.resetCards.bind(this);
+    this.checkHand = this.checkHand.bind(this);
+    this.gameLayout = this.gameLayout.bind(this);
   }
 
   componentDidMount() {
@@ -46,6 +47,7 @@ export default class ChatBox extends Component {
   }
 
   getInfo() {
+    // retrieves game info
     fetch(`http://localhost:4000/games/${this.props.gameid}`, {
       method: 'POST',
       credentials: 'same-origin',
@@ -60,7 +62,9 @@ export default class ChatBox extends Component {
           {
             data: res,
             hand: res[0],
-            blackCard: res[1]
+            blackCard: res[1],
+            players: res[2],
+            BCH: res[3]
           },
           () => console.log()
         );
@@ -68,7 +72,9 @@ export default class ChatBox extends Component {
   }
 
   handBuilder() {
+    // renders player's hand
     const children = [];
+    console.log(this.state);
     for (let i = 0; i < 5; i++) {
       children.push(
         <Card
@@ -96,11 +102,48 @@ export default class ChatBox extends Component {
               : 'white-card'
           }
         >
-          {this.state.hand[i]}
+          {this.checkHand(i)}
         </Card>
       );
     }
     return <Row className="justify-content-center">{children}</Row>;
+  }
+
+  checkHand(i) {
+    if (this.state.hand !== null) {
+      return this.state.hand[i][0];
+    }
+  }
+
+  gameLayout() {
+    // displays player's status
+
+    if (this.state.players !== null) {
+      const children = [];
+      console.log(this.state);
+      for (let i = 0; i < this.state.players.length; i++) {
+        let playerStatus;
+        if (this.state.players[i] === this.state.BCH) {
+          playerStatus = <Spinner animation="grow" variant="dark" size="sm" />;
+        } else {
+          playerStatus = (
+            <Spinner animation="border" variant="dark" size="sm" />
+          );
+        }
+
+        children.push(
+          <Card className="white-card">
+            {this.state.players[i]}
+            <Card.Body>{playerStatus}</Card.Body>
+          </Card>
+        );
+      }
+      return (
+        <div className="game-display">
+          <Row>{children}</Row>
+        </div>
+      );
+    }
   }
 
   resetCards() {
@@ -136,44 +179,11 @@ export default class ChatBox extends Component {
               </Card>
             </div>
             <div>
-              <PlayerList />
+              <PlayerList players={this.state.players} />
             </div>
           </Col>
           <Col md="9" className="game-container">
-            <div className="game-display">
-              <Row>
-                <Card className="white-card">
-                  Player 1
-                  <Card.Body>
-                    <Spinner animation="border" variant="dark" size="sm" />
-                  </Card.Body>
-                </Card>
-                <Card className="white-card">
-                  Player 2
-                  <Card.Body>
-                    <Spinner animation="border" variant="dark" size="sm" />
-                  </Card.Body>
-                </Card>
-                <Card className="white-card">
-                  Player 3
-                  <Card.Body>
-                    <Spinner animation="border" variant="dark" size="sm" />
-                  </Card.Body>
-                </Card>
-                <Card className="white-card">
-                  Player 4
-                  <Card.Body>
-                    <Spinner animation="grow" variant="dark" size="sm" />
-                  </Card.Body>
-                </Card>
-                <Card className="white-card">
-                  Player 5
-                  <Card.Body>
-                    <Spinner animation="border" variant="dark" size="sm" />
-                  </Card.Body>
-                </Card>
-              </Row>
-            </div>
+            {this.gameLayout()}
             <Row className="justify-content-end">
               <ButtonGroup vertical size="lg">
                 <Button variant="dark">Submit</Button>
