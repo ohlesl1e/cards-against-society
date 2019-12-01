@@ -16,7 +16,7 @@ export default class ListRooms extends Component {
   }
 
   getLobbies() {
-    fetch(this.props.url)
+    fetch('http://localhost:4000' + this.props.url)
       .then(response => response.json())
       .then((res) => {
         this.setState(

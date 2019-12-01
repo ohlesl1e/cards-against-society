@@ -46,7 +46,7 @@ export default class ChatBox extends Component {
   }
 
   getInfo() {
-    fetch(`/games/${this.props.gameid}`, {
+    fetch(`http://localhost:4000/games/${this.props.gameid}`, {
       method: 'POST',
       credentials: 'same-origin',
       body: JSON.stringify({ userid: retrieveCookie() }),
