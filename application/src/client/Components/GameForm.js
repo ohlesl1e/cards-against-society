@@ -59,7 +59,7 @@ const GameForm = (state) => {
     };
     console.log(stateObj);
 
-    fetch('/games/newgame', {
+    fetch('http://localhost:4000/games/newgame', {
       method: 'POST',
       credentials: 'same-origin',
       body: JSON.stringify(stateObj),
@@ -120,8 +120,8 @@ const GameForm = (state) => {
                 onChange={e => setSize(e.target.value)}
               >
                 <option>Room Size: </option>
-                <option>1</option>
-                <option>2</option>
+                <option>4</option>
+                <option>5</option>
               </FormControl>
             </FormGroup>
             <br />

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import {
- Button, ButtonToolbar, Col, Row, Container
+  Button, ButtonToolbar, Col, Row, Container
 } from 'react-bootstrap';
 import Header from './Components/Header';
 import { retrieveCookie } from './Components/Cookies';
@@ -59,14 +59,14 @@ export default class Custom extends Component {
         {
           name: 'Harry Potter Erotica',
           cards: [
-            { type: 'white', content: 'gay thoughts' },
+            { type: 'white', content: 'explosions' },
             { type: 'white', content: 'all my dead sisters' },
             {
               type: 'black',
               content: 'america is hungry. america wants________'
             },
             { type: 'white', content: 'a lifetime of sadness' },
-            { type: 'white', content: 'the female orgasm' },
+            { type: 'white', content: 'health minister of belgium' },
             { type: 'white', content: "trump's hair" },
             {
               type: 'black',
@@ -124,6 +124,9 @@ export default class Custom extends Component {
   }
 
   handleClick = (event) => {
+    console.log("event value" + event.target.value);
+    console.log("event id" + event.target.id);
+
     for (let i = 0; i < this.state.decklist.length; i++) {
       if (this.state.decklist[i].name == event.target.value) {
         this.setState({ calledDeck: i });
@@ -186,6 +189,7 @@ export default class Custom extends Component {
                         onHide={deckClose}
                         decklist={this.state.decklist}
                         deck={this.state.decklist[this.state.calledDeck]}
+                        index={this.state.calledDeck}
                       />
                     </ButtonToolbar>
                   </Col>

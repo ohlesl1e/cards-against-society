@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Button, FormGroup, FormControl, FormLabel
+ Button, FormGroup, FormControl, FormLabel 
 } from 'react-bootstrap';
 import './app.css';
 import { Link } from 'react-router-dom';
@@ -24,7 +24,7 @@ export default class Login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    fetch('/users/login', {
+    fetch('http://localhost:4000/users/login', {
       method: 'POST',
       credentials: 'same-origin',
       body: JSON.stringify(this.state),
@@ -67,7 +67,7 @@ export default class Login extends Component {
           </h2>
           <br />
           <form onSubmit={this.handleSubmit}>
-            <FormGroup className="userId" controlId="userid" >
+            <FormGroup className="userId" controlId="userid">
               <FormLabel>Username</FormLabel>
               <FormControl
                 autoFocus
@@ -76,7 +76,7 @@ export default class Login extends Component {
                 onChange={this.handleChange}
               />
             </FormGroup>
-            <FormGroup controlId="password" >
+            <FormGroup controlId="password">
               <FormLabel>Password</FormLabel>
               <FormControl
                 value={this.state.password}
@@ -89,10 +89,13 @@ export default class Login extends Component {
               block
               disabled={!this.validateForm()}
               type="submit"
-              onClick={this.onSubmit}>
+              onClick={this.onSubmit}
+            >
               Login
-                </Button>
-            <Link to="/Registration" className="small">Don't Have an Account?</Link>
+            </Button>
+            <Link to="/Registration" className="small">
+              Don't Have an Account?
+            </Link>
           </form>
         </div>
       </div>

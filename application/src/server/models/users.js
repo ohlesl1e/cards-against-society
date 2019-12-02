@@ -23,8 +23,7 @@ module.exports = (sequelize, Sequelize) => {
       updatedAt: false,
 
       hooks: {
-        beforeCreate: (user, options) =>
-          bcrypt
+        beforeCreate: (user, options) => bcrypt
             .hash(user.password, 10)
             .then((hash) => {
               user.password = hash;
@@ -38,8 +37,13 @@ module.exports = (sequelize, Sequelize) => {
 
   user.associate = (models) => {
     user.belongsToMany(models.gamesessions, {
-      as: 'Games',
+      as: 'Game',
       through: 'playerTable',
+      foreignKey: 'userID'
+    });
+    user.belongsToMany(models.hands, {
+      as: 'Hand',
+      through: 'playerHands',
       foreignKey: 'userID'
     });
   };
