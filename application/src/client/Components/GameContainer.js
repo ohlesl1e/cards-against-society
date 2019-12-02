@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import io from "socket.io-client";
+import React, { Component } from 'react';
+import io from 'socket.io-client';
 import {
   ListGroup,
   Button,
@@ -10,11 +10,11 @@ import {
   Container,
   Card,
   Spinner
-} from "react-bootstrap";
-import PlayerList from "./PlayerList";
-import "../app.css";
-import { retrieveCookie } from "./Cookies";
-import { func } from "prop-types";
+} from 'react-bootstrap';
+import PlayerList from './PlayerList';
+import '../app.css';
+import { retrieveCookie } from './Cookies';
+import { func } from 'prop-types';
 
 export default class ChatBox extends Component {
   constructor(props) {
@@ -29,14 +29,18 @@ export default class ChatBox extends Component {
         [4, false]
       ],
       cardlist: [],
-      socket: io.connect("http://localhost:8080/games/" + this.props.gameid),
-      data: "",
+      socket: io.connect('http://localhost:8080/games/' + this.props.gameid, {
+        reconnection: true,
+        reconnectionDelay: 500,
+        reconnectionAttempts: 10
+      }),
+      data: '',
       hand: null,
-      blackCard: "",
+      blackCard: '',
       BCH: null,
       pick: null,
       players: null,
-      HostUserid: ""
+      HostUserid: ''
     };
     this.getInfo = this.getInfo.bind(this);
     this.handBuilder = this.handBuilder.bind(this);
@@ -46,26 +50,27 @@ export default class ChatBox extends Component {
     this.submitSelection = this.submitSelection.bind(this);
     this.receiveState = this.receiveState.bind(this);
     this.updateState = this.updateState.bind(this);
+    this.checkBCH = this.checkBCH.bind(this);
   }
 
   componentDidMount() {
     this.receiveState();
-    this.state.socket.emit("subscribeToState");
-    this.state.socket.on("state", () => this.receiveState());
+    this.state.socket.emit('subscribeToState');
+    this.state.socket.on('state', () => this.receiveState());
   }
 
   getInfo() {
     // retrieves game info
     fetch(`http://localhost:4000/games/${this.props.gameid}`, {
-      method: "POST",
-      credentials: "same-origin",
+      method: 'POST',
+      credentials: 'same-origin',
       body: JSON.stringify({ userid: retrieveCookie() }),
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       }
     })
       .then(response => response.json())
-      .then(res => {
+      .then((res) => {
         this.setState(
           {
             data: res,
@@ -81,28 +86,47 @@ export default class ChatBox extends Component {
   }
 
   receiveState() {
-    console.log("state received");
+    console.log('state received');
     this.getInfo();
     this.setState({}, () => console.log());
   }
 
   updateState() {
-    this.state.socket.emit("subscribeToState");
+    this.state.socket.emit('subscribeToState');
     this.setState({}, () => console.log());
   }
 
   submitSelection() {
     if (this.state.cardlist.length !== this.state.pick) {
-      alert("please pick " + this.state.pick + " card(s)");
+      alert('please pick ' + this.state.pick + ' card(s)');
       this.resetCards();
     } else {
+      const cards = [];
+      for (let i = 0; i < 5; i++) {
+        if (this.state.cardsSelected[i][1]) {
+          cards.push(this.state.hand[i][1]);
+        }
+      }
+      console.log(cards);
+      fetch(`http://localhost:4000/games/update/${this.props.gameid}`, {
+        method: 'POST',
+        credentials: 'same-origin',
+        body: JSON.stringify({
+          userid: retrieveCookie(),
+          cards
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
       this.updateState();
     }
   }
 
   handBuilder() {
     // renders player's hand
-    if (retrieveCookie() !== this.state.BCH) {
+    if (!this.checkBCH()) {
       const children = [];
       console.log(this.state);
       for (let i = 0; i < 5; i++) {
@@ -128,8 +152,8 @@ export default class ChatBox extends Component {
             }}
             className={
               this.state.cardsSelected[i][1]
-                ? "white-card-selected white-card"
-                : "white-card"
+                ? 'white-card-selected white-card'
+                : 'white-card'
             }
           >
             {this.checkHand(i)}
@@ -140,7 +164,9 @@ export default class ChatBox extends Component {
     }
     return (
       <Row className="justify-content-center">
-        <h2>You are the black card holder</h2>
+        <Card bg="dark" text="white" className="black-card">
+          <h2>You are the black card holder</h2>
+        </Card>
       </Row>
     );
   }
@@ -149,6 +175,13 @@ export default class ChatBox extends Component {
     if (this.state.hand !== null) {
       return this.state.hand[i][0];
     }
+  }
+
+  checkBCH() {
+    if (retrieveCookie() === this.state.BCH) {
+      return true;
+    }
+    return false;
   }
 
   gameLayout() {
@@ -174,7 +207,7 @@ export default class ChatBox extends Component {
         );
       }
       return (
-        <div className="game-display">
+        <div className={this.checkBCH() ? 'game-display' : 'white-card'}>
           <Row>{children}</Row>
         </div>
       );
@@ -203,7 +236,13 @@ export default class ChatBox extends Component {
               <Card bg="dark" text="white" className="black-card">
                 <Card.Body>
                   <Card.Text>{this.state.blackCard}</Card.Text>
-                  <Card.Text>*pick {this.state.pick} card(s)*</Card.Text>
+                  <Card.Text>
+*pick
+{' '}
+{this.state.pick}
+{' '}
+card(s)*
+</Card.Text>
                 </Card.Body>
               </Card>
             </div>

@@ -30,7 +30,10 @@ router.post('/newgame', async (req, res) => {
     pick: blackCard.pick,
     playersPicked: 0,
     playerCount: 1,
-    capacity: req.body.size
+    capacity: req.body.size,
+    gameState: {
+      state: []
+    }
   });
   await game.setCurrentBlackCard(blackCard);
   await game.setHost(host);
@@ -68,7 +71,6 @@ router.post('/:gamesessionid', async (req, res) => {
     });
 
     client.on('subscribeToState', async () => {
-      console.log('hey\n');
       io.of(room).emit('state');
     });
   });
@@ -127,6 +129,26 @@ router.post('/:gamesessionid', async (req, res) => {
     })
     .catch((error) => {
       res.status(400).send(error);
+    });
+});
+
+router.post('/update/:gamesessionid', async (req, res) => {
+  await models.gamesessions
+    .findOne({ where: { gameid: req.params.gamesessionid } })
+    .then(async (game) => {
+      const newState = game.gameState;
+
+      let submitted = false;
+      await newState.state.forEach(async (state) => {
+        if (state[0] === req.body[0]) {
+          console.log('user already submitted');
+          submitted = true;
+        }
+      });
+      if (!submitted) {
+        await newState.state.push(req.body);
+        await game.update({ gameState: newState });
+      }
     });
 });
 

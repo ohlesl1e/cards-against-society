@@ -1,4 +1,4 @@
-JsonField = require('sequelize-json');
+const JsonField = require('sequelize-json');
 
 module.exports = (sequelize, Sequelize) => {
   const gamesession = sequelize.define(
@@ -25,7 +25,8 @@ module.exports = (sequelize, Sequelize) => {
       },
       capacity: {
         type: Sequelize.INTEGER
-      }
+      },
+      gameState: JsonField(Sequelize, 'gamesession', 'gameState')
     },
     {
       updatedAt: false
