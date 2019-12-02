@@ -27,7 +27,10 @@ export default class Game extends Component {
             <br />
             <Row className="justify-content-center">
               <Col md="9">
-                <Chatbox userid={this.state.userid} url="lobby" />
+                <Chatbox
+                  userid={this.state.userid}
+                  url={'games/' + this.props.match.params.gameid}
+                />
               </Col>
               <Col md="3">
                 <ButtonGroup vertical size="lg">

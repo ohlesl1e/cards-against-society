@@ -11,6 +11,20 @@ module.exports = (sequelize, Sequelize) => {
       },
       roomName: {
         type: Sequelize.STRING(20)
+      },
+      pick: {
+        type: Sequelize.INTEGER
+      },
+      playersPicked: {
+        type: Sequelize.INTEGER,
+        default: 0
+      },
+      playerCount: {
+        type: Sequelize.INTEGER,
+        default: 1
+      },
+      capacity: {
+        type: Sequelize.INTEGER
       }
     },
     {

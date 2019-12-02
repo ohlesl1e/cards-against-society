@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import io from 'socket.io-client';
+import React, { Component } from "react";
+import io from "socket.io-client";
 import {
   ListGroup,
   Button,
@@ -10,14 +10,16 @@ import {
   Container,
   Card,
   Spinner
-} from 'react-bootstrap';
-import PlayerList from './PlayerList';
-import '../app.css';
-import { retrieveCookie } from './Cookies';
+} from "react-bootstrap";
+import PlayerList from "./PlayerList";
+import "../app.css";
+import { retrieveCookie } from "./Cookies";
+import { func } from "prop-types";
 
 export default class ChatBox extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       cardsSelected: [
         [0, false],
@@ -27,86 +29,120 @@ export default class ChatBox extends Component {
         [4, false]
       ],
       cardlist: [],
-      socket: io.connect('http://localhost:8080/lobby'),
-      data: '',
+      socket: io.connect("http://localhost:8080/games/" + this.props.gameid),
+      data: "",
       hand: null,
-      blackCard: '',
+      blackCard: "",
       BCH: null,
+      pick: null,
       players: null,
-      HostUserid: ''
+      HostUserid: ""
     };
     this.getInfo = this.getInfo.bind(this);
     this.handBuilder = this.handBuilder.bind(this);
     this.resetCards = this.resetCards.bind(this);
     this.checkHand = this.checkHand.bind(this);
     this.gameLayout = this.gameLayout.bind(this);
+    this.submitSelection = this.submitSelection.bind(this);
+    this.receiveState = this.receiveState.bind(this);
+    this.updateState = this.updateState.bind(this);
   }
 
   componentDidMount() {
-    this.getInfo();
+    this.receiveState();
+    this.state.socket.emit("subscribeToState");
+    this.state.socket.on("state", () => this.receiveState());
   }
 
   getInfo() {
     // retrieves game info
     fetch(`http://localhost:4000/games/${this.props.gameid}`, {
-      method: 'POST',
-      credentials: 'same-origin',
+      method: "POST",
+      credentials: "same-origin",
       body: JSON.stringify({ userid: retrieveCookie() }),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     })
       .then(response => response.json())
-      .then((res) => {
+      .then(res => {
         this.setState(
           {
             data: res,
             hand: res[0],
             blackCard: res[1],
             players: res[2],
-            BCH: res[3]
+            BCH: res[3],
+            pick: res[4]
           },
           () => console.log()
         );
       });
   }
 
+  receiveState() {
+    console.log("state received");
+    this.getInfo();
+    this.setState({}, () => console.log());
+  }
+
+  updateState() {
+    this.state.socket.emit("subscribeToState");
+    this.setState({}, () => console.log());
+  }
+
+  submitSelection() {
+    if (this.state.cardlist.length !== this.state.pick) {
+      alert("please pick " + this.state.pick + " card(s)");
+      this.resetCards();
+    } else {
+      this.updateState();
+    }
+  }
+
   handBuilder() {
     // renders player's hand
-    const children = [];
-    console.log(this.state);
-    for (let i = 0; i < 5; i++) {
-      children.push(
-        <Card
-          onClick={() => {
-            const cards = this.state.cardsSelected;
-            cards[i][1] = !cards[i][1];
-            this.setState({
-              cardsSelected: cards
-            });
+    if (retrieveCookie() !== this.state.BCH) {
+      const children = [];
+      console.log(this.state);
+      for (let i = 0; i < 5; i++) {
+        children.push(
+          <Card
+            onClick={() => {
+              const cards = this.state.cardsSelected;
+              cards[i][1] = !cards[i][1];
+              this.setState({
+                cardsSelected: cards
+              });
 
-            if (!this.state.cardlist.includes(i)) {
-              this.state.cardlist.push(i);
-            } else {
-              const cardls = this.state.cardlist;
-              const index = cardls.indexOf(i);
-              if (index !== -1) {
-                cardls.splice(index, 1);
-                this.setState({ cardlist: cardls });
+              if (!this.state.cardlist.includes(i)) {
+                this.state.cardlist.push(i);
+              } else {
+                const cardls = this.state.cardlist;
+                const index = cardls.indexOf(i);
+                if (index !== -1) {
+                  cardls.splice(index, 1);
+                  this.setState({ cardlist: cardls });
+                }
               }
+            }}
+            className={
+              this.state.cardsSelected[i][1]
+                ? "white-card-selected white-card"
+                : "white-card"
             }
-          }}
-          className={
-            this.state.cardsSelected[i][1]
-              ? 'white-card-selected white-card'
-              : 'white-card'
-          }
-        >
-          {this.checkHand(i)}
-        </Card>
-      );
+          >
+            {this.checkHand(i)}
+          </Card>
+        );
+      }
+      return <Row className="justify-content-center">{children}</Row>;
     }
-    return <Row className="justify-content-center">{children}</Row>;
+    return (
+      <Row className="justify-content-center">
+        <h2>You are the black card holder</h2>
+      </Row>
+    );
   }
 
   checkHand(i) {
@@ -124,7 +160,6 @@ export default class ChatBox extends Component {
       for (let i = 0; i < this.state.players.length; i++) {
         let playerStatus;
         if (this.state.players[i] === this.state.BCH) {
-          playerStatus = <Spinner animation="grow" variant="dark" size="sm" />;
         } else {
           playerStatus = (
             <Spinner animation="border" variant="dark" size="sm" />
@@ -168,6 +203,7 @@ export default class ChatBox extends Component {
               <Card bg="dark" text="white" className="black-card">
                 <Card.Body>
                   <Card.Text>{this.state.blackCard}</Card.Text>
+                  <Card.Text>*pick {this.state.pick} card(s)*</Card.Text>
                 </Card.Body>
               </Card>
             </div>
@@ -186,7 +222,9 @@ export default class ChatBox extends Component {
             {this.gameLayout()}
             <Row className="justify-content-end">
               <ButtonGroup vertical size="lg">
-                <Button variant="dark">Submit</Button>
+                <Button onClick={this.submitSelection} variant="dark">
+                  Submit
+                </Button>
                 <Button onClick={this.resetCards} variant="dark">
                   Reset Selection
                 </Button>

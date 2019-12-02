@@ -120,8 +120,8 @@ const GameForm = (state) => {
                 onChange={e => setSize(e.target.value)}
               >
                 <option>Room Size: </option>
-                <option>1</option>
-                <option>2</option>
+                <option>4</option>
+                <option>5</option>
               </FormControl>
             </FormGroup>
             <br />
