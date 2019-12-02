@@ -32,7 +32,8 @@ router.post('/newgame', async (req, res) => {
     playerCount: 1,
     capacity: req.body.size,
     gameState: {
-      state: []
+      state: [],
+      points: [{ [host]: 0 }]
     }
   });
   await game.setCurrentBlackCard(blackCard);
@@ -80,6 +81,7 @@ router.post('/:gamesessionid', async (req, res) => {
     // retrieve gamesession
     where: { gameid: req.params.gamesessionid }
   });
+
   const user = await models.user.findOne({
     // retrieve user
     where: {
@@ -87,9 +89,31 @@ router.post('/:gamesessionid', async (req, res) => {
     }
   });
 
+  await game.getBCH().then(async (bch) => {
+    if (bch.userid === user.userid) {
+      console.log('bch request');
+      if (game.playersPicked === game.playerCount - 1) {
+        console.log('ready for selection');
+        results[7] = game.gameState.state;
+      }
+    }
+  });
+
   await game.getPlayer().then(async (players) => {
     // retrieving userids in game
     const playerNames = [];
+    if (game.playersPicked === game.playerCount - 1) {
+      results[5] = true;
+    } else {
+      results[5] = false;
+    }
+    results[6] = false;
+    game.gameState.state.forEach(async (state) => {
+      if (state.userid === req.body.userid) {
+        results[6] = true;
+      }
+    });
+
     results[4] = game.pick;
     players.forEach((player) => {
       playerNames.push(player.userid);
@@ -133,6 +157,13 @@ router.post('/:gamesessionid', async (req, res) => {
 });
 
 router.post('/update/:gamesessionid', async (req, res) => {
+  const io = req.app.get('socketio');
+  const room = '/games/' + req.params.gamesessionid;
+  const user = await models.user.findOne({
+    where: {
+      userid: req.body.userid
+    }
+  });
   await models.gamesessions
     .findOne({ where: { gameid: req.params.gamesessionid } })
     .then(async (game) => {
@@ -147,7 +178,36 @@ router.post('/update/:gamesessionid', async (req, res) => {
       });
       if (!submitted) {
         await newState.state.push(req.body);
+        game.playersPicked += 1;
+        await game.save();
         await game.update({ gameState: newState });
+        await game // the hand of the player is retrieved
+          .getHand()
+          .then(async (hands) => {
+            hands.forEach((hand) => {
+              user.getHand().then(async (playerHands) => {
+                playerHands.forEach((playerHand) => {
+                  if (playerHand.handID === hand.handID) {
+                    hand.getCard().then(async (cards) => {
+                      cards.forEach((card) => {
+                        if (req.body.cards.includes(card.text)) {
+                          console.log(card.text);
+                          models.whiteCard
+                            .findOne({ order: Sequelize.literal('rand()') })
+                            .then(async (whiteCard) => {
+                              await hand.removeCard(card);
+                              await hand.addCard(whiteCard);
+                              await hand.save();
+                              await io.of(room).emit('state');
+                            });
+                        }
+                      });
+                    });
+                  }
+                });
+              });
+            });
+          });
       }
     });
 });
@@ -173,15 +233,19 @@ router.post('/join/:gamesessionid', async (req, res) => {
       }
     });
   });
-  if (!found) {
+  if (!found || game.capacity !== game.playerCount) {
     const io = req.app.get('socketio');
     const room = '/games/' + req.params.gamesessionid;
     const msg = {
       msg: `${req.body.userid} has joined the game!`,
       title: 'Bot'
     };
-
+    const newState = game.gameState;
+    const name = user.userid;
+    const newpoints = { [name]: 0 };
+    await newState.points.push(newpoints);
     await game.addPlayer(req.body.userid);
+    await game.update({ gameState: newState });
     game.playerCount += 1;
     await game.save();
     const newHand = await models.hands.create();

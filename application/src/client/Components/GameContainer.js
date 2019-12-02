@@ -40,7 +40,10 @@ export default class ChatBox extends Component {
       BCH: null,
       pick: null,
       players: null,
-      HostUserid: ''
+      HostUserid: '',
+      allPlayersSubmitted: null,
+      playerHasSubmitted: null,
+      playerSelections: null
     };
     this.getInfo = this.getInfo.bind(this);
     this.handBuilder = this.handBuilder.bind(this);
@@ -78,7 +81,10 @@ export default class ChatBox extends Component {
             blackCard: res[1],
             players: res[2],
             BCH: res[3],
-            pick: res[4]
+            pick: res[4],
+            allPlayersSubmitted: res[5],
+            playerHasSubmitted: res[6],
+            playerSelections: res[7]
           },
           () => console.log()
         );
@@ -104,10 +110,9 @@ export default class ChatBox extends Component {
       const cards = [];
       for (let i = 0; i < 5; i++) {
         if (this.state.cardsSelected[i][1]) {
-          cards.push(this.state.hand[i][1]);
+          cards.push(this.state.hand[i][0]);
         }
       }
-      console.log(cards);
       fetch(`http://localhost:4000/games/update/${this.props.gameid}`, {
         method: 'POST',
         credentials: 'same-origin',
@@ -118,9 +123,9 @@ export default class ChatBox extends Component {
         headers: {
           'Content-Type': 'application/json'
         }
-      });
-
-      this.updateState();
+      })
+        .then(response => response.json())
+        .then(this.updateState(), this.resetCards());
     }
   }
 
@@ -207,7 +212,7 @@ export default class ChatBox extends Component {
         );
       }
       return (
-        <div className={this.checkBCH() ? 'game-display' : 'white-card'}>
+        <div className={this.checkBCH() ? 'game-display' : ''}>
           <Row>{children}</Row>
         </div>
       );
