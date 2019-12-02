@@ -58,6 +58,8 @@ router.post('/newgame', async (req, res) => {
         newHand.addCard(whiteCard);
       });
   }
+  const io = req.app.get('socketio');
+  io.of('/lobby').emit('roomUpdate');
   res.send(game);
 });
 
@@ -259,9 +261,10 @@ router.post('/join/:gamesessionid', async (req, res) => {
           newHand.addCard(whiteCard);
         });
     }
-    res.send(game);
-    io.of(room).emit('message', msg);
-    io.of(room).emit('state');
+    await io.of(room).emit('message', msg);
+    await io.of(room).emit('state');
+    await io.of('/lobby').emit('roomUpdate');
+    await res.send(game);
   }
 });
 

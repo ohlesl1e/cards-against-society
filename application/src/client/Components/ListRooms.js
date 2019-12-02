@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
 import '../app.css';
 import { Table, Button } from 'react-bootstrap';
+import io from 'socket.io-client';
+import { retrieveCookie } from './Cookies';
 
 export default class ListRooms extends Component {
   constructor() {
     super();
     this.state = {
-      data: null
+      data: null,
+      socket: io.connect('http://localhost:8080/lobby', {
+        reconnection: true,
+        reconnectionDelay: 500,
+        reconnectionAttempts: 10
+      })
     };
     this.getLobbies = this.getLobbies.bind(this);
   }
 
   componentDidMount() {
     this.getLobbies();
+    this.state.socket.on('roomUpdate', () => this.getLobbies());
   }
 
   getLobbies() {
@@ -73,7 +81,18 @@ export default class ListRooms extends Component {
   };
 
   handleRouteChange(link) {
-    window.open('Game/' + link.gameid);
+    fetch(`http://localhost:4000/games/join/${link.gameid}`, {
+      method: 'POST',
+      credentials: 'same-origin',
+      body: JSON.stringify({ userid: retrieveCookie() }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then((res) => {
+        window.open('/Game/' + link.gameid);
+      });
   }
 
   render() {
