@@ -193,6 +193,9 @@ router.post('/update/:gamesessionid', async (req, res) => {
         if (state.userid === req.body.userid) {
           console.log('user already submitted\n');
           submitted = true;
+          res.status(401);
+          res.send();
+          return 0;
         }
       });
       if (!submitted) {

@@ -134,11 +134,8 @@
   animation: fadein 1s;
 }
 .selection {
-  align-content: center;
-  align-items: center;
-  justify-content: center;
-  width: 160px;
-
+  
+  width: 20%;
   -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
   -moz-animation: fadein 2s; /* Firefox < 16 */
   -ms-animation: fadein 2s; /* Internet Explorer */
@@ -149,7 +146,7 @@
 .selection-selected {
   filter: grayscale(100%);
   transition: all 0.4s ease;
-  box-shadow: -5px 10px #888888;
+  box-shadow: -5px 10px 1px #888888;
   border-radius: 5px;
 }
 
@@ -215,8 +212,36 @@
 
 .game-display {
   margin: 55px;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  align-self: auto;
+  text-align: center;
 }
 
+.game-display-submitted{
+  margin: 55px;
+  align-content: left;
+  align-items: left;
+  justify-content: left;
+  text-align: left;
+}
+.player-submission{
+  transition: all 0.4s ease;
+  align-content: center;
+  align-items: center;
+  width: 160px;
+  margin: 5px;
+  padding: 40px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+ 
+  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 2s; /* Firefox < 16 */
+  -ms-animation: fadein 2s; /* Internet Explorer */
+  -o-animation: fadein 2s; /* Opera < 12.1 */
+  animation: fadein 1s; 
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

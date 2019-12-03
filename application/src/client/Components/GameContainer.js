@@ -127,7 +127,11 @@ export default class ChatBox extends Component {
             "Content-Type": "application/json"
           }
         })
-          .then(response => response.json())
+          .then(response => {if(!response.ok){
+            alert('You\\\'ve already picked your cards');
+          }
+        }
+          )
           .then(this.updateState(), this.resetCards());
       }
     } else {
@@ -185,7 +189,7 @@ export default class ChatBox extends Component {
       return <Row className="justify-content-center">{children}</Row>;
     }
     return (
-      <Row className="justify-content-center">
+      <Row className="justify-content-center" md ='auto'>
         <Card bg="dark" text="white" className="black-card">
           <h2>You are the black card holder</h2>
         </Card>
@@ -208,7 +212,17 @@ export default class ChatBox extends Component {
 
   gameLayout() {
     // displays player's status
-    if (this.state.playerSelections !== null) {
+    if(this.state.players !== null && this.state.players.length <= 1){
+      return (
+        <div className={"game-display"}>
+          <Col>Waiting for other players to join...
+            <br/> 
+          <Spinner animation="border" variant="dark" size="sm" />
+          </Col>
+        </div>
+      );
+    }
+    else if (this.state.playerSelections !== null) {
       if (this.state.cardlist.length > 1) {
         alert("pick one winner. \n one winner i tell ya!!");
         this.resetCards();
@@ -222,13 +236,13 @@ export default class ChatBox extends Component {
             j++
           ) {
             cards.push(
-              <Card className="white-card">
+              <Card className="player-submission">
                 {this.state.playerSelections[i].cards[j]}
               </Card>
             );
           }
           children.push(
-            <Col
+            <Col md = 'auto'
               onClick={() => {
                 console.log(this.state);
                 const cards = this.state.cardsSelected;
@@ -261,7 +275,7 @@ export default class ChatBox extends Component {
         }
 
         return (
-          <div className={this.checkBCH() ? "game-display" : ""}>
+          <div className={this.checkBCH() ? "game-display-submitted" : ""}>
             <Row>{children}</Row>
           </div>
         );
