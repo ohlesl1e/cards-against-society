@@ -36,12 +36,12 @@ export default class PlayerList extends Component {
 
   loadPlayers() {
     const children = [];
-    if (this.props.players !== null) {
-      for (let i = 0; i < this.props.players.length; i++) {
+    if (this.props.points !== null) {
+      for (let i = 0; i < this.props.points.length; i++) {
         children.push(
           <tr>
-            <td>{this.props.players[i]}</td>
-            <td>0</td>
+            <td>{Object.keys(this.props.points[i])[0]}</td>
+            <td>{Object.values(this.props.points[i])[0]}</td>
           </tr>
         );
       }
