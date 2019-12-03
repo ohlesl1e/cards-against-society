@@ -17,6 +17,18 @@ router.get('/allgames', async (req, res) => {
   res.send(results);
 });
 
+router.get('/mygames/:userid', async (req, res) => {
+  const user = await models.user.findOne({
+    where: {
+      userid: req.params.userid
+    }
+  });
+  await user.getGame().then(async (games) =>{
+    res.send(games);
+  });
+ 
+});
+
 router.post('/newgame', async (req, res) => {
   const blackCard = await models.blackCard.findOne({
     // retrieving random black card
