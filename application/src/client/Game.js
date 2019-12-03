@@ -6,6 +6,7 @@ import Header from './Components/Header';
 import { retrieveCookie } from './Components/Cookies';
 import Chatbox from './Components/Chatbox';
 import GameContainer from './Components/GameContainer';
+import ChatContainer from './Components/ChatContainer';
 
 export default class Game extends Component {
   constructor() {
@@ -27,7 +28,7 @@ export default class Game extends Component {
             <br />
             <Row className="justify-content-center">
               <Col md="9">
-                <Chatbox
+                <ChatContainer
                   userid={this.state.userid}
                   url={'games/' + this.props.match.params.gameid}
                 />
