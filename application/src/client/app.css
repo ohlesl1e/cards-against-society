@@ -146,10 +146,12 @@
 .selection-selected {
   filter: grayscale(100%);
   transition: all 0.4s ease;
-  box-shadow: -5px 10px 1px #888888;
+  box-shadow: -5px 10px #888888;
   border-radius: 5px;
 }
-
+.chat-container{
+  height:400px;
+}
 @keyframes fadein {
   from {
     opacity: 0;
