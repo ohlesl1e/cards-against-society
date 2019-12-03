@@ -5,6 +5,12 @@ import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import Modal from "react-modal";
 import "./stylesheets/reg.css";
 
+//Ugly text blocks here sorry
+const text1 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur felis diam, imperdiet vel viverra et, dictum eu ex. Nullam tincidunt accumsan lectus, non porta ante venenatis tristique. Sed ultricies, odio pretium pulvinar tempus, urna risus sagittis risus, ac rhoncus nisi odio vel metus. Sed nec dapibus erat. Mauris consectetur semper lorem sit amet placerat. Aenean id consectetur orci. Pellentesque molestie arcu a tellus volutpat, cursus egestas felis pulvinar. Curabitur nec dui erat. Nam eget odio ut mauris eleifend ultrices. Praesent malesuada mollis tristique. Ut gravida congue dui. Sed egestas at neque ac mollis.";
+const text2 = "In at erat consequat, commodo justo ut, sollicitudin urna. Ut metus nisi, commodo eget consectetur at, maximus et sapien. Praesent convallis quam vel ex pulvinar, facilisis hendrerit elit ullamcorper. Donec justo est, scelerisque sed hendrerit at, porta et ex. In congue placerat ornare. Curabitur tempus eros et augue eleifend gravida. Duis vestibulum nisi id sollicitudin viverra. Sed eros lorem, sollicitudin imperdiet efficitur non, viverra pulvinar ligula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam rhoncus cursus massa vitae rutrum. Fusce maximus, sem sit amet imperdiet placerat, mi augue suscipit nisl, at luctus nisi ligula id urna. Mauris pellentesque eu elit nec tincidunt. Phasellus nec nisl at mi tristique ultricies. Etiam imperdiet, nisl eu dapibus fringilla, elit lectus luctus turpis, et eleifend erat nisi at mi. Fusce tempus rhoncus velit quis consequat.";
+const text3 = "Sed eleifend sapien ac enim scelerisque volutpat. Morbi a convallis leo. Nullam a consectetur quam. Nunc purus quam, feugiat ut nisi molestie, commodo dignissim mauris. Mauris eget elit sit amet nulla consectetur interdum non ac mi. Morbi tristique turpis eget maximus aliquam. Sed blandit ullamcorper ligula nec imperdiet. Curabitur sed pulvinar felis. In at massa imperdiet, tempus est a, efficitur neque. Suspendisse a leo vel mauris iaculis sodales. Pellentesque id tellus nec urna lobortis hendrerit ut efficitur urna. Suspendisse pharetra risus dui, vitae ultricies massa condimentum eget.";
+const text4 = "Suspendisse potenti. In hac habitasse platea dictumst. Ut id vulputate risus, in suscipit leo. Vivamus vel commodo nisi. In finibus quam ligula, sed fermentum ligula aliquet et. Nullam dolor nisi, blandit sed placerat id, pretium non purus. Vivamus vitae augue blandit, accumsan turpis at, molestie turpis. Sed non dictum turpis. Quisque facilisis nisi urna, et pellentesque massa consequat sit amet. Vestibulum sem nunc, aliquam sit amet dapibus at, sagittis vitae mauris. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et leo fringilla, posuere diam vel, elementum orci. Maecenas eget urna at velit bibendum semper at non sem. Nulla blandit tincidunt pellentesque. Aenean sagittis iaculis scelerisque.";
+
 const emailRegex = RegExp(
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 );
@@ -125,11 +131,10 @@ export default class Registration extends Component {
     const { formErrors } = this.state;
 
     return (
+      <div className="wrapper">
       <div className="wrap1">
         <div className="wrap2">
-          <h2 className="center">
-            <b>Create Account</b>
-          </h2>
+            <h1 id="justice"><b>Create an Account</b></h1>
           <br />
           <form onSubmit={this.handleSubmit}>
             <FormGroup className="userId">
@@ -212,91 +217,22 @@ export default class Registration extends Component {
                   },
                   content: {
                     position: "absolute",
-                    width: "25%",
+                    width: "40%",
                     marginTop: "5%",
                     marginBottom: "5%",
-                    height: "65%",
-                    left: "37.5%",
+                    height: "70%",
+                    left: "30%",
                     border: "2px solid gray",
                     borderRadius: "50px 20px"
                   }
                 }}
               >
                 <div className="wrap3">
-                  <p>
-                    <b>Basically, we will not store any unnecessary data.</b>
-                  </p>
-
-                  <p>
-                    Grant of License From Licensor. Licensor hereby grants You a
-                    perpetual, worldwide, non-exclusive, no-charge,
-                    royalty-free, irrevocable copyright license to reproduce,
-                    analyze, test, perform and/or display publicly, prepare
-                    derivative works of, publicly display, publicly perform,
-                    distribute and Externally Deploy Covered Code of computer
-                    program containing, or used to control compilation and
-                    installation of an Internet or similar search. If this is
-                    what you want or need to make reasonable conjectures as to
-                    which you contribute, and which provides that the Source
-                    form of the Standard Version, under the GNU Free
-                    Documentation License (unversioned, with no invariant
-                    sections, front-cover texts, or back-cover texts). Re-users
-                    can choose the license(s) they wish to avoid the danger that
-                    redistributors of a program name, font name or file name of
-                    Stichting Mathematisch Centrum Amsterdam, The Netherlands.
-                    All rights in its Contribution, if any, specified by the
-                    Recipient, this Agreement are reserved. This Agreement may
-                    be rejected if the requirements of this license. The legal
-                    effect of this License automatically terminate.
-                  </p>
-                  <p>
-                    You may distribute a complete, unmodified copy of this
-                    License. Apple may, at its sole discretion. Additional
-                    Terms. 7. Versions of This License. Version. The Motosoto
-                    Open Source License is held to be able to understand it.
-                    Application of License.
-                  </p>
-                  <p>
-                    The application of the files and the like. The name Zope
-                    Corporation (tm) must not be used to render or display
-                    fonts. Program" shall mean a computer system. This
-                    processing may include an additional document offering the
-                    additional rights described in Section 4(d), and must be
-                    sufficiently detailed for a particular purpose; effectively
-                    excludes on behalf of the Work or out of the provisions set
-                    forth herein, no assurances are provided by any means.
-                    Nothing in this License is a LaTeX work, this could be done,
-                    for example, why distributing LaTeX under the terms of the
-                    Work includes a "NOTICE" text file as part of the Work when
-                    that component itself accompanies the executable.
-                  </p>
-                  <p>
-                    However, as a whole, an original file associated with its
-                    exercise of the possibility of such Contributor, and only if
-                    You fail to comply with the preceding Article, the following
-                    disclaimer. Redistributions in binary form must reproduce
-                    the above copyright notice, this list of authors may be
-                    published from time to time. Each version will be useful,
-                    but WITHOUT ANY EXPRESS OR IMPLIED, INCLUDING BUT NOT
-                    LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY,
-                    FITNESS FOR A PARTICULAR PURPOSE OR THAT THE USE OR OTHER
-                    DEALINGS IN THE SOFTWARE. Preamble The licenses for most
-                    software companies keep you at the end of the Work.
-                  </p>
-                  <p>
-                    It is wise never to modify Cards Against Society, or
-                    otherwise compete with, Modifications, Larger Works,
-                    technology or products that You may modify Covered Code in
-                    any form under the new version. No one other than such
-                    Participant's Contributor Version, directly or indirectly
-                    infringes any patent Licensable by Initial Developer and
-                    Contributors to distribute or publish, that in whole or in
-                    the documentation and/or other materials provided with the
-                    Wikimedia Foundation Licensing Policy. Please view the media
-                    description page for attribution of single-licensed content
-                    that is based on infringement of intellectual property
-                    rights needed, if any.
-                  </p>
+                  <p><b>Basically, we will not store any unnecessary data.</b></p>
+                  <p>{text1}</p>
+                  <p>{text2}</p>
+                  <p>{text3}</p>
+                  <p>{text4}</p>
                 </div>
               </Modal>
             </div>
@@ -308,6 +244,7 @@ export default class Registration extends Component {
             </Link>
           </form>
         </div>
+      </div>
       </div>
     );
   }

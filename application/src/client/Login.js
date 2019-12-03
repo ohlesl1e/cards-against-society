@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
- Button, FormGroup, FormControl, FormLabel 
-} from 'react-bootstrap';
+import { Button, FormGroup, FormControl, FormLabel } from 'react-bootstrap';
 import './app.css';
 import { Link } from 'react-router-dom';
 import { saveCookie } from './Components/Cookies';
@@ -60,43 +58,57 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className="wrap1">
+      <div class="wrapper">
+        <div class="left">
+        <div id="slideshow">
+          <div class="slide-wrapper">
+            <div class="slide"><h1 class="slide-number">temp 1</h1></div>
+            <div class="slide"><h1 class="slide-number">temp 2</h1></div>
+            <div class="slide"><h1 class="slide-number">temp 3</h1></div>
+            <div class="slide"><h1 class="slide-number">temp 4</h1></div>
+            <div class="slide"><h1 class="slide-number">temp 5</h1></div>
+          </div>
+        </div>
+        </div>
+        <div class="right">
         <div className="wrap2">
-          <h2 className="centertext">
-            <b>Cards Against Society</b>
-          </h2>
-          <br />
-          <form onSubmit={this.handleSubmit}>
-            <FormGroup className="userId" controlId="userid">
-              <FormLabel>Username</FormLabel>
-              <FormControl
-                autoFocus
-                type="username"
-                value={this.state.userid}
-                onChange={this.handleChange}
-              />
-            </FormGroup>
-            <FormGroup controlId="password">
-              <FormLabel>Password</FormLabel>
-              <FormControl
-                value={this.state.password}
-                onChange={this.handleChange}
-                type="password"
-                data-toggle="password"
-              />
-            </FormGroup>
-            <Button
-              block
-              disabled={!this.validateForm()}
-              type="submit"
-              onClick={this.onSubmit}
-            >
-              Login
-            </Button>
-            <Link to="/Registration" className="small">
-              Don't Have an Account?
-            </Link>
-          </form>
+            <h1 id="justice"><b>Cards Against Society</b></h1>
+            <h2 className="centertext">
+              A party game for horrible people
+            </h2>
+            <br />
+            <form onSubmit={this.handleSubmit}>
+              <FormGroup className="userId" controlId="userid">
+                <FormLabel>Username</FormLabel>
+                <FormControl
+                  autoFocus
+                  type="username"
+                  value={this.state.userid}
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <FormGroup controlId="password">
+                <FormLabel>Password</FormLabel>
+                <FormControl
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                  type="password"
+                  data-toggle="password"
+                />
+              </FormGroup>
+              <Button
+                block
+                disabled={!this.validateForm()}
+                type="submit"
+                onClick={this.onSubmit}
+              >
+                Login
+              </Button>
+              <Link to="/Registration" className="small">
+                Don't Have an Account?
+              </Link>
+            </form>
+          </div>
         </div>
       </div>
     );
