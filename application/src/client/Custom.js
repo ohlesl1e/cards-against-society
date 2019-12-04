@@ -24,7 +24,7 @@ export default class Custom extends Component {
         {
           name: 'Deck1',
           cards: [
-            { type: 'white', content: 'a big black duck' },
+            { type: 'white', content: 'a big black deck' },
             { type: 'white', content: 'an ar15 assault rifle' },
             { type: 'black', content: 'the class trip was ruined by________' }
           ]
@@ -124,6 +124,7 @@ export default class Custom extends Component {
   }
 
   handleClick = (event) => {
+    event.preventDefault()
     console.log("event value" + event.target.value);
     console.log("event id" + event.target.id);
 
