@@ -44,7 +44,7 @@ export default class ListRooms extends Component {
   }
 
   getLobbies() {
-    fetch(this.props.url)
+    fetch("http://52.53.156.79:4000" + this.props.url)
       .then(response => response.json())
       .then(res => {
         this.setState(
@@ -118,7 +118,7 @@ export default class ListRooms extends Component {
   };
 
   handleRouteChange(link) {
-    fetch(`/games/join/${link.gameid}`, {
+    fetch(`http://52.53.156.79:4000/games/join/${link.gameid}`, {
       method: "POST",
       credentials: "same-origin",
       body: JSON.stringify({ userid: retrieveCookie() }),
