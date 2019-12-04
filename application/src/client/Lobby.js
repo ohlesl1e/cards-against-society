@@ -34,7 +34,7 @@ export default class Lobby extends Component {
                 <br />
                 <ListRooms url="/games/allgames" />
               </Col>
-              <Col md="6">
+              <Col md="6" className="lobby-chat">
                 <Chatbox userid={this.state.userid} url="lobby" />
               </Col>
             </Row>
