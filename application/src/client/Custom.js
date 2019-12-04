@@ -148,13 +148,12 @@ export default class Custom extends Component {
       border: 'solid 1px black',
       borderRadius: '5px',
       padding: '10px',
-      alignSelf: 'auto'
+      alignSelf: 'auto',
     };
     return (
       <div>
         {this.renderRedirect()}
         <Header />
-        <div className="BodyWrapper">
           <div className="DeckList">
             <Container>
               <Row>
@@ -173,32 +172,33 @@ export default class Custom extends Component {
                 </Col>
               </Row>
               <Row style={border}>
-                {this.state.decklist.map(d => (
-                  <Col xs="6" md="4">
-                    <ButtonToolbar>
-                      <Button
-                        className="CustomDeck"
-                        variant="dark"
-                        value={d.name}
-                        onClick={this.handleClick}
-                      >
-                        <h3>{d.name}</h3>
-                      </Button>
-                      <ShowDeck
-                        show={this.state.deckShow}
-                        onHide={deckClose}
-                        decklist={this.state.decklist}
-                        deck={this.state.decklist[this.state.calledDeck]}
-                        index={this.state.calledDeck}
-                      />
-                    </ButtonToolbar>
-                  </Col>
-                ))}
+                  {this.state.decklist.map(d => (
+                    <Col md="4">
+                      <ButtonToolbar>
+                        <Button
+                          className="CustomDeck"
+                          variant="dark"
+                          size="lg"
+                          value={d.name}
+                          onClick={this.handleClick}
+                        >
+                          <h3>{d.name}</h3>
+                        </Button>
+                        <ShowDeck
+                          show={this.state.deckShow}
+                          onHide={deckClose}
+                          decklist={this.state.decklist}
+                          deck={this.state.decklist[this.state.calledDeck]}
+                          index={this.state.calledDeck}
+                        />
+                      </ButtonToolbar>
+                    </Col>
+                  ))}
               </Row>
             </Container>
           </div>
+          <div className="footer"></div>
         </div>
-      </div>
     );
   }
 }
