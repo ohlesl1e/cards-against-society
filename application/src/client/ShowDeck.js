@@ -34,7 +34,7 @@ export class ShowDeck extends Component {
 
     getCard = () => {
         for (let index = 0; index < this.props.deck.cards.length; index++) {
-            if (this.props.deck.cards[index].content == event.target.value) {
+            if (this.props.deck.cards[index].content == event.currentTarget.value) {
                 this.setState({ calledCard: index })
                 break
             }

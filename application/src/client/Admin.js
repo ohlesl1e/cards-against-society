@@ -63,9 +63,9 @@ export default class Admin extends Component {
           <h5># of Active Game Rooms:</h5>
         </div>
 
-        <div className="column2">
+        <div className="admin_usercol">
           <h2>Users</h2>
-          <UserSearch userid=" " />
+          <UserSearch userid="a " />
           <h5># of Users:</h5>
         </div>
       </body>
