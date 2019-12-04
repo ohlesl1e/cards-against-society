@@ -47,6 +47,11 @@
   height: 300px;
 }
 
+.admin_usercol {
+  padding-top: 20px;
+  float: left;
+}
+
 .dropdown {
   margin-right: 50px;
 }
@@ -334,6 +339,28 @@
   background-color: #333940;
   margin: 0 auto;
 }
+
+.wrapper_room {
+  border-style: solid;
+  border-width: 1.5px;
+  border-color: #333940;
+  min-width: 100%;
+  height: 95.5%;
+  background-color: #fcfcfc;
+  border-radius: 7px;
+  margin: 0 auto;
+}
+
+.wrapper_users {
+  min-width: 100%;
+  height: 100%;
+  border-style: solid;
+  border-width: 1.5px;
+  border-radius: 7px;
+  background-color: #fcfcfc;
+  margin: 0 auto;
+}
+
 .left {
   width: 50%;
   height: 100vh;
@@ -345,4 +372,11 @@
   height: 100vh;
   background-color: #fff;
   float: right;
+}
+
+.gradientbg{
+  height: 100%;
+  width: 100%;
+  background:linear-gradient(rgb(255, 255, 255),transparent);
+  background-color:rgb(112, 109, 133);
 }

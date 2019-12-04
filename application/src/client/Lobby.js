@@ -5,6 +5,7 @@ import './app.css';
 import Chatbox from './Components/Chatbox';
 import GameForm from './Components/GameForm';
 import ListRooms from './Components/ListRooms';
+import UserList from './Components/UserList';
 import { Container, Row, Col } from 'react-bootstrap';
 
 export default class Lobby extends Component {
@@ -20,13 +21,23 @@ export default class Lobby extends Component {
 
   render() {
     return (
+      
       <body>
+        
         <div className="homePage">
           <Header userid={this.state.userid} />
         </div>
+
+
         <div className="lobby">
           <Container>
             <Row>
+
+            <Col mid="2">
+                  <center><h3>Registered Users</h3></center>
+                  <UserList userid=""/>
+            </Col>
+
               <Col md="6">
                 <div>
                   <GameForm />
@@ -37,13 +48,17 @@ export default class Lobby extends Component {
                 </center>
                 <ListRooms url="/games/allgames" />
               </Col>
-              <Col md="6">
+             
+                <Col md="4">
                 <Chatbox userid={this.state.userid} url="lobby" />
               </Col>
+
             </Row>
           </Container>
-        </div>
+
+          </div>
       </body>
+      
     );
   }
 }

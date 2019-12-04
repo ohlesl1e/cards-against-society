@@ -97,9 +97,12 @@ export default class ListRooms extends Component {
 
   render() {
     return (
+
+      <div className="wrapper_room">
       <Table scrollY maxHeight="70vh" striped boredered centered small>
         {this.createTable()}
       </Table>
+      </div>
     );
   }
 }
