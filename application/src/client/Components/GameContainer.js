@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
 import {
-  ListGroup,
   Button,
-  Form,
   ButtonGroup,
   Row,
   Col,
@@ -14,7 +12,6 @@ import {
 import PlayerList from "./PlayerList";
 import "../app.css";
 import { retrieveCookie } from "./Cookies";
-import { func } from "prop-types";
 
 export default class ChatBox extends Component {
   constructor(props) {
@@ -106,6 +103,7 @@ export default class ChatBox extends Component {
 
   submitSelection() {
     if (!this.checkBCH()) {
+      // if the user is not the BCH
       if (this.state.cardlist.length !== this.state.pick) {
         alert("please pick " + this.state.pick + " card(s)");
         this.resetCards();
@@ -127,14 +125,15 @@ export default class ChatBox extends Component {
             "Content-Type": "application/json"
           }
         })
-          .then(response => {if(!response.ok){
-            alert('You\\\'ve already picked your cards');
-          }
-        }
-          )
+          .then(response => {
+            if (!response.ok) {
+              alert("You've already picked your cards");
+            }
+          })
           .then(this.updateState(), this.resetCards());
       }
     } else {
+      // if the user is the BCH
       const index = this.state.cardlist[0];
       const winner = this.state.playerSelections[index].userid;
       fetch(`http://localhost:4000/games/submitWinner/${this.props.gameid}`, {
@@ -189,7 +188,7 @@ export default class ChatBox extends Component {
       return <Row className="justify-content-center">{children}</Row>;
     }
     return (
-      <Row className="justify-content-center" md ='auto'>
+      <Row className="justify-content-center" md="auto">
         <Card bg="dark" text="white" className="black-card">
           <h2>You are the black card holder</h2>
         </Card>
@@ -212,17 +211,18 @@ export default class ChatBox extends Component {
 
   gameLayout() {
     // displays player's status
-    if(this.state.players !== null && this.state.players.length <= 1){
+    if (this.state.players !== null && this.state.players.length <= 1) {
       return (
-        <div className={"game-display"}>
-          <Col>Waiting for other players to join...
-            <br/> 
-          <Spinner animation="border" variant="dark" size="sm" />
+        <div className="game-display">
+          <Col>
+            Waiting for other players to join...
+            <br />
+            <Spinner animation="border" variant="dark" size="sm" />
           </Col>
         </div>
       );
     }
-    else if (this.state.playerSelections !== null) {
+    if (this.state.playerSelections !== null) {
       if (this.state.cardlist.length > 1) {
         alert("pick one winner. \n one winner i tell ya!!");
         this.resetCards();
@@ -242,7 +242,8 @@ export default class ChatBox extends Component {
             );
           }
           children.push(
-            <Col md = 'auto'
+            <Col
+              md="auto"
               onClick={() => {
                 console.log(this.state);
                 const cards = this.state.cardsSelected;
