@@ -8,6 +8,7 @@
   button,input {
     width: 100%;
   }
+  
   button.account {
     background-color: lightblue;
     width: auto;
@@ -67,4 +68,8 @@
     width: auto;
     font-size: 13px;
     color:#007bff;;
+  }
+
+  h1{
+    text-shadow: 2px 2px 4px;
   }
