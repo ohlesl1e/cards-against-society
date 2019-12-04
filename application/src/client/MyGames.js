@@ -19,7 +19,7 @@ export default class MyGames extends Component {
       <div>
         <Header userid={this.state.userid} />
         <div className = 'my-games'>
-          <ListRooms url="/games/allgames" />
+          <ListRooms url={"/games/mygames/"+this.state.userid} />
         </div>
       </div>
     );

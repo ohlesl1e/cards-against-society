@@ -1,4 +1,4 @@
-JsonField = require('sequelize-json');
+const JsonField = require('sequelize-json');
 
 module.exports = (sequelize, Sequelize) => {
   const gamesession = sequelize.define(
@@ -12,9 +12,22 @@ module.exports = (sequelize, Sequelize) => {
       roomName: {
         type: Sequelize.STRING(20)
       },
+      pick: {
+        type: Sequelize.INTEGER
+      },
+      playersPicked: {
+        type: Sequelize.INTEGER,
+        default: 0
+      },
+      playerCount: {
+        type: Sequelize.INTEGER,
+        default: 1
+      },
+      capacity: {
+        type: Sequelize.INTEGER
+      },
       gameState: JsonField(Sequelize, 'gamesession', 'gameState')
     },
-
     {
       updatedAt: false
     }
@@ -26,6 +39,10 @@ module.exports = (sequelize, Sequelize) => {
       through: 'hostTable'
     });
 
+    gamesession.belongsTo(models.user, {
+      as: 'BCH'
+    });
+
     gamesession.belongsToMany(models.user, {
       as: 'Player',
       through: 'playerTable'
@@ -34,6 +51,11 @@ module.exports = (sequelize, Sequelize) => {
     gamesession.belongsTo(models.blackCard, {
       as: 'CurrentBlackCard',
       through: 'cardTable'
+    });
+
+    gamesession.belongsToMany(models.hands, {
+      as: 'Hand',
+      through: 'gameHands'
     });
   };
 
