@@ -1,5 +1,5 @@
-import React from 'react';
-import '../About.css';
+import React from "react";
+import "../About.css";
 import {
   Button,
   FormGroup,
@@ -8,44 +8,44 @@ import {
   FormCheck,
   Dropdown,
   Modal
-} from 'react-bootstrap';
-import { retrieveCookie } from './Cookies';
+} from "react-bootstrap";
+import { retrieveCookie } from "./Cookies";
 
-const GameForm = (state) => {
+const GameForm = state => {
   const settingButton = {
-    width: '100%',
+    width: "100%",
     borderRadius: 0,
-    height: '4.5rem',
-    color: 'white'
+    height: "4.5rem",
+    color: "white"
   };
 
   const marginStyle = {};
 
   const formStyle = {
-    width: '100%',
-    display: 'inline-flex',
-    flexDirection: 'column',
-    textAlign: 'center',
-    padding: '1.5rem'
+    width: "100%",
+    display: "inline-flex",
+    flexDirection: "column",
+    textAlign: "center",
+    padding: "1.5rem"
   };
 
   const inputGameStyle = {
     borderRadius: 0,
-    height: '3rem'
+    height: "3rem"
   };
 
   const CheckStyle = {
-    flexDirection: 'row',
-    display: 'inline-flex',
-    justifyContent: 'flex-end'
+    flexDirection: "row",
+    display: "inline-flex",
+    justifyContent: "flex-end"
   };
   const [show, setShow] = React.useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [points, setPoints] = React.useState('');
-  const [size, setSize] = React.useState('');
-  const [card, setCard] = React.useState('');
-  const [roomName, setRoomName] = React.useState('');
+  const [points, setPoints] = React.useState("");
+  const [size, setSize] = React.useState("");
+  const [card, setCard] = React.useState("");
+  const [roomName, setRoomName] = React.useState("");
   const [isPrivate, setPrivate] = React.useState(false);
 
   const submitChange = () => {
@@ -59,17 +59,17 @@ const GameForm = (state) => {
     };
     console.log(stateObj);
 
-    fetch('http://localhost:4000/games/newgame', {
-      method: 'POST',
-      credentials: 'same-origin',
+    fetch("http://52.53.156.79:4000/games/newgame", {
+      method: "POST",
+      credentials: "same-origin",
       body: JSON.stringify(stateObj),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     })
       .then(response => response.json())
-      .then((res) => {
-        window.open('/Game/' + res.gameid);
+      .then(res => {
+        window.open("/Game/" + res.gameid);
       });
     handleClose();
   };
@@ -92,7 +92,7 @@ const GameForm = (state) => {
             <div style={CheckStyle}>
               <FormLabel>Private</FormLabel>
               <FormCheck
-                style={{ marginLeft: '1rem' }}
+                style={{ marginLeft: "1rem" }}
                 checked={isPrivate}
                 onChange={e => setPrivate(e.target.checked)}
               />

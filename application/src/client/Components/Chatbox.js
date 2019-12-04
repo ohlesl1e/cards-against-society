@@ -10,7 +10,7 @@ export default class ChatBox extends Component {
       textmsg: "",
       userid: this.props.userid,
       msgHistory: [],
-      socket: io.connect(`http://localhost:8080/${this.props.url}`, {
+      socket: io.connect(`http://52.53.156.79:8080/${this.props.url}`, {
         reconnection: true,
         reconnectionDelay: 500,
         reconnectionAttempts: 10

@@ -1,39 +1,39 @@
-import React, { Component } from 'react';
-import { Button, FormGroup, FormControl, FormLabel } from 'react-bootstrap';
-import './app.css';
-import { Link } from 'react-router-dom';
-import { saveCookie } from './Components/Cookies';
+import React, { Component } from "react";
+import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import "./app.css";
+import { Link } from "react-router-dom";
+import { saveCookie } from "./Components/Cookies";
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
     this.handleRouteChange = this.handleRouteChange.bind(this);
     this.state = {
-      userid: '',
-      password: ''
+      userid: "",
+      password: ""
     };
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({
       [event.target.id]: event.target.value
     });
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
-    fetch('http://localhost:4000/users/login', {
-      method: 'POST',
-      credentials: 'same-origin',
+    fetch("http://52.53.156.79:4000/users/login", {
+      method: "POST",
+      credentials: "same-origin",
       body: JSON.stringify(this.state),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     })
       .then(res => res.json())
-      .then((res) => {
+      .then(res => {
         if (res.status === 401) {
-          alert('Sorry please check log-in credentials');
+          alert("Sorry please check log-in credentials");
         } else if (res.password === true) {
           saveCookie(res.userid);
           this.handleRouteChange();
@@ -42,14 +42,14 @@ export default class Login extends Component {
           throw error;
         }
       })
-      .catch((err) => {
-        alert('Error logging in please try again');
+      .catch(err => {
+        alert("Error logging in please try again");
         console.error(err);
       });
   };
 
   handleRouteChange() {
-    this.props.history.push('/lobby');
+    this.props.history.push("/lobby");
   }
 
   validateForm() {
@@ -60,22 +60,32 @@ export default class Login extends Component {
     return (
       <div class="wrapper">
         <div class="left">
-        <div id="slideshow">
-          <div class="slide-wrapper">
-            <div class="slide"><h1 class="slide-number">temp 1</h1></div>
-            <div class="slide"><h1 class="slide-number">temp 2</h1></div>
-            <div class="slide"><h1 class="slide-number">temp 3</h1></div>
-            <div class="slide"><h1 class="slide-number">temp 4</h1></div>
-            <div class="slide"><h1 class="slide-number">temp 5</h1></div>
+          <div id="slideshow">
+            <div class="slide-wrapper">
+              <div class="slide">
+                <h1 class="slide-number">temp 1</h1>
+              </div>
+              <div class="slide">
+                <h1 class="slide-number">temp 2</h1>
+              </div>
+              <div class="slide">
+                <h1 class="slide-number">temp 3</h1>
+              </div>
+              <div class="slide">
+                <h1 class="slide-number">temp 4</h1>
+              </div>
+              <div class="slide">
+                <h1 class="slide-number">temp 5</h1>
+              </div>
+            </div>
           </div>
         </div>
-        </div>
         <div class="right">
-        <div className="wrap2">
-            <h1 id="justice"><b>Cards Against Society</b></h1>
-            <h2 className="centertext">
-              A party game for horrible people
-            </h2>
+          <div className="wrap2">
+            <h1 id="justice">
+              <b>Cards Against Society</b>
+            </h1>
+            <h2 className="centertext">A party game for horrible people</h2>
             <br />
             <form onSubmit={this.handleSubmit}>
               <FormGroup className="userId" controlId="userid">

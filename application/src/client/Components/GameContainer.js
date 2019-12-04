@@ -26,11 +26,14 @@ export default class ChatBox extends Component {
         [4, false]
       ],
       cardlist: [],
-      socket: io.connect("http://localhost:8080/games/" + this.props.gameid, {
-        reconnection: true,
-        reconnectionDelay: 500,
-        reconnectionAttempts: 10
-      }),
+      socket: io.connect(
+        "http://52.53.156.79:8080/games/" + this.props.gameid,
+        {
+          reconnection: true,
+          reconnectionDelay: 500,
+          reconnectionAttempts: 10
+        }
+      ),
       data: "",
       hand: null,
       blackCard: "",
@@ -62,7 +65,7 @@ export default class ChatBox extends Component {
 
   getInfo() {
     // retrieves game info
-    fetch(`http://localhost:4000/games/${this.props.gameid}`, {
+    fetch(`http://52.53.156.79:4000/games/${this.props.gameid}`, {
       method: "POST",
       credentials: "same-origin",
       body: JSON.stringify({ userid: retrieveCookie() }),
@@ -114,7 +117,7 @@ export default class ChatBox extends Component {
             cards.push(this.state.hand[i][0]);
           }
         }
-        fetch(`http://localhost:4000/games/update/${this.props.gameid}`, {
+        fetch(`http://52.53.156.79:4000/games/update/${this.props.gameid}`, {
           method: "POST",
           credentials: "same-origin",
           body: JSON.stringify({
@@ -137,14 +140,17 @@ export default class ChatBox extends Component {
       const index = this.state.cardlist[0];
       const winner = this.state.playerSelections[index].userid;
 
-      fetch(`http://localhost:4000/games/submitWinner/${this.props.gameid}`, {
-        method: "POST",
-        credentials: "same-origin",
-        body: JSON.stringify({ winner }),
-        headers: {
-          "Content-Type": "application/json"
+      fetch(
+        `http://52.53.156.79:4000/games/submitWinner/${this.props.gameid}`,
+        {
+          method: "POST",
+          credentials: "same-origin",
+          body: JSON.stringify({ winner }),
+          headers: {
+            "Content-Type": "application/json"
+          }
         }
-      })
+      )
         .then(response => response.json())
         .then(this.updateState(), this.resetCards());
     }
