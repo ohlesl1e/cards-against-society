@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
-import React, { Component } from 'react';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Link } from 'react-router-dom';
-import '../app.css';
-import { retrieveCookie, deleteCookie } from './Cookies';
+import React, { Component } from "react";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import { Link } from "react-router-dom";
+import "../app.css";
+import { retrieveCookie, deleteCookie } from "./Cookies";
 
 export default class Header extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ export default class Header extends Component {
   }
 
   isAdmin() {
-    if (retrieveCookie() === 'admin') {
+    if (retrieveCookie() === "admin") {
       return (
         <Link to="/Admin">
           <Nav.Item className="navselection">Admin</Nav.Item>
@@ -26,6 +26,14 @@ export default class Header extends Component {
       );
     }
     return <div />;
+  }
+
+  isLoggedIn() {
+    if (retrieveCookie()) {
+      return "Log Out";
+    } else {
+      return "Log In";
+    }
   }
 
   render() {
@@ -38,7 +46,7 @@ export default class Header extends Component {
             </Navbar.Brand>
           </Link>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Collapse id="basic-navbar-nav" className="dropdown">
             <Link to="/MyGames">
               <Nav.Item className="navselection">My Games</Nav.Item>
             </Link>
@@ -49,9 +57,7 @@ export default class Header extends Component {
             <Navbar.Collapse className="justify-content-end">
               <NavDropdown id="basic-nav-dropdown">
                 <Link to="/Profile">
-                  <NavDropdown.Item href="#profile">
-                    Profile
-                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#profile">Profile</NavDropdown.Item>
                 </Link>
                 <Link to="/Custom">
                   <NavDropdown.Item href="#custom">
@@ -60,11 +66,11 @@ export default class Header extends Component {
                 </Link>
                 <Link to="/">
                   <NavDropdown.Item href="#login" onClick={() => this.logout()}>
-                    Log Out
+                    {this.isLoggedIn()}
                   </NavDropdown.Item>
                 </Link>
               </NavDropdown>
-              <Navbar.Text>{this.props.userid}</Navbar.Text>
+              <Navbar.Text>Signed in as: {retrieveCookie()}</Navbar.Text>
             </Navbar.Collapse>
           </Navbar.Collapse>
         </Navbar>
