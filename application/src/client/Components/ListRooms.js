@@ -26,23 +26,6 @@ export default class ListRooms extends Component {
     this.state.socket.on("roomUpdate", () => this.getLobbies());
   }
 
-  cellButton(cell, row, enumObject, rowIndex) {
-    if (
-      this.state.data[enumObject].playerCount !==
-      this.state.data[enumObject].capacity
-    ) {
-      return (
-        <Button size="sm" onClick={() => this.handleRouteChange(row)}>
-          Join
-        </Button>
-      );
-    }
-  }
-
-  roomCapacity(cell, row, enumObject, rowIndex) {
-    return row.playerCount + "/" + row.capacity;
-  }
-
   getLobbies() {
     fetch("http://localhost:4000" + this.props.url)
       .then(response => response.json())
@@ -61,7 +44,13 @@ export default class ListRooms extends Component {
     const { SearchBar } = Search;
     if (this.state.data !== null) {
       if (this.state.data.length === 0) {
-        children.push(<div>No games available... please create one.</div>);
+        return (
+          <div>
+            <h4>No games available...</h4>
+            <h4>wanna create one?</h4>
+            <h4>up to you</h4>
+          </div>
+        );
       } else {
         const columns = [
           {
@@ -116,6 +105,22 @@ export default class ListRooms extends Component {
       }
     }
   };
+  cellButton(cell, row, enumObject, rowIndex) {
+    if (
+      this.state.data[enumObject].playerCount !==
+      this.state.data[enumObject].capacity
+    ) {
+      return (
+        <Button size="sm" onClick={() => this.handleRouteChange(row)}>
+          Join
+        </Button>
+      );
+    }
+  }
+
+  roomCapacity(cell, row, enumObject, rowIndex) {
+    return row.playerCount + "/" + row.capacity;
+  }
 
   handleRouteChange(link) {
     fetch(`http://localhost:4000/games/join/${link.gameid}`, {

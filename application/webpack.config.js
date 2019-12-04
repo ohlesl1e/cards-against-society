@@ -34,14 +34,12 @@ module.exports = {
     extensions: ["*", ".js", ".jsx"]
   },
   devServer: {
-    host: "0.0.0.0",
-    disableHostCheck: true,
     port: 3000,
     open: true,
     proxy: {
-      '/api': {
-        target: 'http://localhost:4000',
-        pathRewrite: { '^/api': '' },
+      "/api": {
+        target: "http://localhost:4000",
+        pathRewrite: { "^/api": "" },
         secure: false,
         changeOrigin: true
       }
