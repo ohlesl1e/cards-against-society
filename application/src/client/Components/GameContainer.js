@@ -139,6 +139,7 @@ export default class ChatBox extends Component {
       // if the user is the BCH
       const index = this.state.cardlist[0];
       const winner = this.state.playerSelections[index].userid;
+
       fetch(
         `http://52.53.156.79:4000/games/submitWinner/${this.props.gameid}`,
         {
@@ -251,7 +252,6 @@ export default class ChatBox extends Component {
             <Col
               md="auto"
               onClick={() => {
-                console.log(this.state);
                 const cards = this.state.cardsSelected;
                 cards[i][1] = !cards[i][1];
                 this.setState({
