@@ -53,7 +53,11 @@
 }
 
 .dropdown {
-  margin-right: 50px;
+  margin-right: 0px;
+}
+
+.game-row {
+  height: 300px;
 }
 
 .lobby {
@@ -95,11 +99,24 @@
 .chat-section {
   text-align: left;
   box-shadow: 1px 1px 5px 1px #888888;
-  height: 73vh;
+  height: 100%;
+}
+.chat-message {
+  transition: all 0.1s ease;
+
+  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 2s; /* Firefox < 16 */
+  -ms-animation: fadein 2s; /* Internet Explorer */
+  -o-animation: fadein 2s; /* Opera < 12.1 */
+  animation: fadein 1s;
 }
 .text-area {
   width: 100%;
   margin: 22px;
+}
+
+.lobby-chat {
+  height: 73vh;
 }
 
 .black-card {
@@ -139,11 +156,7 @@
   animation: fadein 1s;
 }
 .selection {
-  align-content: center;
-  align-items: center;
-  justify-content: center;
-  width: 160px;
-
+  width: 20%;
   -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
   -moz-animation: fadein 2s; /* Firefox < 16 */
   -ms-animation: fadein 2s; /* Internet Explorer */
@@ -157,7 +170,9 @@
   box-shadow: -5px 10px #888888;
   border-radius: 5px;
 }
-
+.chat-container {
+  height: 400px;
+}
 @keyframes fadein {
   from {
     opacity: 0;
@@ -220,8 +235,36 @@
 
 .game-display {
   margin: 55px;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  align-self: auto;
+  text-align: center;
 }
 
+.game-display-submitted {
+  margin: 55px;
+  align-content: left;
+  align-items: left;
+  justify-content: left;
+  text-align: left;
+}
+.player-submission {
+  transition: all 0.4s ease;
+  align-content: center;
+  align-items: center;
+  width: 160px;
+  margin: 5px;
+  padding: 40px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+
+  -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 2s; /* Firefox < 16 */
+  -ms-animation: fadein 2s; /* Internet Explorer */
+  -o-animation: fadein 2s; /* Opera < 12.1 */
+  animation: fadein 1s;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -300,20 +343,20 @@
 }
 
 .slide:nth-child(1) {
-  background: #D93B65;
-  background-repeat: no-repeat; 
+  background: #d93b65;
+  background-repeat: no-repeat;
 }
 
 .slide:nth-child(2) {
-  background: #037E8C;
+  background: #037e8c;
 }
 
 .slide:nth-child(3) {
-  background: #36BF66;
+  background: #36bf66;
 }
 
 .slide:nth-child(4) {
-  background: #D9D055;
+  background: #d9d055;
 }
 
 .slide-number {
@@ -324,13 +367,27 @@
 }
 
 @-webkit-keyframes slide {
-  20% {margin-left: 0px;}
-  30% {margin-left: -728px;}
-  50% {margin-left: -728px;}
-  60% {margin-left: -1456px;}
-  70% {margin-left: -1456px;}
-  80% {margin-left: -2184px;}
-  90% {margin-left: -2184px;}
+  20% {
+    margin-left: 0px;
+  }
+  30% {
+    margin-left: -728px;
+  }
+  50% {
+    margin-left: -728px;
+  }
+  60% {
+    margin-left: -1456px;
+  }
+  70% {
+    margin-left: -1456px;
+  }
+  80% {
+    margin-left: -2184px;
+  }
+  90% {
+    margin-left: -2184px;
+  }
 }
 
 .wrapper {
@@ -373,6 +430,7 @@
   background-color: #fff;
   float: right;
 }
+<<<<<<< HEAD
 
 .gradientbg{
   height: 100%;
@@ -380,3 +438,5 @@
   background:linear-gradient(rgb(255, 255, 255),transparent);
   background-color:rgb(112, 109, 133);
 }
+=======
+>>>>>>> bdb20a398819a61386719b45f2930904a6666e6e

@@ -1,17 +1,16 @@
-import React, { Component } from 'react';
-import {
- Container, Row, Col, ButtonGroup, Button 
-} from 'react-bootstrap';
-import Header from './Components/Header';
-import { retrieveCookie } from './Components/Cookies';
-import Chatbox from './Components/Chatbox';
-import GameContainer from './Components/GameContainer';
+import React, { Component } from "react";
+import { Container, Row, Col, ButtonGroup, Button } from "react-bootstrap";
+import Header from "./Components/Header";
+import { retrieveCookie } from "./Components/Cookies";
+import Chatbox from "./Components/Chatbox";
+import GameContainer from "./Components/GameContainer";
+import ChatContainer from "./Components/ChatContainer";
 
 export default class Game extends Component {
   constructor() {
     super();
     this.state = {
-      userid: retrieveCookie('userid')
+      userid: retrieveCookie("userid")
     };
   }
 
@@ -26,10 +25,11 @@ export default class Game extends Component {
           <Container>
             <br />
             <Row className="justify-content-center">
-              <Col md="9">
-                <Chatbox
+              <Col md="9" className="justify-content-center game-row">
+                <ChatContainer
+                  className="chat-container"
                   userid={this.state.userid}
-                  url={'games/' + this.props.match.params.gameid}
+                  url={"games/" + this.props.match.params.gameid}
                 />
               </Col>
               <Col md="3">
