@@ -32,10 +32,7 @@ export default class ListRooms extends Component {
       this.state.data[enumObject].capacity
     ) {
       return (
-        <Button
-          size="sm"
-          onClick={() => this.handleRouteChange(this.state.data[enumObject])}
-        >
+        <Button size="sm" onClick={() => this.handleRouteChange(row)}>
           Join
         </Button>
       );
@@ -43,11 +40,7 @@ export default class ListRooms extends Component {
   }
 
   roomCapacity(cell, row, enumObject, rowIndex) {
-    return (
-      this.state.data[enumObject].playerCount +
-      "/" +
-      this.state.data[enumObject].capacity
-    );
+    return row.playerCount + "/" + row.capacity;
   }
 
   getLobbies() {
@@ -77,8 +70,7 @@ export default class ListRooms extends Component {
           },
           {
             dataField: "HostUserid",
-            text: "Host",
-            searchable: false
+            text: "Host"
           },
           {
             dataField: "capacity",
