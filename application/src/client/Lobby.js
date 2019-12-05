@@ -32,7 +32,6 @@ export default class Lobby extends Component {
           <Container>
             <Row>
 
-
               <Col md="6">
                 <div>
                   <GameForm />
@@ -41,7 +40,7 @@ export default class Lobby extends Component {
                 <ListRooms url="/games/allgames" />
               </Col>
              
-                <Col md="6">
+              <Col md="6" className="lobby-chat">
                   <h3>Registered Users: </h3>
                 <Chatbox userid={this.state.userid} url="lobby" />
               </Col>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import { Button, FormGroup, FormControl, FormLabel, Image} from "react-bootstrap";
 import "./app.css";
 import { Link } from "react-router-dom";
 import { saveCookie } from "./Components/Cookies";
@@ -63,19 +63,16 @@ export default class Login extends Component {
           <div id="slideshow">
             <div class="slide-wrapper">
               <div class="slide">
-                <h1 class="slide-number">temp 1</h1>
+                <Image src={require('./images/bluecat.jpeg')} fluid/>
               </div>
               <div class="slide">
-                <h1 class="slide-number">temp 2</h1>
+              <Image src={require('./images/fishgun.png')} fluid/>
               </div>
               <div class="slide">
-                <h1 class="slide-number">temp 3</h1>
+              <Image src={require('./images/kokokok.jpg')} fluid/>
               </div>
               <div class="slide">
-                <h1 class="slide-number">temp 4</h1>
-              </div>
-              <div class="slide">
-                <h1 class="slide-number">temp 5</h1>
+              <Image src={require('./images/wizardcat.jpg')} fluid/>
               </div>
             </div>
           </div>
