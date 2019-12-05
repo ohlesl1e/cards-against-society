@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, FormLabel, Image} from "react-bootstrap";
+import { Button, FormGroup, FormControl, FormLabel, Image, Carousel } from "react-bootstrap";
 import "./app.css";
 import { Link } from "react-router-dom";
 import { saveCookie } from "./Components/Cookies";
@@ -61,20 +61,20 @@ export default class Login extends Component {
       <div class="wrapper">
         <div class="left">
           <div id="slideshow">
-            <div class="slide-wrapper">
-              <div class="slide">
-                <Image src={require('./images/bluecat.jpeg')} fluid/>
-              </div>
-              <div class="slide">
-              <Image src={require('./images/fishgun.png')} fluid/>
-              </div>
-              <div class="slide">
-              <Image src={require('./images/kokokok.jpg')} fluid/>
-              </div>
-              <div class="slide">
-              <Image src={require('./images/wizardcat.jpg')} fluid/>
-              </div>
-            </div>
+            <Carousel>
+              <Carousel.Item>
+                <Image src={require('./images/bluecat.jpeg')} fluid alt="First slide"/>
+              </Carousel.Item>
+              <Carousel.Item>
+                <Image src={require('./images/fishgun.png')} fluid alt="Second slide"/>
+              </Carousel.Item>
+              <Carousel.Item>
+                <Image src={require('./images/kokokok.jpg')} fluid alt="Third slide"/>
+              </Carousel.Item>
+              <Carousel.Item>
+                <Image src={require('./images/wizardcat.jpg')} fluid alt="Fourth slide"/>
+              </Carousel.Item>
+            </Carousel>
           </div>
         </div>
         <div class="right">
