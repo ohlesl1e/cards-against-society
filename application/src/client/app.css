@@ -420,3 +420,19 @@
   background-color: #fff;
   float: right;
 }
+
+.pchat {
+  text-align: center;
+  background-color: #333940;
+  color: whitesmoke;
+  border-radius: 3px;
+  text-size-adjust: 140x;
+  padding: 5px;
+}
+
+.rusers {
+  text-align: right;
+  background-color: rgb(40, 37, 44);
+  color: white;
+  padding-right: 7px;
+}

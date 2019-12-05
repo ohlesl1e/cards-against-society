@@ -41,7 +41,15 @@ export default class Lobby extends Component {
               </Col>
              
               <Col md="6" className="lobby-chat">
-                  <h3>Registered Users: </h3>
+                  
+              <div className="pchat">
+                  <div class="panel panel-default">
+                    <div class="panel-heading"><h6>Public Chat</h6></div>
+                  </div>
+                  </div>
+
+              <div className="rusers">Registered Users: 6 </div>
+              
                 <Chatbox userid={this.state.userid} url="lobby" />
               </Col>
             </Row>
