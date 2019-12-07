@@ -8,11 +8,12 @@ import io from "socket.io-client";
 import { retrieveCookie } from "./Cookies";
 
 export default class ListRooms extends Component {
+  _isMounted = false;
   constructor() {
     super();
     this.state = {
       data: null,
-      socket: io.connect("http://52.53.156.79:8080/lobby", {
+      socket: io.connect("http://54.183.228.36:8080/lobby", {
         reconnection: true,
         reconnectionDelay: 500,
         reconnectionAttempts: 10
@@ -22,21 +23,25 @@ export default class ListRooms extends Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
     this.getLobbies();
     this.state.socket.on("roomUpdate", () => this.getLobbies());
   }
 
   getLobbies() {
-    fetch("http://52.53.156.79:4000" + this.props.url)
+    fetch("http://54.183.228.36:4000" + this.props.url)
       .then(response => response.json())
       .then(res => {
+        if(this._isMounted){
         this.setState(
           {
             data: res
           },
           () => console.log(this.state.data)
         );
+      }
       });
+      
   }
 
   // Create a table function
@@ -123,7 +128,7 @@ export default class ListRooms extends Component {
   }
 
   handleRouteChange(link) {
-    fetch(`http://52.53.156.79:4000/games/join/${link.gameid}`, {
+    fetch(`http://54.183.228.36:4000/games/join/${link.gameid}`, {
       method: "POST",
       credentials: "same-origin",
       body: JSON.stringify({ userid: retrieveCookie() }),
@@ -135,6 +140,10 @@ export default class ListRooms extends Component {
       .then(res => {
         window.open("/Game/" + link.gameid);
       });
+  }
+
+  componentWillUnmount(){
+    this._isMounted = false;
   }
 
   render() {
