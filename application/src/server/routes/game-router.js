@@ -25,6 +25,23 @@ router.get('/mygames/:userid', async (req, res) => {
   });
 });
 
+router.post('/deleteroom/:gamesessionid', async (req, res) => {
+  const room = `/games/${req.params.gamesessionid}`;
+  const io = req.app.get('socketio');
+  const msg = {
+    msg: 'This game session has been deleted.',
+    title: 'Bot'
+  };
+  await io.of(room).emit('message', msg);
+  await io.of('/lobby').emit('roomUpdate');
+  await models.gamesessions.destroy({
+    where: {
+      gameid: req.params.gamesessionid
+    }
+  });
+  res.send();
+});
+
 router.post('/newgame', async (req, res) => {
   const blackCard = await models.blackCard.findOne({
     // retrieving random black card
@@ -72,7 +89,7 @@ router.post('/newgame', async (req, res) => {
 });
 
 router.post('/:gamesessionid', async (req, res) => {
-  const room = '/games/' + req.params.gamesessionid;
+  const room = `/games/${req.params.gamesessionid}`;
 
   const io = req.app.get('socketio');
   io.of(room).on('connection', async (client) => {
@@ -176,7 +193,7 @@ router.post('/:gamesessionid', async (req, res) => {
 
 router.post('/update/:gamesessionid', async (req, res) => {
   const io = req.app.get('socketio');
-  const room = '/games/' + req.params.gamesessionid;
+  const room = `/games/${req.params.gamesessionid}`;
   const user = await models.user.findOne({
     where: {
       userid: req.body.userid
@@ -235,7 +252,7 @@ router.post('/update/:gamesessionid', async (req, res) => {
 
 router.post('/submitWinner/:gamesessionid', async (req, res) => {
   const io = req.app.get('socketio');
-  const room = '/games/' + req.params.gamesessionid;
+  const room = `/games/${req.params.gamesessionid}`;
   const game = await models.gamesessions.findOne({
     where: { gameid: req.params.gamesessionid }
   });
@@ -304,7 +321,7 @@ router.post('/submitWinner/:gamesessionid', async (req, res) => {
 
 router.post('/join/:gamesessionid', async (req, res) => {
   const io = req.app.get('socketio');
-  const room = '/games/' + req.params.gamesessionid;
+  const room = `/games/${req.params.gamesessionid}`;
 
   let found = false; // to check if user is already in the game
   const game = await models.gamesessions.findOne({
@@ -325,7 +342,7 @@ router.post('/join/:gamesessionid', async (req, res) => {
   });
   if (!found && game.capacity !== game.playerCount) {
     const io = req.app.get('socketio');
-    const room = '/games/' + req.params.gamesessionid;
+    const room = `/games/${req.params.gamesessionid}`;
     const msg = {
       msg: `${req.body.userid} has joined the game!`,
       title: 'Bot'
@@ -354,6 +371,65 @@ router.post('/join/:gamesessionid', async (req, res) => {
     await io.of('/lobby').emit('roomUpdate');
     await res.send(game);
   }
+});
+
+router.post('/leaveroom/:gamesessionid', async (req, res) => {
+  const io = req.app.get('socketio');
+  const room = `/games/${req.params.gamesessionid}`;
+
+  const game = await models.gamesessions.findOne({
+    where: {
+      gameid: req.params.gamesessionid
+    }
+  });
+  const user = await models.user.findOne({
+    where: {
+      userid: req.body.userid
+    }
+  });
+  await game.getHost().then(async (host) => {
+    if (host.userid === user.userid) {
+      // shut down game
+    }
+  });
+  await game.removePlayer(req.body.userid);
+
+  const newState = game.gameState;
+
+  for (let i = 0; i < newState.points.length; i++) {
+    if (newState.points[i][req.body.userid] !== undefined) {
+      newState.points.splice(i, 1);
+      game.playerCount -= 1;
+    }
+  }
+
+  for (let i = 0; i < newState.state.length; i++) {
+    if (newState.state[i][req.body.userid] !== undefined) {
+      newState.state.splice(i, 1);
+      game.playersPicked -= 1;
+    }
+  }
+
+  await game.getBCH().then(async (bch) => {
+    if (bch.userid == user.userid) {
+      await game.getHost().then(async (host) => {
+        game.setBCH(host);
+      });
+    }
+  });
+
+  await game.update({ gameState: newState });
+
+  await game.save();
+
+  const msg = {
+    msg: `${req.body.userid} has left the game!`,
+    title: 'Bot'
+  };
+  await io.of(room).emit('message', msg);
+  await io.of(room).emit('state');
+  await io.of('/lobby').emit('roomUpdate');
+  res.send(game);
 });
 
 module.exports = router;
