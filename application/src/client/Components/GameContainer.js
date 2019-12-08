@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import io from "socket.io-client";
+import React, { Component } from 'react';
+import io from 'socket.io-client';
 import {
   Button,
   ButtonGroup,
@@ -8,13 +8,14 @@ import {
   Container,
   Card,
   Spinner
-} from "react-bootstrap";
-import PlayerList from "./PlayerList";
-import "../app.css";
-import { retrieveCookie } from "./Cookies";
+} from 'react-bootstrap';
+import PlayerList from './PlayerList';
+import '../app.css';
+import { retrieveCookie } from './Cookies';
 
 export default class GameContainer extends Component {
   _isMounted = false;
+
   constructor(props) {
     super(props);
 
@@ -28,22 +29,22 @@ export default class GameContainer extends Component {
       ],
       cardlist: [],
       socket: io.connect(
-        "http://54.183.228.36:8080/games/" + this.props.gameid,
+        'http://54.183.228.36:8080/games/' + this.props.gameid,
         {
           forceNew: true,
           reconnection: true,
           reconnectionDelay: 500,
           reconnectionAttempts: 10,
-          pintTimeout:  6000000000000000
+          pintTimeout: 6000000000000000
         }
       ),
-      data: "",
+      data: '',
       hand: [],
-      blackCard: "",
+      blackCard: '',
       BCH: null,
       pick: null,
       players: null,
-      HostUserid: "",
+      HostUserid: '',
       allPlayersSubmitted: null,
       playerHasSubmitted: null,
       playerSelections: null,
@@ -63,32 +64,32 @@ export default class GameContainer extends Component {
   componentDidMount() {
     this._isMounted = true;
     this.receiveState();
-    this.state.socket.emit("subscribeToState");
-    this.state.socket.on("state", () => this.receiveState());
+    this.state.socket.emit('subscribeToState');
+    this.state.socket.on('state', () => this.receiveState());
 
     try {
       setInterval(async () => {
         this.getInfo();
-      }, 3000).then(
-        this.setState())
-    } catch(e) {
+      }, 3000).then(this.setState());
+    } catch (e) {
       console.log(e);
     }
   }
 
   getInfo() {
     // retrieves game info
-    fetch(`http://54.183.228.36:4000/games/${this.props.gameid}`, {
-      method: "POST",
-      credentials: "same-origin",
+
+    fetch(`http://localhost:4000/games/${this.props.gameid}`, {
+      method: 'POST',
+      credentials: 'same-origin',
       body: JSON.stringify({ userid: retrieveCookie() }),
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       }
     })
       .then(response => response.json())
-      .then(res => {
-        if(this._isMounted){
+      .then((res) => {
+        if (this._isMounted) {
           this.setState(
             {
               data: res,
@@ -109,24 +110,23 @@ export default class GameContainer extends Component {
   }
 
   receiveState() {
-    console.log("state received");
-    this.getInfo();    
+    console.log('state received');
+    this.getInfo();
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this._isMounted = false;
   }
 
   updateState() {
-    this.state.socket.emit("subscribeToState");
-    
+    this.state.socket.emit('subscribeToState');
   }
 
   submitSelection() {
     if (!this.checkBCH()) {
       // if the user is not the BCH
       if (this.state.cardlist.length !== this.state.pick) {
-        alert("please pick " + this.state.pick + " card(s)");
+        alert('please pick ' + this.state.pick + ' card(s)');
         this.resetCards();
       } else {
         const cards = [];
@@ -135,18 +135,18 @@ export default class GameContainer extends Component {
             cards.push(this.state.hand[i][0]);
           }
         }
-        fetch(`http://54.183.228.36:4000/games/update/${this.props.gameid}`, {
-          method: "POST",
-          credentials: "same-origin",
+        fetch(`http://localhost:4000/games/update/${this.props.gameid}`, {
+          method: 'POST',
+          credentials: 'same-origin',
           body: JSON.stringify({
             userid: retrieveCookie(),
             cards
           }),
           headers: {
-            "Content-Type": "application/json"
+            'Content-Type': 'application/json'
           }
         })
-          .then(response => {
+          .then((response) => {
             if (!response.ok) {
               alert("You've already picked your cards");
             }
@@ -155,25 +155,25 @@ export default class GameContainer extends Component {
       }
     } else {
       // if the user is the BCH
-      if(this.state.cardlist.length === 1){
-      const index = this.state.cardlist[0];
-      const winner = this.state.playerSelections[index].userid;
+      if (this.state.cardlist.length === 1) {
+        const index = this.state.cardlist[0];
+        const winner = this.state.playerSelections[index].userid;
 
-      fetch(
-        `http://54.183.228.36:4000/games/submitWinner/${this.props.gameid}`,
-        {
-          method: "POST",
-          credentials: "same-origin",
-          body: JSON.stringify({ winner }),
-          headers: {
-            "Content-Type": "application/json"
+        fetch(
+          `http://54.183.228.36:4000/games/submitWinner/${this.props.gameid}`,
+          {
+            method: 'POST',
+            credentials: 'same-origin',
+            body: JSON.stringify({ winner }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
           }
-        }
-      )
-        .then(response => response.json())
-        .then(this.updateState(), this.resetCards());
-    }
+        )
+          .then(response => response.json())
+          .then(this.updateState(), this.resetCards());
       }
+    }
 
     this.resetCards();
   }
@@ -206,8 +206,8 @@ export default class GameContainer extends Component {
             }}
             className={
               this.state.cardsSelected[i][1]
-                ? "white-card-selected white-card"
-                : "white-card"
+                ? 'white-card-selected white-card'
+                : 'white-card'
             }
           >
             {this.checkHand(i)}
@@ -227,11 +227,9 @@ export default class GameContainer extends Component {
 
   checkHand(i) {
     if (this.state.hand !== null) {
-      if(this.state.hand[i] && this.state.hand[i][0]){
-        
-         return this.state.hand[i][0];
-        
-      }  
+      if (this.state.hand[i] && this.state.hand[i][0]) {
+        return this.state.hand[i][0];
+      }
     }
   }
 
@@ -257,7 +255,7 @@ export default class GameContainer extends Component {
     }
     if (this.state.playerSelections !== null) {
       if (this.state.cardlist.length > 1) {
-        alert("pick one winner. \n one winner i tell ya!!");
+        alert('pick one winner. \n one winner i tell ya!!');
         this.resetCards();
       } else {
         const children = [];
@@ -297,8 +295,8 @@ export default class GameContainer extends Component {
               }}
               className={
                 this.state.cardsSelected[i][1]
-                  ? "selection-selected selection"
-                  : "selection"
+                  ? 'selection-selected selection'
+                  : 'selection'
               }
             >
               {this.state.playerSelections[i].userid}
@@ -308,7 +306,7 @@ export default class GameContainer extends Component {
         }
 
         return (
-          <div className={this.checkBCH() ? "game-display-submitted" : ""}>
+          <div className={this.checkBCH() ? 'game-display-submitted' : ''}>
             <Row>{children}</Row>
           </div>
         );
@@ -334,7 +332,7 @@ export default class GameContainer extends Component {
         );
       }
       return (
-        <div className={this.checkBCH() ? "game-display" : ""}>
+        <div className={this.checkBCH() ? 'game-display' : ''}>
           <Row>{children}</Row>
         </div>
       );
@@ -363,7 +361,13 @@ export default class GameContainer extends Component {
               <Card bg="dark" text="white" className="black-card">
                 <Card.Body>
                   <Card.Text>{this.state.blackCard}</Card.Text>
-                  <Card.Text>*pick {this.state.pick} card(s)*</Card.Text>
+                  <Card.Text>
+*pick
+{' '}
+{this.state.pick}
+{' '}
+card(s)*
+</Card.Text>
                 </Card.Body>
               </Card>
             </div>
