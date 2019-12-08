@@ -78,7 +78,7 @@ export default class UserSearch extends Component {
 
   render() {
     return (
-      <div className="wrapper">
+      <div className="wrappser">
         <div className="form-wrapper">
           <br />
           <Form onSubmit={this.getUsers}>

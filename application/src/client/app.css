@@ -48,7 +48,7 @@
 }
 
 .admin_usercol {
-  padding-top: 20px;
+  padding-left: 100px;
   float: left;
 }
 
@@ -436,4 +436,13 @@
   width: 100%;
   background:linear-gradient(rgb(255, 255, 255),transparent);
   background-color:rgb(112, 109, 133);
+}
+
+.panel-heading{
+  text-align: center;
+  color: white;
+  background-color: #333940;
+  padding: 6.5px;
+  font-size: 14px;
+  border-radius: 5px;
 }
