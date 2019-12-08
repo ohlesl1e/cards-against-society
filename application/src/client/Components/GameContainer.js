@@ -13,7 +13,8 @@ import PlayerList from "./PlayerList";
 import "../app.css";
 import { retrieveCookie } from "./Cookies";
 
-export default class ChatBox extends Component {
+export default class GameContainer extends Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
 
@@ -27,15 +28,17 @@ export default class ChatBox extends Component {
       ],
       cardlist: [],
       socket: io.connect(
-        "http://52.53.156.79:8080/games/" + this.props.gameid,
+        "http://54.183.228.36:8080/games/" + this.props.gameid,
         {
+          forceNew: true,
           reconnection: true,
           reconnectionDelay: 500,
-          reconnectionAttempts: 10
+          reconnectionAttempts: 10,
+          pintTimeout:  6000000000000000
         }
       ),
       data: "",
-      hand: null,
+      hand: [],
       blackCard: "",
       BCH: null,
       pick: null,
@@ -58,14 +61,24 @@ export default class ChatBox extends Component {
   }
 
   componentDidMount() {
+    this._isMounted = true;
     this.receiveState();
     this.state.socket.emit("subscribeToState");
     this.state.socket.on("state", () => this.receiveState());
+
+    try {
+      setInterval(async () => {
+        this.getInfo();
+      }, 3000).then(
+        this.setState())
+    } catch(e) {
+      console.log(e);
+    }
   }
 
   getInfo() {
     // retrieves game info
-    fetch(`http://52.53.156.79:4000/games/${this.props.gameid}`, {
+    fetch(`http://54.183.228.36:4000/games/${this.props.gameid}`, {
       method: "POST",
       credentials: "same-origin",
       body: JSON.stringify({ userid: retrieveCookie() }),
@@ -75,33 +88,38 @@ export default class ChatBox extends Component {
     })
       .then(response => response.json())
       .then(res => {
-        this.setState(
-          {
-            data: res,
-            hand: res[0],
-            blackCard: res[1],
-            players: res[2],
-            BCH: res[3],
-            pick: res[4],
-            allPlayersSubmitted: res[5],
-            playerHasSubmitted: res[6],
-            playerSelections: res[7],
-            points: res[8]
-          },
-          () => console.log()
-        );
+        if(this._isMounted){
+          this.setState(
+            {
+              data: res,
+              hand: res[0],
+              blackCard: res[1],
+              players: res[2],
+              BCH: res[3],
+              pick: res[4],
+              allPlayersSubmitted: res[5],
+              playerHasSubmitted: res[6],
+              playerSelections: res[7],
+              points: res[8]
+            },
+            () => console.log()
+          );
+        }
       });
   }
 
   receiveState() {
     console.log("state received");
-    this.getInfo();
-    this.setState({}, () => console.log());
+    this.getInfo();    
+  }
+
+  componentWillUnmount(){
+    this._isMounted = false;
   }
 
   updateState() {
     this.state.socket.emit("subscribeToState");
-    this.setState({}, () => console.log());
+    
   }
 
   submitSelection() {
@@ -117,7 +135,7 @@ export default class ChatBox extends Component {
             cards.push(this.state.hand[i][0]);
           }
         }
-        fetch(`http://52.53.156.79:4000/games/update/${this.props.gameid}`, {
+        fetch(`http://54.183.228.36:4000/games/update/${this.props.gameid}`, {
           method: "POST",
           credentials: "same-origin",
           body: JSON.stringify({
@@ -137,11 +155,12 @@ export default class ChatBox extends Component {
       }
     } else {
       // if the user is the BCH
+      if(this.state.cardlist.length === 1){
       const index = this.state.cardlist[0];
       const winner = this.state.playerSelections[index].userid;
 
       fetch(
-        `http://52.53.156.79:4000/games/submitWinner/${this.props.gameid}`,
+        `http://54.183.228.36:4000/games/submitWinner/${this.props.gameid}`,
         {
           method: "POST",
           credentials: "same-origin",
@@ -154,6 +173,9 @@ export default class ChatBox extends Component {
         .then(response => response.json())
         .then(this.updateState(), this.resetCards());
     }
+      }
+
+    this.resetCards();
   }
 
   handBuilder() {
@@ -205,7 +227,11 @@ export default class ChatBox extends Component {
 
   checkHand(i) {
     if (this.state.hand !== null) {
-      return this.state.hand[i][0];
+      if(this.state.hand[i] && this.state.hand[i][0]){
+        
+         return this.state.hand[i][0];
+        
+      }  
     }
   }
 

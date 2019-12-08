@@ -10,11 +10,16 @@ export default class Game extends Component {
   constructor() {
     super();
     this.state = {
-      userid: retrieveCookie("userid")
+      userid: retrieveCookie("userid"),
+      url: ""
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this.setState({
+      url: this.props.match.params.gameid
+    });
+  }
 
   render() {
     return (
@@ -29,7 +34,7 @@ export default class Game extends Component {
                 <ChatContainer
                   className="chat-container"
                   userid={this.state.userid}
-                  url={"games/" + this.props.match.params.gameid}
+                  url={"games/" + this.state.url}
                 />
               </Col>
               <Col md="3">

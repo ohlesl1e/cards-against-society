@@ -4,13 +4,14 @@ import { ListGroup, Button, Form, Row, Col, Card } from "react-bootstrap";
 import "../app.css";
 
 export default class ChatBox extends Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
     this.state = {
       textmsg: "",
       userid: this.props.userid,
       msgHistory: [],
-      socket: io.connect(`http://52.53.156.79:8080/${this.props.url}`, {
+      socket: io.connect(`http://54.183.228.36:8080/${this.props.url}`, {
         reconnection: true,
         reconnectionDelay: 500,
         reconnectionAttempts: 10
@@ -19,10 +20,12 @@ export default class ChatBox extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.receiveMessage = this.receiveMessage.bind(this);
     this.getMessage = this.getMessage.bind(this);
+  
   }
 
   componentDidMount = () => {
-    this.getMessage(this.receiveMessage);
+    this._isMounted = true;
+    this.state.socket.on("message", this.receieveMessage);
   };
 
   componentDidUpdate() {
@@ -39,6 +42,7 @@ export default class ChatBox extends Component {
   };
 
   receiveMessage(data) {
+    if(this._isMounted){
     this.setState(state => {
       const msgHistory = state.msgHistory.concat({
         title: data.title,
@@ -50,6 +54,7 @@ export default class ChatBox extends Component {
         textmsg: ""
       };
     });
+  }
   }
 
   sendMessage(message) {

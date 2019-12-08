@@ -300,10 +300,12 @@ router.post("/submitWinner/:gamesessionid", async (req, res) => {
   game.playersPicked = 0;
   await game.save();
 
+  
   await io.of(room).emit("state");
 });
 
 router.post("/join/:gamesessionid", async (req, res) => {
+  
   const io = req.app.get("socketio");
   const room = "/games/" + req.params.gamesessionid;
 
