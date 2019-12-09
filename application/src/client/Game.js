@@ -19,11 +19,11 @@ export default class Game extends Component {
     this.leaveRoom = this.leaveRoom.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({
+  componentWillMount = async () => {
+    await this.setState({
       url: this.props.match.params.gameid
     });
-  }
+  };
 
   leaveRoom() {
     console.log('ass');

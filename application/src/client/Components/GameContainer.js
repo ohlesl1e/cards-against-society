@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import io from 'socket.io-client';
+import React, { Component } from "react";
+import io from "socket.io-client";
 import {
   Button,
   ButtonGroup,
@@ -8,10 +8,10 @@ import {
   Container,
   Card,
   Spinner
-} from 'react-bootstrap';
-import PlayerList from './PlayerList';
-import '../app.css';
-import { retrieveCookie } from './Cookies';
+} from "react-bootstrap";
+import PlayerList from "./PlayerList";
+import "../app.css";
+import { retrieveCookie } from "./Cookies";
 
 export default class GameContainer extends Component {
   _isMounted = false;
@@ -29,7 +29,7 @@ export default class GameContainer extends Component {
       ],
       cardlist: [],
       socket: io.connect(
-        'http://54.183.228.36:8080/games/' + this.props.gameid,
+        "http://54.183.228.36:8080/games/" + this.props.gameid,
         {
           forceNew: true,
           reconnection: true,
@@ -38,13 +38,13 @@ export default class GameContainer extends Component {
           pintTimeout: 6000000000000000
         }
       ),
-      data: '',
+      data: "",
       hand: [],
-      blackCard: '',
+      blackCard: "",
       BCH: null,
       pick: null,
       players: null,
-      HostUserid: '',
+      HostUserid: "",
       allPlayersSubmitted: null,
       playerHasSubmitted: null,
       playerSelections: null,
@@ -64,8 +64,8 @@ export default class GameContainer extends Component {
   componentDidMount() {
     this._isMounted = true;
     this.receiveState();
-    this.state.socket.emit('subscribeToState');
-    this.state.socket.on('state', () => this.receiveState());
+    this.state.socket.emit("subscribeToState");
+    this.state.socket.on("state", () => this.receiveState());
 
     try {
       setInterval(async () => {
@@ -80,15 +80,15 @@ export default class GameContainer extends Component {
     // retrieves game info
 
     fetch(`http://54.183.228.36:4000/games/${this.props.gameid}`, {
-      method: 'POST',
-      credentials: 'same-origin',
+      method: "POST",
+      credentials: "same-origin",
       body: JSON.stringify({ userid: retrieveCookie() }),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     })
       .then(response => response.json())
-      .then((res) => {
+      .then(res => {
         if (this._isMounted) {
           this.setState(
             {
@@ -110,7 +110,7 @@ export default class GameContainer extends Component {
   }
 
   receiveState() {
-    console.log('state received');
+    console.log("state received");
     this.getInfo();
   }
 
@@ -119,14 +119,14 @@ export default class GameContainer extends Component {
   }
 
   updateState() {
-    this.state.socket.emit('subscribeToState');
+    this.state.socket.emit("subscribeToState");
   }
 
   submitSelection() {
     if (!this.checkBCH()) {
       // if the user is not the BCH
       if (this.state.cardlist.length !== this.state.pick) {
-        alert('please pick ' + this.state.pick + ' card(s)');
+        alert("please pick " + this.state.pick + " card(s)");
         this.resetCards();
       } else {
         const cards = [];
@@ -136,17 +136,17 @@ export default class GameContainer extends Component {
           }
         }
         fetch(`http://54.183.228.36:4000/games/update/${this.props.gameid}`, {
-          method: 'POST',
-          credentials: 'same-origin',
+          method: "POST",
+          credentials: "same-origin",
           body: JSON.stringify({
             userid: retrieveCookie(),
             cards
           }),
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
           }
         })
-          .then((response) => {
+          .then(response => {
             if (!response.ok) {
               alert("You've already picked your cards");
             }
@@ -162,11 +162,11 @@ export default class GameContainer extends Component {
         fetch(
           `http://54.183.228.36:4000/games/submitWinner/${this.props.gameid}`,
           {
-            method: 'POST',
-            credentials: 'same-origin',
+            method: "POST",
+            credentials: "same-origin",
             body: JSON.stringify({ winner }),
             headers: {
-              'Content-Type': 'application/json'
+              "Content-Type": "application/json"
             }
           }
         )
@@ -206,8 +206,8 @@ export default class GameContainer extends Component {
             }}
             className={
               this.state.cardsSelected[i][1]
-                ? 'white-card-selected white-card'
-                : 'white-card'
+                ? "white-card-selected white-card"
+                : "white-card"
             }
           >
             {this.checkHand(i)}
@@ -255,7 +255,7 @@ export default class GameContainer extends Component {
     }
     if (this.state.playerSelections !== null) {
       if (this.state.cardlist.length > 1) {
-        alert('pick one winner. \n one winner i tell ya!!');
+        alert("pick one winner. \n one winner i tell ya!!");
         this.resetCards();
       } else {
         const children = [];
@@ -295,8 +295,8 @@ export default class GameContainer extends Component {
               }}
               className={
                 this.state.cardsSelected[i][1]
-                  ? 'selection-selected selection'
-                  : 'selection'
+                  ? "selection-selected selection"
+                  : "selection"
               }
             >
               {this.state.playerSelections[i].userid}
@@ -306,7 +306,7 @@ export default class GameContainer extends Component {
         }
 
         return (
-          <div className={this.checkBCH() ? 'game-display-submitted' : ''}>
+          <div className={this.checkBCH() ? "game-display-submitted" : ""}>
             <Row>{children}</Row>
           </div>
         );
@@ -332,7 +332,7 @@ export default class GameContainer extends Component {
         );
       }
       return (
-        <div className={this.checkBCH() ? 'game-display' : ''}>
+        <div className={this.checkBCH() ? "game-display" : ""}>
           <Row>{children}</Row>
         </div>
       );
@@ -361,13 +361,7 @@ export default class GameContainer extends Component {
               <Card bg="dark" text="white" className="black-card">
                 <Card.Body>
                   <Card.Text>{this.state.blackCard}</Card.Text>
-                  <Card.Text>
-*pick
-{' '}
-{this.state.pick}
-{' '}
-card(s)*
-</Card.Text>
+                  <Card.Text>*pick {this.state.pick} card(s)*</Card.Text>
                 </Card.Body>
               </Card>
             </div>

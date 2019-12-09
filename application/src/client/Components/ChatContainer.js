@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import io from "socket.io-client";
-import { Tabs, Tab } from "react-bootstrap";
-import "../app.css";
-import Chatbox from "./Chatbox";
+import React, { Component } from 'react';
+import io from 'socket.io-client';
+import { Tabs, Tab } from 'react-bootstrap';
+import '../app.css';
+import Chatbox from './Chatbox';
 
 export default class ChatContainer extends Component {
   constructor(props) {
@@ -10,7 +10,9 @@ export default class ChatContainer extends Component {
     this.state = {};
   }
 
-  componentDidMount = () => {};
+  componentDidMount = () => {
+    alert(this.props.url);
+  };
 
   render = () => (
     <Tabs defaultActiveKey="private">
@@ -19,7 +21,7 @@ export default class ChatContainer extends Component {
         title="Public"
         className="justify-content-center game-row"
       >
-        <Chatbox userid={this.props.userid} url={"lobby"} />
+        <Chatbox userid={this.props.userid} url="lobby" />
       </Tab>
       <Tab
         eventKey="private"
