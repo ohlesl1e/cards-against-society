@@ -79,7 +79,7 @@ export default class GameContainer extends Component {
   getInfo() {
     // retrieves game info
 
-    fetch(`http://localhost:4000/games/${this.props.gameid}`, {
+    fetch(`http://54.183.228.36:4000/games/${this.props.gameid}`, {
       method: 'POST',
       credentials: 'same-origin',
       body: JSON.stringify({ userid: retrieveCookie() }),
@@ -135,7 +135,7 @@ export default class GameContainer extends Component {
             cards.push(this.state.hand[i][0]);
           }
         }
-        fetch(`http://localhost:4000/games/update/${this.props.gameid}`, {
+        fetch(`http://54.183.228.36:4000/games/update/${this.props.gameid}`, {
           method: 'POST',
           credentials: 'same-origin',
           body: JSON.stringify({

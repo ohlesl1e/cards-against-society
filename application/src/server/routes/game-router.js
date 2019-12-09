@@ -116,6 +116,10 @@ router.post('/:gamesessionid', async (req, res) => {
     }
   });
 
+  await game.getHost().then(async (host) => {
+    results[9] = host.userid;
+  });
+
   await game.getBCH().then(async (bch) => {
     if (bch.userid === user.userid) {
       console.log('bch request');

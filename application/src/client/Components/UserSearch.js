@@ -16,7 +16,7 @@ export default class UserSearch extends Component {
 
   getUsers(e) {
     e.preventDefault();
-    fetch('http://localhost:4000/users/userSearch', {
+    fetch('http://54.183.228.36:4000/users/userSearch', {
       method: 'PUT',
       credentials: 'same-origin',
       body: JSON.stringify(this.state),

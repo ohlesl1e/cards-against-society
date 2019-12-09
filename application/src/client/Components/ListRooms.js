@@ -30,7 +30,7 @@ export default class ListRooms extends Component {
   }
 
   getLobbies() {
-    fetch('http://localhost:4000' + this.props.url)
+    fetch('http://54.183.228.36:4000' + this.props.url)
       .then(response => response.json())
       .then((res) => {
         if (this._isMounted) {
@@ -138,7 +138,7 @@ export default class ListRooms extends Component {
   }
 
   handleRouteChange(link) {
-    fetch(`http://localhost:4000/games/join/${link.gameid}`, {
+    fetch(`http://54.183.228.36:4000/games/join/${link.gameid}`, {
       method: 'POST',
       credentials: 'same-origin',
       body: JSON.stringify({ userid: retrieveCookie() }),

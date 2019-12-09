@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Button,
   FormGroup,
@@ -6,41 +6,41 @@ import {
   FormLabel,
   Image,
   Carousel
-} from 'react-bootstrap';
-import './app.css';
-import { Link } from 'react-router-dom';
-import { saveCookie } from './Components/Cookies';
+} from "react-bootstrap";
+import "./app.css";
+import { Link } from "react-router-dom";
+import { saveCookie } from "./Components/Cookies";
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
     this.handleRouteChange = this.handleRouteChange.bind(this);
     this.state = {
-      userid: '',
-      password: ''
+      userid: "",
+      password: ""
     };
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({
       [event.target.id]: event.target.value
     });
   };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
-    fetch('http://localhost:4000/users/login', {
-      method: 'POST',
-      credentials: 'same-origin',
+    fetch("http://54.183.228.36:4000/users/login", {
+      method: "POST",
+      credentials: "same-origin",
       body: JSON.stringify(this.state),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     })
       .then(res => res.json())
-      .then((res) => {
+      .then(res => {
         if (res.status === 401) {
-          alert('Sorry please check log-in credentials');
+          alert("Sorry please check log-in credentials");
         } else if (res.password === true) {
           saveCookie(res.userid);
           this.handleRouteChange();
@@ -49,14 +49,14 @@ export default class Login extends Component {
           throw error;
         }
       })
-      .catch((err) => {
-        alert('Error logging in please try again');
+      .catch(err => {
+        alert("Error logging in please try again");
         console.error(err);
       });
   };
 
   handleRouteChange() {
-    this.props.history.push('/lobby');
+    this.props.history.push("/lobby");
   }
 
   validateForm() {
@@ -71,28 +71,28 @@ export default class Login extends Component {
             <Carousel>
               <Carousel.Item>
                 <Image
-                  src={require('./images/bluecat.jpeg')}
+                  src={require("./images/bluecat.jpeg")}
                   fluid
                   alt="First slide"
                 />
               </Carousel.Item>
               <Carousel.Item>
                 <Image
-                  src={require('./images/fishgun.png')}
+                  src={require("./images/fishgun.png")}
                   fluid
                   alt="Second slide"
                 />
               </Carousel.Item>
               <Carousel.Item>
                 <Image
-                  src={require('./images/kokokok.jpg')}
+                  src={require("./images/kokokok.jpg")}
                   fluid
                   alt="Third slide"
                 />
               </Carousel.Item>
               <Carousel.Item>
                 <Image
-                  src={require('./images/wizardcat.jpg')}
+                  src={require("./images/wizardcat.jpg")}
                   fluid
                   alt="Fourth slide"
                 />

@@ -1,14 +1,17 @@
-import React, { Component } from "react";
-import io from "socket.io-client";
-import { ListGroup, Button, Form, Row, Col, Card } from "react-bootstrap";
-import "../app.css";
+import React, { Component } from 'react';
+import io from 'socket.io-client';
+import {
+ ListGroup, Button, Form, Row, Col, Card 
+} from 'react-bootstrap';
+import '../app.css';
 
 export default class ChatBox extends Component {
   _isMounted = false;
+
   constructor(props) {
     super(props);
     this.state = {
-      textmsg: "",
+      textmsg: '',
       userid: this.props.userid,
       msgHistory: [],
       socket: io.connect(`http://54.183.228.36:8080/${this.props.url}`, {
@@ -20,12 +23,11 @@ export default class ChatBox extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.receiveMessage = this.receiveMessage.bind(this);
     this.getMessage = this.getMessage.bind(this);
-  
   }
 
   componentDidMount = () => {
     this._isMounted = true;
-    this.state.socket.on("message", this.receieveMessage);
+    this.state.socket.on('message', this.receieveMessage);
   };
 
   componentDidUpdate() {
@@ -34,7 +36,7 @@ export default class ChatBox extends Component {
   }
 
   getMessage(receieveMessage) {
-    this.state.socket.on("message", receieveMessage);
+    this.state.socket.on('message', receieveMessage);
   }
 
   handleSubmit = () => {
@@ -42,23 +44,23 @@ export default class ChatBox extends Component {
   };
 
   receiveMessage(data) {
-    if(this._isMounted){
-    this.setState(state => {
-      const msgHistory = state.msgHistory.concat({
-        title: data.title,
-        description: data.msg,
-        userid: data.userid
+    if (this._isMounted) {
+      this.setState((state) => {
+        const msgHistory = state.msgHistory.concat({
+          title: data.title,
+          description: data.msg,
+          userid: data.userid
+        });
+        return {
+          msgHistory,
+          textmsg: ''
+        };
       });
-      return {
-        msgHistory,
-        textmsg: ""
-      };
-    });
-  }
+    }
   }
 
   sendMessage(message) {
-    this.state.socket.emit("subscribeToChat", message);
+    this.state.socket.emit('subscribeToChat', message);
   }
 
   handleChange(event) {
