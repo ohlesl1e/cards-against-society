@@ -10,9 +10,7 @@ export default class ChatContainer extends Component {
     this.state = {};
   }
 
-  componentDidMount = () => {
-    alert(this.props.url);
-  };
+  componentDidMount = () => {};
 
   render = () => (
     <Tabs defaultActiveKey="private">

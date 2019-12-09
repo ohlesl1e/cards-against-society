@@ -1,22 +1,19 @@
-import React, { Component } from 'react';
-import {
- Container, Row, Col, ButtonGroup, Button 
-} from 'react-bootstrap';
-import Header from './Components/Header';
-import { retrieveCookie } from './Components/Cookies';
-import Chatbox from './Components/Chatbox';
-import GameContainer from './Components/GameContainer';
-import ChatContainer from './Components/ChatContainer';
-import GameButtons from './Components/GameButtons';
+import React, { Component } from "react";
+import { Container, Row, Col, ButtonGroup, Button } from "react-bootstrap";
+import Header from "./Components/Header";
+import { retrieveCookie } from "./Components/Cookies";
+import Chatbox from "./Components/Chatbox";
+import GameContainer from "./Components/GameContainer";
+import ChatContainer from "./Components/ChatContainer";
+import GameButtons from "./Components/GameButtons";
 
 export default class Game extends Component {
   constructor() {
     super();
     this.state = {
-      userid: retrieveCookie('userid'),
-      url: ''
+      userid: retrieveCookie("userid"),
+      url: ""
     };
-    this.leaveRoom = this.leaveRoom.bind(this);
   }
 
   componentWillMount = async () => {
@@ -24,10 +21,6 @@ export default class Game extends Component {
       url: this.props.match.params.gameid
     });
   };
-
-  leaveRoom() {
-    console.log('ass');
-  }
 
   render() {
     return (
@@ -42,7 +35,7 @@ export default class Game extends Component {
                 <ChatContainer
                   className="chat-container"
                   userid={this.state.userid}
-                  url={'games/' + this.state.url}
+                  url={"games/" + this.state.url}
                 />
               </Col>
               <Col md="3">

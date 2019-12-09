@@ -1,13 +1,15 @@
-import React, { Component } from "react";
-import io from "socket.io-client";
-import { ListGroup, Button, Form, Row, Col, Card } from "react-bootstrap";
-import "../app.css";
+import React, { Component } from 'react';
+import io from 'socket.io-client';
+import {
+ ListGroup, Button, Form, Row, Col, Card 
+} from 'react-bootstrap';
+import '../app.css';
 
 export default class ChatBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      textmsg: "",
+      textmsg: '',
       userid: this.props.userid,
       msgHistory: [],
       socket: io.connect(`http://54.183.228.36:8080/${this.props.url}`)
@@ -27,7 +29,7 @@ export default class ChatBox extends Component {
   }
 
   getMessage(receieveMessage) {
-    this.state.socket.on("message", receieveMessage);
+    this.state.socket.on('message', receieveMessage);
   }
 
   handleSubmit = () => {
@@ -35,7 +37,7 @@ export default class ChatBox extends Component {
   };
 
   receiveMessage(data) {
-    this.setState(state => {
+    this.setState((state) => {
       const msgHistory = state.msgHistory.concat({
         title: data.title,
         description: data.msg,
@@ -48,9 +50,9 @@ export default class ChatBox extends Component {
   }
 
   sendMessage(message) {
-    this.state.socket.emit("subscribeToChat", message);
+    this.state.socket.emit('subscribeToChat', message);
     this.setState(state => ({
-      textmsg: ""
+      textmsg: ''
     }));
   }
 
