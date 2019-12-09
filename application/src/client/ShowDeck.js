@@ -34,7 +34,7 @@ export class ShowDeck extends Component {
 
     getCard = () => {
         for (let index = 0; index < this.props.deck.cards.length; index++) {
-            if (this.props.deck.cards[index].content == event.target.value) {
+            if (this.props.deck.cards[index].content == event.currentTarget.value) {
                 this.setState({ calledCard: index })
                 break
             }
@@ -55,6 +55,8 @@ export class ShowDeck extends Component {
     render() {
         let formClose = () => this.setState({ formShow: false })
         let cardClose = () => this.setState({ cardShow: false })
+        console.log(this.props.index);
+        
         if (this.props.deck != null) {
             return (
                 <div>
@@ -92,7 +94,7 @@ export class ShowDeck extends Component {
                                 </Row>
                             </Modal.Title>
                         </Modal.Header>
-                        <Modal.Body>
+                        <Modal.Body className="deckWrapper">
                             <Container>
                                 <Row>
                                     {this.props.deck.cards.map(c => {

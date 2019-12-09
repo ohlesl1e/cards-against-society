@@ -1,21 +1,26 @@
-import React, { Component } from 'react';
-import {
- Container, Row, Col, ButtonGroup, Button 
-} from 'react-bootstrap';
-import Header from './Components/Header';
-import { retrieveCookie } from './Components/Cookies';
-import Chatbox from './Components/Chatbox';
-import GameContainer from './Components/GameContainer';
+import React, { Component } from "react";
+import { Container, Row, Col, ButtonGroup, Button } from "react-bootstrap";
+import Header from "./Components/Header";
+import { retrieveCookie } from "./Components/Cookies";
+import Chatbox from "./Components/Chatbox";
+import GameContainer from "./Components/GameContainer";
+import ChatContainer from "./Components/ChatContainer";
+import GameButtons from "./Components/GameButtons";
 
 export default class Game extends Component {
   constructor() {
     super();
     this.state = {
-      userid: retrieveCookie('userid')
+      userid: retrieveCookie("userid"),
+      url: ""
     };
   }
 
-  componentDidMount() {}
+  componentWillMount = async () => {
+    await this.setState({
+      url: this.props.match.params.gameid
+    });
+  };
 
   render() {
     return (
@@ -26,16 +31,15 @@ export default class Game extends Component {
           <Container>
             <br />
             <Row className="justify-content-center">
-              <Col md="9">
-                <Chatbox userid={this.state.userid} url="lobby" />
+              <Col md="9" className="justify-content-center game-row">
+                <ChatContainer
+                  className="chat-container"
+                  userid={this.state.userid}
+                  url={"games/" + this.state.url}
+                />
               </Col>
               <Col md="3">
-                <ButtonGroup vertical size="lg">
-                  <Button variant="outline-dark">Edit Game Rules</Button>
-                  <Button variant="outline-dark">Invite Friends</Button>
-                  <Button variant="outline-dark">Kick Player</Button>
-                  <Button variant="outline-dark">Leave Room</Button>
-                </ButtonGroup>
+                <GameButtons gameid={this.props.match.params.gameid} />
               </Col>
             </Row>
           </Container>

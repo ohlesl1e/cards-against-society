@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Table, Form } from "react-bootstrap";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Table, Form } from 'react-bootstrap';
 
 export default class UserSearch extends Component {
   constructor(props) {
@@ -16,16 +16,16 @@ export default class UserSearch extends Component {
 
   getUsers(e) {
     e.preventDefault();
-    fetch("/users/userSearch", {
-      method: "PUT",
-      credentials: "same-origin",
+    fetch('http://54.183.228.36:4000/users/userSearch', {
+      method: 'PUT',
+      credentials: 'same-origin',
       body: JSON.stringify(this.state),
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       }
     })
       .then(response => response.json())
-      .then(res => {
+      .then((res) => {
         this.setState(
           {
             data: res
@@ -45,7 +45,10 @@ export default class UserSearch extends Component {
           <Table>
             <tbody>
               <tr className="lobby_Games">
-                <th scope="col"> {"users: "}</th>
+                <th scope="col"> 
+{' '}
+{"users: "}
+</th>
               </tr>
             </tbody>
           </Table>
@@ -69,7 +72,7 @@ export default class UserSearch extends Component {
   };
 
   handleChange(event) {
-    if (event.target.value == "") {
+    if (event.target.value == '') {
       this.setState({ userid: null });
     } else {
       this.setState({ userid: event.target.value });
@@ -78,7 +81,7 @@ export default class UserSearch extends Component {
 
   render() {
     return (
-      <div className="wrapper">
+      <div className="wrappser">
         <div className="form-wrapper">
           <br />
           <Form onSubmit={this.getUsers}>

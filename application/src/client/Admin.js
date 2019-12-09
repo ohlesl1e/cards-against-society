@@ -4,6 +4,7 @@ import { retrieveCookie } from './Components/Cookies';
 import './app.css';
 import ListRooms from './Components/ListRooms';
 import UserSearch from './Components/UserSearch';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
 export default class Admin extends Component {
   state = {
@@ -17,6 +18,7 @@ export default class Admin extends Component {
           <Header userid={this.state.userid} />
         </div>
 
+        <Container>
         <div className="sidebarContainer">
           <div className="sidebarAdmin">Admin Control</div>
 
@@ -57,18 +59,26 @@ export default class Admin extends Component {
           </div>
         </div>
 
-        <div className="column2">
+        <Row>
+        
+          <Col md="6">
           <h2>Active Game Rooms</h2>
           <ListRooms url="games/allgames" />
-          <h5># of Active Game Rooms:</h5>
-        </div>
+          <button type="button" class="btn btn-dark"> Delete Room </button>
+          </Col>
 
-        <div className="column2">
+        
+          <Col md="6">
+        <div className="admin_usercol">
           <h2>Users</h2>
-          <UserSearch userid=" " />
-          <h5># of Users:</h5>
-        </div>
+          <UserSearch userid="" />
+          <button type="button" class="btn btn-dark"> Delete User </button>
+          </div>
+          </Col>
+        </Row>
+        </Container>
       </body>
+      
     );
   }
 }

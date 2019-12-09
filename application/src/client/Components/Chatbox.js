@@ -12,7 +12,7 @@ export default class ChatBox extends Component {
       textmsg: '',
       userid: this.props.userid,
       msgHistory: [],
-      socket: io.connect(`http://52.53.156.79:8080/${this.props.url}`)
+      socket: io.connect(`http://54.183.228.36:8080/${this.props.url}`)
     };
     this.handleChange = this.handleChange.bind(this);
     this.receiveMessage = this.receiveMessage.bind(this);
@@ -44,14 +44,16 @@ export default class ChatBox extends Component {
         userid: data.userid
       });
       return {
-        msgHistory,
-        textmsg: ''
+        msgHistory
       };
     });
   }
 
   sendMessage(message) {
     this.state.socket.emit('subscribeToChat', message);
+    this.setState(state => ({
+      textmsg: ''
+    }));
   }
 
   handleChange(event) {

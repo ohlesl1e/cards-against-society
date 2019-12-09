@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Modal, Button, Row, Col, Form, Container, ButtonToolbar } from 'react-bootstrap'
+import './CustomCard.css'
 
 export class ShowCard extends Component {
     constructor(props) {
