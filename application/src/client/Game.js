@@ -6,6 +6,7 @@ import Chatbox from "./Components/Chatbox";
 import GameContainer from "./Components/GameContainer";
 import ChatContainer from "./Components/ChatContainer";
 import {Redirect} from "react-router-dom"
+import GameButtons from "./Components/GameButtons";
 
 export default class Game extends Component {
   constructor() {
@@ -26,8 +27,15 @@ export default class Game extends Component {
     if (!retrieveCookie("userid")) {
       this.setState({notloggedin: true})
       alert("please log in!");
-    }
+      url: ""
+    };
   }
+
+  componentWillMount = async () => {
+    await this.setState({
+      url: this.props.match.params.gameid
+    });
+  };
 
   render() {
     return (
@@ -43,16 +51,11 @@ export default class Game extends Component {
                 <ChatContainer
                   className="chat-container"
                   userid={this.state.userid}
-                  url={"games/" + this.props.match.params.gameid}
+                  url={"games/" + this.state.url}
                 />
               </Col>
               <Col md="3">
-                <ButtonGroup vertical size="lg">
-                  <Button variant="outline-dark">Edit Game Rules</Button>
-                  <Button variant="outline-dark">Invite Friends</Button>
-                  <Button variant="outline-dark">Kick Player</Button>
-                  <Button variant="outline-dark">Leave Room</Button>
-                </ButtonGroup>
+                <GameButtons gameid={this.props.match.params.gameid} />
               </Col>
             </Row>
           </Container>

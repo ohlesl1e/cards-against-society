@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { Button, FormGroup, FormControl, FormLabel, Image, Carousel } from "react-bootstrap";
+import {
+  Button,
+  FormGroup,
+  FormControl,
+  FormLabel,
+  Image,
+  Carousel
+} from "react-bootstrap";
 import "./app.css";
 import { Link } from "react-router-dom";
 import { saveCookie } from "./Components/Cookies";
@@ -22,7 +29,7 @@ export default class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    fetch("http://52.53.156.79:4000/users/login", {
+    fetch("http://54.183.228.36:4000/users/login", {
       method: "POST",
       credentials: "same-origin",
       body: JSON.stringify(this.state),
@@ -58,26 +65,42 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div class="wrapper">
-        <div class="left">
+      <div className="wrapper">
+        <div className="left">
           <div id="slideshow">
             <Carousel>
               <Carousel.Item>
-                <Image src={require('./images/bluecat.jpeg')} fluid alt="First slide"/>
+                <Image
+                  src={require("./images/Lobby.png")}
+                  fluid
+                  alt="First slide"
+                />
               </Carousel.Item>
               <Carousel.Item>
-                <Image src={require('./images/fishgun.png')} fluid alt="Second slide"/>
+                <Image
+                  src={require("./images/CustomCard.png")}
+                  fluid
+                  alt="Second slide"
+                />
               </Carousel.Item>
               <Carousel.Item>
-                <Image src={require('./images/kokokok.jpg')} fluid alt="Third slide"/>
+                <Image
+                  src={require("./images/BlackCardH.png")}
+                  fluid
+                  alt="Third slide"
+                />
               </Carousel.Item>
               <Carousel.Item>
-                <Image src={require('./images/wizardcat.jpg')} fluid alt="Fourth slide"/>
+                <Image
+                  src={require("./images/GameSet.png")}
+                  fluid
+                  alt="Fourth slide"
+                />
               </Carousel.Item>
             </Carousel>
           </div>
         </div>
-        <div class="right">
+        <div className="right">
           <div className="wrap2">
             <h1 id="justice">
               <b>Cards Against Society</b>

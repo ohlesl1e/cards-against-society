@@ -48,7 +48,7 @@
 }
 
 .admin_usercol {
-  padding-top: 20px;
+  padding-left: 100px;
   float: left;
 }
 
@@ -73,8 +73,6 @@
 }
 
 .my-games {
-  margin-left: 400px;
-  margin-right: 400px;
 }
 
 .navselection {
@@ -324,46 +322,20 @@
 
 #slideshow {
   overflow: hidden;
-  max-height: 75%;
+  max-height: 40%;
   width: 80%;
   margin: 0 auto;
-  margin-top: 10%;
+  margin-top: 30vh;
 }
 
-.slide-wrapper {
-  width: 2912px;
-  -webkit-animation: slide 24s ease infinite;
+.carousel .thumb img {
+  width: 100% !important;
+  height: 100% !important;
 }
 
-.slide {
-  float: left;
-  height: 100vh;
-  width: 728px;
-  margin-top: 20px;
-}
-
-.slide:nth-child(1) {
-  background: #d93b65;
-  background-repeat: no-repeat;
-}
-
-.slide:nth-child(2) {
-  background: #037e8c;
-}
-
-.slide:nth-child(3) {
-  background: #36bf66;
-}
-
-.slide:nth-child(4) {
-  background: #d9d055;
-}
-
-.slide-number {
-  margin-top: 25%;
-  color: #000;
-  text-align: center;
-  font-size: 10em;
+.carousel .slide img {
+  max-height: 300px;  /* change this to whatever you want */
+  width: auto;
 }
 
 @-webkit-keyframes slide {
@@ -401,12 +373,12 @@
   border-style: solid;
   border-width: 1.5px;
   border-color: #333940;
-  min-width: 100%;
-  height: 95.5%;
   background-color: #fcfcfc;
   border-radius: 7px;
+  padding: 1em;
   margin: 0 auto;
 }
+
 
 .wrapper_users {
   min-width: 100%;
@@ -436,4 +408,38 @@
   width: 100%;
   background:linear-gradient(rgb(255, 255, 255),transparent);
   background-color:rgb(112, 109, 133);
+}
+
+.panel-heading{
+  text-align: center;
+  color: white;
+  background-color: #333940;
+  padding: 6.5px;
+  font-size: 14px;
+  border-radius: 5px;
+}
+
+.pagination-style {
+  width: 8rem;
+} 
+
+.pagination-button {
+  display:flex;
+  width: 2rem;
+}
+
+.pagination-href {
+  color: white;
+}
+
+.div-pagination {
+  display:flex;
+  justify-content:center;
+  margin-left: -5.5%;
+}
+
+@media only screen and (max-width: 575px) {
+  .div-pagination {
+    margin-left: 0%;
+  }
 }

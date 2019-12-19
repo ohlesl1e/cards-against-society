@@ -1,35 +1,51 @@
-const express = require("express");
-const Sequelize = require("sequelize");
-const bodyParser = require("body-parser");
+const express = require('express');
+const Sequelize = require('sequelize');
+const bodyParser = require('body-parser');
 
 const router = express.Router();
-const models = require("../models");
+const models = require('../models');
 
 const app = express();
 const op = Sequelize.Op;
 
-router.get("/allgames", async (req, res) => {
-  const results = await models.gamesessions.findAll({
-    raw: true
-  });
+router.get('/allgames', async (req, res) => {
+  const results = await models.gamesessions.findAll({});
+
   res.send(results);
 });
 
-router.get("/mygames/:userid", async (req, res) => {
+router.get('/mygames/:userid', async (req, res) => {
   const user = await models.user.findOne({
     where: {
       userid: req.params.userid
     }
   });
-  await user.getGame().then(async games => {
+  await user.getGame().then(async (games) => {
     res.send(games);
   });
 });
 
-router.post("/newgame", async (req, res) => {
+router.post('/deleteroom/:gamesessionid', async (req, res) => {
+  const room = `/games/${req.params.gamesessionid}`;
+  const io = req.app.get('socketio');
+  const msg = {
+    msg: 'This game session has been deleted.',
+    title: 'Bot'
+  };
+  await io.of(room).emit('message', msg);
+  await io.of('/lobby').emit('roomUpdate');
+  await models.gamesessions.destroy({
+    where: {
+      gameid: req.params.gamesessionid
+    }
+  });
+  res.send();
+});
+
+router.post('/newgame', async (req, res) => {
   const blackCard = await models.blackCard.findOne({
     // retrieving random black card
-    order: Sequelize.literal("rand()")
+    order: Sequelize.literal('rand()')
   });
 
   const host = req.body.userid;
@@ -62,28 +78,28 @@ router.post("/newgame", async (req, res) => {
   for (let i = 0; i < 5; i++) {
     // creating new hand
     models.whiteCard
-      .findOne({ order: Sequelize.literal("rand()") })
-      .then(async whiteCard => {
+      .findOne({ order: Sequelize.literal('rand()') })
+      .then(async (whiteCard) => {
         newHand.addCard(whiteCard);
       });
   }
-  const io = req.app.get("socketio");
-  io.of("/lobby").emit("roomUpdate");
+  const io = req.app.get('socketio');
+  io.of('/lobby').emit('roomUpdate');
   res.send(game);
 });
 
-router.post("/:gamesessionid", async (req, res) => {
-  const room = "/games/" + req.params.gamesessionid;
+router.post('/:gamesessionid', async (req, res) => {
+  const room = `/games/${req.params.gamesessionid}`;
 
-  const io = req.app.get("socketio");
-  io.of(room).on("connection", async client => {
+  const io = req.app.get('socketio');
+  io.of(room).on('connection', async (client) => {
     client.removeAllListeners();
-    client.on("subscribeToChat", async msg => {
-      io.of(room).emit("message", msg);
+    client.on('subscribeToChat', async (msg) => {
+      io.of(room).emit('message', msg);
     });
 
-    client.on("subscribeToState", async () => {
-      io.of(room).emit("state");
+    client.on('subscribeToState', async () => {
+      io.of(room).emit('state');
     });
   });
 
@@ -100,11 +116,15 @@ router.post("/:gamesessionid", async (req, res) => {
     }
   });
 
-  await game.getBCH().then(async bch => {
+  await game.getHost().then(async (host) => {
+    results[9] = host.userid;
+  });
+
+  await game.getBCH().then(async (bch) => {
     if (bch.userid === user.userid) {
-      console.log("bch request");
+      console.log('bch request');
       if (game.playersPicked === game.playerCount - 1) {
-        console.log("ready for selection");
+        console.log('ready for selection');
         results[7] = game.gameState.state;
       } else if (game.playersPicked > game.playerCount - 1) {
         game.playersPicked = game.playerCount - 1;
@@ -117,7 +137,7 @@ router.post("/:gamesessionid", async (req, res) => {
     }
   });
 
-  await game.getPlayer().then(async players => {
+  await game.getPlayer().then(async (players) => {
     // retrieving userids in game
     const playerNames = [];
     if (game.playersPicked === game.playerCount - 1) {
@@ -126,7 +146,7 @@ router.post("/:gamesessionid", async (req, res) => {
       results[5] = false;
     }
     results[6] = false;
-    game.gameState.state.forEach(async state => {
+    game.gameState.state.forEach(async (state) => {
       if (state.userid === req.body.userid) {
         results[6] = true;
       }
@@ -134,25 +154,25 @@ router.post("/:gamesessionid", async (req, res) => {
 
     results[4] = game.pick;
     results[8] = game.gameState.points;
-    players.forEach(player => {
+    players.forEach((player) => {
       playerNames.push(player.userid);
     });
     results[2] = playerNames;
   });
-  await game.getBCH().then(async bch => {
+  await game.getBCH().then(async (bch) => {
     // retrieving current BCH of game
     results[3] = bch.userid;
   });
   await game // the hand of the player is retrieved
     .getHand()
-    .then(async hands => {
-      hands.forEach(hand => {
-        user.getHand().then(async playerHands => {
-          playerHands.forEach(playerHand => {
+    .then(async (hands) => {
+      hands.forEach((hand) => {
+        user.getHand().then(async (playerHands) => {
+          playerHands.forEach((playerHand) => {
             if (playerHand.handID === hand.handID) {
               results[0] = [];
-              hand.getCard().then(async cards => {
-                cards.forEach(card => {
+              hand.getCard().then(async (cards) => {
+                cards.forEach((card) => {
                   const cardArr = [];
                   cardArr.push(card.text);
                   cardArr.push(card.id);
@@ -160,7 +180,7 @@ router.post("/:gamesessionid", async (req, res) => {
                 });
                 models.blackCard
                   .findOne({ where: { id: game.CurrentBlackCardId } })
-                  .then(async blackCard => {
+                  .then(async (blackCard) => {
                     results[1] = blackCard.text;
                     res.send(results);
                   });
@@ -170,14 +190,14 @@ router.post("/:gamesessionid", async (req, res) => {
         });
       });
     })
-    .catch(error => {
+    .catch((error) => {
       res.status(400).send(error);
     });
 });
 
-router.post("/update/:gamesessionid", async (req, res) => {
-  const io = req.app.get("socketio");
-  const room = "/games/" + req.params.gamesessionid;
+router.post('/update/:gamesessionid', async (req, res) => {
+  const io = req.app.get('socketio');
+  const room = `/games/${req.params.gamesessionid}`;
   const user = await models.user.findOne({
     where: {
       userid: req.body.userid
@@ -185,13 +205,13 @@ router.post("/update/:gamesessionid", async (req, res) => {
   });
   await models.gamesessions
     .findOne({ where: { gameid: req.params.gamesessionid } })
-    .then(async game => {
+    .then(async (game) => {
       const newState = game.gameState;
 
       let submitted = false;
-      await newState.state.forEach(async state => {
+      await newState.state.forEach(async (state) => {
         if (state.userid === req.body.userid) {
-          console.log("user already submitted\n");
+          console.log('user already submitted\n');
           submitted = true;
           res.status(401);
           res.send();
@@ -205,22 +225,22 @@ router.post("/update/:gamesessionid", async (req, res) => {
         await game.update({ gameState: newState });
         await game // the hand of the player is retrieved
           .getHand()
-          .then(async hands => {
-            hands.forEach(hand => {
-              user.getHand().then(async playerHands => {
-                playerHands.forEach(playerHand => {
+          .then(async (hands) => {
+            hands.forEach((hand) => {
+              user.getHand().then(async (playerHands) => {
+                playerHands.forEach((playerHand) => {
                   if (playerHand.handID === hand.handID) {
-                    hand.getCard().then(async cards => {
-                      cards.forEach(card => {
+                    hand.getCard().then(async (cards) => {
+                      cards.forEach((card) => {
                         if (req.body.cards.includes(card.text)) {
                           console.log(card.text);
                           models.whiteCard
-                            .findOne({ order: Sequelize.literal("rand()") })
-                            .then(async whiteCard => {
+                            .findOne({ order: Sequelize.literal('rand()') })
+                            .then(async (whiteCard) => {
                               await hand.removeCard(card);
                               await hand.addCard(whiteCard);
                               await hand.save();
-                              await io.of(room).emit("state");
+                              await io.of(room).emit('state');
                             });
                         }
                       });
@@ -234,9 +254,9 @@ router.post("/update/:gamesessionid", async (req, res) => {
     });
 });
 
-router.post("/submitWinner/:gamesessionid", async (req, res) => {
-  const io = req.app.get("socketio");
-  const room = "/games/" + req.params.gamesessionid;
+router.post('/submitWinner/:gamesessionid', async (req, res) => {
+  const io = req.app.get('socketio');
+  const room = `/games/${req.params.gamesessionid}`;
   const game = await models.gamesessions.findOne({
     where: { gameid: req.params.gamesessionid }
   });
@@ -246,7 +266,7 @@ router.post("/submitWinner/:gamesessionid", async (req, res) => {
 
   let winningCards = 0;
   for (let i = 0; i < game.gameState.state.length; i++) {
-    console.log(game.gameState.state[i].userid + "\n\n");
+    console.log(`${game.gameState.state[i].userid}\n\n`);
     if (game.gameState.state[i].userid === req.body.winner) {
       winningCards = i;
     }
@@ -254,27 +274,27 @@ router.post("/submitWinner/:gamesessionid", async (req, res) => {
 
   const msgWinner = {
     msg: `${req.body.winner} has won the round!`,
-    title: "Bot"
+    title: 'Bot'
   };
-  await io.of(room).emit("message", msgWinner);
+  await io.of(room).emit('message', msgWinner);
 
   const msgBlackCard = {
     msg: `${currentBC.text}`,
-    title: ""
+    title: ''
   };
-  await io.of(room).emit("message", msgBlackCard);
+  await io.of(room).emit('message', msgBlackCard);
 
-  game.gameState.state[winningCards].cards.forEach(async card => {
+  game.gameState.state[winningCards].cards.forEach(async (card) => {
     const msgResponses = {
       msg: `${card}`,
-      title: ""
+      title: ''
     };
-    await io.of(room).emit("message", msgResponses);
+    await io.of(room).emit('message', msgResponses);
   });
 
   const blackCard = await models.blackCard.findOne({
     // retrieving random black card
-    order: Sequelize.literal("rand()")
+    order: Sequelize.literal('rand()')
   });
 
   const user = await models.user.findOne({
@@ -285,7 +305,7 @@ router.post("/submitWinner/:gamesessionid", async (req, res) => {
 
   const newState = game.gameState;
 
-  newState.points.forEach(async pointCounter => {
+  newState.points.forEach(async (pointCounter) => {
     const winner = pointCounter[req.body.winner];
     if (winner !== undefined) {
       pointCounter[req.body.winner] = pointCounter[req.body.winner] + 1;
@@ -300,12 +320,12 @@ router.post("/submitWinner/:gamesessionid", async (req, res) => {
   game.playersPicked = 0;
   await game.save();
 
-  await io.of(room).emit("state");
+  await io.of(room).emit('state');
 });
 
-router.post("/join/:gamesessionid", async (req, res) => {
-  const io = req.app.get("socketio");
-  const room = "/games/" + req.params.gamesessionid;
+router.post('/join/:gamesessionid', async (req, res) => {
+  const io = req.app.get('socketio');
+  const room = `/games/${req.params.gamesessionid}`;
 
   let found = false; // to check if user is already in the game
   const game = await models.gamesessions.findOne({
@@ -316,8 +336,8 @@ router.post("/join/:gamesessionid", async (req, res) => {
       userid: req.body.userid
     }
   });
-  await game.getPlayer().then(async players => {
-    players.forEach(player => {
+  await game.getPlayer().then(async (players) => {
+    players.forEach((player) => {
       if (player.userid === req.body.userid) {
         res.send(game);
         found = true;
@@ -325,11 +345,11 @@ router.post("/join/:gamesessionid", async (req, res) => {
     });
   });
   if (!found && game.capacity !== game.playerCount) {
-    const io = req.app.get("socketio");
-    const room = "/games/" + req.params.gamesessionid;
+    const io = req.app.get('socketio');
+    const room = `/games/${req.params.gamesessionid}`;
     const msg = {
       msg: `${req.body.userid} has joined the game!`,
-      title: "Bot"
+      title: 'Bot'
     };
     const newState = game.gameState;
     const name = user.userid;
@@ -345,16 +365,75 @@ router.post("/join/:gamesessionid", async (req, res) => {
     await game.addHand(newHand);
     for (let i = 0; i < 5; i++) {
       models.whiteCard
-        .findOne({ order: Sequelize.literal("rand()") })
-        .then(async whiteCard => {
+        .findOne({ order: Sequelize.literal('rand()') })
+        .then(async (whiteCard) => {
           newHand.addCard(whiteCard);
         });
     }
-    await io.of(room).emit("message", msg);
-    await io.of(room).emit("state");
-    await io.of("/lobby").emit("roomUpdate");
+    await io.of(room).emit('message', msg);
+    await io.of(room).emit('state');
+    await io.of('/lobby').emit('roomUpdate');
     await res.send(game);
   }
+});
+
+router.post('/leaveroom/:gamesessionid', async (req, res) => {
+  const io = req.app.get('socketio');
+  const room = `/games/${req.params.gamesessionid}`;
+
+  const game = await models.gamesessions.findOne({
+    where: {
+      gameid: req.params.gamesessionid
+    }
+  });
+  const user = await models.user.findOne({
+    where: {
+      userid: req.body.userid
+    }
+  });
+  await game.getHost().then(async (host) => {
+    if (host.userid === user.userid) {
+      // shut down game
+    }
+  });
+  await game.removePlayer(req.body.userid);
+
+  const newState = game.gameState;
+
+  for (let i = 0; i < newState.points.length; i++) {
+    if (newState.points[i][req.body.userid] !== undefined) {
+      newState.points.splice(i, 1);
+      game.playerCount -= 1;
+    }
+  }
+
+  for (let i = 0; i < newState.state.length; i++) {
+    if (newState.state[i][req.body.userid] !== undefined) {
+      newState.state.splice(i, 1);
+      game.playersPicked -= 1;
+    }
+  }
+
+  await game.getBCH().then(async (bch) => {
+    if (bch.userid == user.userid) {
+      await game.getHost().then(async (host) => {
+        game.setBCH(host);
+      });
+    }
+  });
+
+  await game.update({ gameState: newState });
+
+  await game.save();
+
+  const msg = {
+    msg: `${req.body.userid} has left the game!`,
+    title: 'Bot'
+  };
+  await io.of(room).emit('message', msg);
+  await io.of(room).emit('state');
+  await io.of('/lobby').emit('roomUpdate');
+  res.send(game);
 });
 
 module.exports = router;

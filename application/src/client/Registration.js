@@ -5,7 +5,7 @@ import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import Modal from "react-modal";
 import "./stylesheets/reg.css";
 
-//Ugly text blocks here sorry
+// Ugly text blocks here sorry
 const text1 =
   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur felis diam, imperdiet vel viverra et, dictum eu ex. Nullam tincidunt accumsan lectus, non porta ante venenatis tristique. Sed ultricies, odio pretium pulvinar tempus, urna risus sagittis risus, ac rhoncus nisi odio vel metus. Sed nec dapibus erat. Mauris consectetur semper lorem sit amet placerat. Aenean id consectetur orci. Pellentesque molestie arcu a tellus volutpat, cursus egestas felis pulvinar. Curabitur nec dui erat. Nam eget odio ut mauris eleifend ultrices. Praesent malesuada mollis tristique. Ut gravida congue dui. Sed egestas at neque ac mollis.";
 const text2 =
@@ -92,7 +92,7 @@ export default class Registration extends Component {
     e.preventDefault();
     if (formValid(this.state)) {
       this.handleRouteChange();
-      fetch("http://52.53.156.79:4000/users/register", {
+      fetch("http://54.183.228.36:4000/users/register", {
         method: "POST",
         credentials: "same-origin",
         body: JSON.stringify(this.state),

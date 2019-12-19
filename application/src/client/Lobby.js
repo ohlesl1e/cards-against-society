@@ -58,7 +58,7 @@ export default class Lobby extends Component {
                   </div>
                   </div>
 
-              <div className="rusers">Registered Users: 6 </div>
+              <div className="rusers"></div>
               
                 <Chatbox userid={this.state.userid} url="lobby" />
               </Col>
