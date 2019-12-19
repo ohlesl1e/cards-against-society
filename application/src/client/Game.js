@@ -5,20 +5,34 @@ import { retrieveCookie } from "./Components/Cookies";
 import Chatbox from "./Components/Chatbox";
 import GameContainer from "./Components/GameContainer";
 import ChatContainer from "./Components/ChatContainer";
+import {Redirect} from "react-router-dom"
 
 export default class Game extends Component {
   constructor() {
     super();
     this.state = {
-      userid: retrieveCookie("userid")
+      userid: retrieveCookie("userid"),
+      notloggedin: false
     };
   }
 
-  componentDidMount() {}
+  notLoggedInRedirect = () => {
+    if (this.state.notloggedin) {
+      return <Redirect to={'./'} />;
+    }
+  };
+
+  componentDidMount() {
+    if (!retrieveCookie("userid")) {
+      this.setState({notloggedin: true})
+      alert("please log in!");
+    }
+  }
 
   render() {
     return (
       <div>
+        {this.notLoggedInRedirect()}
         <Header userid={this.state.userid} />
         <div className="game-page">
           <GameContainer gameid={this.props.match.params.gameid} />

@@ -20,6 +20,7 @@ export default class Custom extends Component {
       calledDeck: 0,
       redirectTo: '',
       redirect: false,
+      notloggedin: false,
       decklist: [
         {
           name: 'Deck1',
@@ -101,11 +102,18 @@ export default class Custom extends Component {
     }
   };
 
+  notLoggedInRedirect = () => {
+    if (this.state.notloggedin) {
+      return <Redirect to={'./'} />;
+    }
+  };
+
   componentDidMount() {
-    /*
     if (!retrieveCookie("userid")) {
+      this.setState({notloggedin : true})
       alert("please log in!");
     }
+    /*
     fetch("/api/getalldecks",{
       method: "POST",
       body: JSON.stringify(this.state.userid)
@@ -152,6 +160,7 @@ export default class Custom extends Component {
     return (
       <div>
         {this.renderRedirect()}
+        {this.notLoggedInRedirect()}
         <Header />
         <div className="DeckList">
           <Container>
