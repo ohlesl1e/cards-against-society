@@ -28,3 +28,8 @@ Front-End Lead: Brian Li
 ## How to run the app:
 
 From the /application folder, run "npm start"
+
+
+## How to access the application database:
+
+Using the provided ssh key and password, use MySQL workbench to connect to the database
