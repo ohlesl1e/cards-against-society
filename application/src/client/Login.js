@@ -71,28 +71,28 @@ export default class Login extends Component {
             <Carousel>
               <Carousel.Item>
                 <Image
-                  src={require("./images/bluecat.jpeg")}
+                  src={require("./images/Lobby.png")}
                   fluid
                   alt="First slide"
                 />
               </Carousel.Item>
               <Carousel.Item>
                 <Image
-                  src={require("./images/fishgun.png")}
+                  src={require("./images/CustomCard.png")}
                   fluid
                   alt="Second slide"
                 />
               </Carousel.Item>
               <Carousel.Item>
                 <Image
-                  src={require("./images/kokokok.jpg")}
+                  src={require("./images/BlackCardH.png")}
                   fluid
                   alt="Third slide"
                 />
               </Carousel.Item>
               <Carousel.Item>
                 <Image
-                  src={require("./images/wizardcat.jpg")}
+                  src={require("./images/GameSet.png")}
                   fluid
                   alt="Fourth slide"
                 />
