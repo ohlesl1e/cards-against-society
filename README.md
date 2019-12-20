@@ -1,6 +1,6 @@
 # Cards Against Society
 
-Team Application URL: http://52.53.156.79:4000/
+Team Application URL: http://54.183.228.36:4000/
 
 Team #: 203
 Team Members:
