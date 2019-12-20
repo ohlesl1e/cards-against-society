@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/users-router');
 const gameRouter = require('./routes/game-router');
-const customRouter = require('./routes/custom-router');
 
 const app = express();
 
@@ -32,7 +31,6 @@ app.listen(4000, () => console.log('Listening on port 4000!'));
 app.get('/', indexRouter);
 app.use('/users', userRouter);
 app.use('/games', gameRouter);
-app.use('/custom', customRouter);
 
 app.use((err, req, res, next) => {
   // set locals, only providing error in development
