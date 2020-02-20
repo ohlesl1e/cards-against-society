@@ -375,6 +375,15 @@ export default class GameContainer extends Component {
             <div>
               <PlayerList points={this.state.points} />
             </div>
+            <div>
+              <Card bg="dark" text="white" className="black-card">
+                <Card.Body>
+                  <Card.Text>
+                    {"Current Black Card Holder: " + this.state.BCH}
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </div>
           </Col>
           <Col md="9" className="game-container">
             {this.gameLayout()}

@@ -8,14 +8,23 @@ import {
 import Header from "./Components/Header";
 import { retrieveCookie } from './Components/Cookies';
 import './app.css';
+import {Redirect} from 'react-router-dom';
 
 export default class Profile extends Component {
   state = {
-    userid: retrieveCookie('userid')
+    userid: retrieveCookie('userid'),
+    notloggedin: false
+  };
+
+  notLoggedInRedirect = () => {
+    if (this.state.notloggedin) {
+      return <Redirect to={'./'} />;
+    }
   };
 
   componentDidMount() {
     if (!retrieveCookie('userid')) {
+      this.setState({notloggedin: true})
       alert('please log in!');
     }
   }
@@ -23,6 +32,7 @@ export default class Profile extends Component {
   render() {
     return (
       <body>
+        {this.notLoggedInRedirect()}
           <Header userid={this.state.userid} />
           <div className="profile-page">
               <Form>

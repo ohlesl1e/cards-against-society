@@ -5,11 +5,12 @@
 
 ## About
 
-Cards Against Society is an online multiplayer card game. The project was implemented using React for the front end, Node.js and Express.js for the backend, and utilizes a MySQL database. The application is deployed using an Amazon EC2 instance. 
+Cards Against Society is an online multiplayer card game. The project was implemented using React for the front end, Node.js and Express.js for the backend, and utilizes a MySQL database. The application is deployed using an Amazon EC2 instance.
 
 
 ## Team #: 203
 Documentations are in /Milestones folder
+
 
 ## Team Members:
 
