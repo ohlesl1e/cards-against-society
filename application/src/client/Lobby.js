@@ -6,14 +6,23 @@ import Chatbox from './Components/Chatbox';
 import GameForm from './Components/GameForm';
 import ListRooms from './Components/ListRooms';
 import { Container, Row, Col } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 
 export default class Lobby extends Component {
   state = {
-    userid: retrieveCookie("userid")
+    userid: retrieveCookie("userid"),
+    notloggedin: false
+  };
+
+  notLoggedInRedirect = () => {
+    if (this.state.notloggedin) {
+      return <Redirect to={'./'} />;
+    }
   };
 
   componentDidMount() {
     if (!retrieveCookie("userid")) {
+      this.setState({notloggedin: true})
       alert("please log in!");
     }
   }
@@ -22,7 +31,8 @@ export default class Lobby extends Component {
     return (
       
       <body>
-        
+        {this.notLoggedInRedirect()}
+
         <div className="homePage">
           <Header userid={this.state.userid} />
         </div>
