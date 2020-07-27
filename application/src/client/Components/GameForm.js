@@ -59,7 +59,7 @@ const GameForm = (state) => {
     };
     console.log(stateObj);
 
-    fetch('http://54.183.228.36:4000/games/newgame', {
+    fetch('http://localhost:4000/games/newgame', {
       method: 'POST',
       credentials: 'same-origin',
       body: JSON.stringify(stateObj),

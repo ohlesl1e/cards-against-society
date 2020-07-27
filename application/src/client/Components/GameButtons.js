@@ -25,7 +25,7 @@ export default class GameButtons extends Component {
       url: this.props.gameid
     });
 
-    fetch(`http://54.183.228.36:4000/games/${this.props.gameid}`, {
+    fetch(`http://localhost:4000/games/${this.props.gameid}`, {
       method: 'POST',
       credentials: 'same-origin',
       body: JSON.stringify({ userid: retrieveCookie() }),
@@ -52,7 +52,7 @@ export default class GameButtons extends Component {
 
   leaveRoom = async () => {
     await fetch(
-      `http://54.183.228.36:4000/games/leaveroom/${this.props.gameid}`,
+      `http://localhost:4000/games/leaveroom/${this.props.gameid}`,
       {
         method: 'POST',
         credentials: 'same-origin',
@@ -68,7 +68,7 @@ export default class GameButtons extends Component {
 
   deleteRoom = async () => {
     await fetch(
-      `http://54.183.228.36:4000/games/deleteroom/${this.props.gameid}`,
+      `http://localhost:4000/games/deleteroom/${this.props.gameid}`,
       {
         method: 'POST',
         credentials: 'same-origin',

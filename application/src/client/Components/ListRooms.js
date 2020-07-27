@@ -20,7 +20,7 @@ export default class ListRooms extends Component {
     super();
     this.state = {
       data: null,
-      socket: io.connect('http://54.183.228.36:8080/lobby', {
+      socket: io.connect('http://localhost:8080/lobby', {
         reconnection: true,
         reconnectionDelay: 500,
         reconnectionAttempts: 10
@@ -36,7 +36,7 @@ export default class ListRooms extends Component {
   }
 
   getLobbies() {
-    fetch('http://54.183.228.36:4000' + this.props.url)
+    fetch('http://localhost:4000' + this.props.url)
       .then(response => response.json())
       .then((res) => {
         if (this._isMounted) {
@@ -229,7 +229,7 @@ export default class ListRooms extends Component {
   }
 
   handleRouteChange(link) {
-    fetch(`http://54.183.228.36:4000/games/join/${link.gameid}`, {
+    fetch(`http://localhost:4000/games/join/${link.gameid}`, {
       method: 'POST',
       credentials: 'same-origin',
       body: JSON.stringify({ userid: retrieveCookie() }),

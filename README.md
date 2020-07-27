@@ -1,6 +1,6 @@
 # Cards Against Society
 
-## Team Application URL: <del>http://54.183.228.36:4000/</del>
+## Team Application URL: <del>http://localhost:4000/</del>
 
 
 ## About

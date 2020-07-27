@@ -29,7 +29,7 @@ export default class GameContainer extends Component {
       ],
       cardlist: [],
       socket: io.connect(
-        "http://54.183.228.36:8080/games/" + this.props.gameid,
+        "http://localhost:8080/games/" + this.props.gameid,
         {
           forceNew: true,
           reconnection: true,
@@ -79,7 +79,7 @@ export default class GameContainer extends Component {
   getInfo() {
     // retrieves game info
 
-    fetch(`http://54.183.228.36:4000/games/${this.props.gameid}`, {
+    fetch(`http://localhost:4000/games/${this.props.gameid}`, {
       method: "POST",
       credentials: "same-origin",
       body: JSON.stringify({ userid: retrieveCookie() }),
@@ -135,7 +135,7 @@ export default class GameContainer extends Component {
             cards.push(this.state.hand[i][0]);
           }
         }
-        fetch(`http://54.183.228.36:4000/games/update/${this.props.gameid}`, {
+        fetch(`http://localhost:4000/games/update/${this.props.gameid}`, {
           method: "POST",
           credentials: "same-origin",
           body: JSON.stringify({
@@ -160,7 +160,7 @@ export default class GameContainer extends Component {
         const winner = this.state.playerSelections[index].userid;
 
         fetch(
-          `http://54.183.228.36:4000/games/submitWinner/${this.props.gameid}`,
+          `http://localhost:4000/games/submitWinner/${this.props.gameid}`,
           {
             method: "POST",
             credentials: "same-origin",
