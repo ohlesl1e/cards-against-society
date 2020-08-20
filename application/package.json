@@ -16,7 +16,7 @@
     "antd": "^3.26.18",
     "axios": "^0.19.2",
     "babel-polyfill": "^6.26.0",
-    "bcrypt": "^3.0.8",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.5.0",
     "cors": "^2.8.5",
